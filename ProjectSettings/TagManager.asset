@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GameManager
   - Hands
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -40,18 +41,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: CardBack
-    uniqueID: 979130327
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Hand
-    uniqueID: 1483496483
-    locked: 0
-  - name: Field
-    uniqueID: 1473712755
-    locked: 0
-  - name: Arrow
+  - name: BackGround
     uniqueID: 2192687549
     locked: 0

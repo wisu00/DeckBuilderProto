@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
+using TMPro;
+
 public class ConnectToServer : MonoBehaviourPunCallbacks
 {
-    // Start is called before the first frame update
-    void Start() 
+    public TMP_InputField usernameInput;
+    public TMP_Text buttonText;
+
+    public void OnClickConnect() 
     {
-        PhotonNetwork.ConnectUsingSettings();
+        if (usernameInput.text.Length >= 1) 
+        {
+            PhotonNetwork.NickName = usernameInput.text;
+            buttonText.text = "Connecting...";
+            PhotonNetwork.ConnectUsingSettings();
+        }
     }
 
     public override void OnConnectedToMaster()
