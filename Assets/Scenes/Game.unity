@@ -850,6 +850,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 738960902}
+  - component: {fileID: 738960903}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -871,6 +872,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &738960903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738960901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84568eb1a79f0fc4db35c75e22b2176b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deck: {fileID: 792251683}
+  hand: {fileID: 874629191}
+  discardPile: {fileID: 394397182}
 --- !u!1001 &785438379
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1075,8 +1091,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7889ef74cbc9cec4ca9dd469d51165dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardsInDeck: []
   hand: {fileID: 874629191}
+  discardPile: {fileID: 394397182}
+  cardsInDeck:
+  - {fileID: 11400000, guid: 34f8072bca512db498960494c24a7d47, type: 2}
+  - {fileID: 11400000, guid: 34f8072bca512db498960494c24a7d47, type: 2}
+  - {fileID: 11400000, guid: 34f8072bca512db498960494c24a7d47, type: 2}
+  - {fileID: 11400000, guid: 34f8072bca512db498960494c24a7d47, type: 2}
+  - {fileID: 11400000, guid: 34f8072bca512db498960494c24a7d47, type: 2}
+  - {fileID: 11400000, guid: 34f8072bca512db498960494c24a7d47, type: 2}
 --- !u!4 &792251684
 Transform:
   m_ObjectHideFlags: 0
@@ -1120,6 +1143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2c822aeb23d27448771eaeaf7bd3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handArea: {fileID: 2010682204}
+  discardPile: {fileID: 394397182}
+  cardPrefab: {fileID: 4422418461076721767, guid: 6a2924c55b4b6ae4e8c93db8970767e7,
+    type: 3}
   hand: []
 --- !u!4 &874629192
 Transform:
@@ -1873,10 +1900,10 @@ RectTransform:
   m_Father: {fileID: 386957784}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.15, y: 0}
-  m_AnchorMax: {x: 0.85, y: 0.25}
-  m_AnchoredPosition: {x: 0, y: -11}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.14875, y: 0}
+  m_AnchorMax: {x: 0.85, y: 0.22333333}
+  m_AnchoredPosition: {x: 0, y: -5.5}
+  m_SizeDelta: {x: 0, y: 11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2010682206
 MonoBehaviour:

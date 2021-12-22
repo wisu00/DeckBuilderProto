@@ -12,8 +12,11 @@ public class UpdateCardInfo : MonoBehaviour
     public TMP_Text goldCost;
     public TMP_Text discardValueText;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() { 
+        UpdateValues();
+    }
+
+    public void UpdateValues() {
         cardName.text = card.cardName;
         description.text = card.description;
         goldCost.text = card.goldCost.ToString();

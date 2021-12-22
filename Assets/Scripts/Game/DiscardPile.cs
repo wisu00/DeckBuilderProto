@@ -9,4 +9,12 @@ public class DiscardPile : MonoBehaviour {
     public void ShuffleDiscardPileToDeck(){
         deck.ShuffleDiscardPileToDeck(cardsInDiscardPile);
     }
+
+    public void AddCardToDiscardPile(Card cardToBeAdded) {
+        cardsInDiscardPile.Add(cardToBeAdded);
+    }
+
+    public int GetDiscardPileSize() {
+        return cardsInDiscardPile.Count;
+    }
 }
