@@ -156,10 +156,10 @@ RectTransform:
   m_Father: {fileID: 386957784}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -294.33, y: 0}
-  m_SizeDelta: {x: 20, y: 200}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 60, y: 0}
+  m_SizeDelta: {x: 40, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &248087235
 GameObject:
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Direction: 3
   m_MinValue: 0
   m_MaxValue: 100
-  m_WholeNumbers: 1
+  m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -831,7 +831,7 @@ PrefabInstance:
     - target: {fileID: 2545433451395444395, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: increasePlayer2Influence
+      value: IncreasePlayer2Influence
       objectReference: {fileID: 0}
     - target: {fileID: 2545433451395444395, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
@@ -902,12 +902,12 @@ PrefabInstance:
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 207.97
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 32.6
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
@@ -947,7 +947,7 @@ PrefabInstance:
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -86
+      value: -650
       objectReference: {fileID: 0}
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
@@ -1006,7 +1006,7 @@ PrefabInstance:
     - target: {fileID: 2545433451395444395, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: increasePlayer1Influence
+      value: IncreasePlayer1Influence
       objectReference: {fileID: 0}
     - target: {fileID: 2545433451395444395, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
@@ -1077,12 +1077,12 @@ PrefabInstance:
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 207.97
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 32.6
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
@@ -1122,7 +1122,7 @@ PrefabInstance:
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -86
+      value: -650
       objectReference: {fileID: 0}
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
@@ -1187,7 +1187,7 @@ PrefabInstance:
     - target: {fileID: 2545433451395444395, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: decreasePlayer1Influence
+      value: DecreasePlayer1Influence
       objectReference: {fileID: 0}
     - target: {fileID: 2545433451395444395, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
@@ -1258,12 +1258,12 @@ PrefabInstance:
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 207.97
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 32.6
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
@@ -1303,7 +1303,7 @@ PrefabInstance:
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 201.99
+      value: -350
       objectReference: {fileID: 0}
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
@@ -1410,7 +1410,7 @@ MonoBehaviour:
   m_Direction: 2
   m_MinValue: 0
   m_MaxValue: 100
-  m_WholeNumbers: 1
+  m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1462,7 +1462,7 @@ PrefabInstance:
     - target: {fileID: 2545433451395444395, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: decreasePlayer2Influence
+      value: DecreasePlayer2Influence
       objectReference: {fileID: 0}
     - target: {fileID: 2545433451395444395, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
@@ -1533,12 +1533,12 @@ PrefabInstance:
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 207.97
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 32.6
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
@@ -1578,7 +1578,7 @@ PrefabInstance:
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 204.9
+      value: -350
       objectReference: {fileID: 0}
     - target: {fileID: 6957191474325721797, guid: b709521860aab1949a21da9df6af70a4,
         type: 3}

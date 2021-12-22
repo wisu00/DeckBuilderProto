@@ -3,39 +3,68 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InfluenceBarManager : MonoBehaviour
-{
+public class InfluenceBarManager : MonoBehaviour {
     [SerializeField] private Slider player1InfluenceBar;
     [SerializeField] private Slider player2InfluenceBar;
 
-    public void increasePlayer1Influence() {
-        if(player1InfluenceBar.value + player2InfluenceBar.value + 5 <= 100) {
-            player1InfluenceBar.value += 5;
+    private int changeAmount = 5; //will get replaced with parameters
+
+    private void StealPoints(bool player1 ,float amount) {
+        if(player1) {
+            player1InfluenceBar.value += amount;
+            player2InfluenceBar.value -= amount;
         }
         else {
-            float stolenInfluence = player1InfluenceBar.value + player2InfluenceBar.value + 5 - 100 ;
-            player1InfluenceBar.value += 5;
-            player2InfluenceBar.value -= stolenInfluence;
+            player1InfluenceBar.value -= amount;
+            player2InfluenceBar.value += amount;
         }
-        
     }
 
-    public void decreasePlayer1Influence() {
-        player1InfluenceBar.value -= 5;
-    }
-
-    public void increasePlayer2Influence() {
-        if(player2InfluenceBar.value + player1InfluenceBar.value + 5 <= 100) {
-            player2InfluenceBar.value += 5;
+    public void IncreasePlayer1Influence() {
+        if(player1InfluenceBar.value + player2InfluenceBar.value > 100){ Debug.Log("over 100");}
+        if(player1InfluenceBar.value + player2InfluenceBar.value + 2*changeAmount <= 100) {
+            player1InfluenceBar.value += 2*changeAmount;
+        }
+        else if(player1InfluenceBar.value + player2InfluenceBar.value == 100) {
+            StealPoints(true, changeAmount);
         }
         else {
-            float stolenInfluence = player2InfluenceBar.value + player1InfluenceBar.value + 5 -100;
-            player2InfluenceBar.value += 5;
-            player1InfluenceBar.value -= stolenInfluence;
+            float neutralLeft = 100 - player2InfluenceBar.value - player1InfluenceBar.value;
+            float pointsToBeStealed = (changeAmount*2 - neutralLeft)/2;
+
+            player1InfluenceBar.value += neutralLeft;
+            StealPoints(true, pointsToBeStealed);
         }
     }
 
-    public void decreasePlayer2Influence() {
-        player2InfluenceBar.value -= 5;
+    public void DecreasePlayer1Influence() {
+        player1InfluenceBar.value -= changeAmount;
+    }
+
+
+
+
+
+
+
+    public void IncreasePlayer2Influence() {
+        if(player1InfluenceBar.value + player2InfluenceBar.value > 100){ Debug.Log("over 100");}
+        if(player2InfluenceBar.value + player1InfluenceBar.value + changeAmount*2 <= 100) {
+            player2InfluenceBar.value += changeAmount*2;
+        }
+        else if(player1InfluenceBar.value + player2InfluenceBar.value == 100) {
+            StealPoints(false, changeAmount);
+        }
+        else {
+            float neutralLeft = 100 - player2InfluenceBar.value - player1InfluenceBar.value;
+            float pointsToBeStealed = (changeAmount*2 - neutralLeft)/2;
+
+            player2InfluenceBar.value += neutralLeft;
+            StealPoints(false, pointsToBeStealed);
+        }
+    }
+
+    public void DecreasePlayer2Influence() {
+        player2InfluenceBar.value -= changeAmount;
     }
 }
