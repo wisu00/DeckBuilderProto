@@ -16,7 +16,7 @@ public class Deck : MonoBehaviour
         }
         else if(discardPile.GetDiscardPileSize() > 0) {
            discardPile.ShuffleDiscardPileToDeck();
-           DrawCard(); 
+           DrawCard();
         }
     }
 

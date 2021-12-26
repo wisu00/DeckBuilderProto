@@ -595,6 +595,7 @@ GameObject:
   - component: {fileID: 531439437}
   - component: {fileID: 531439436}
   - component: {fileID: 531439435}
+  - component: {fileID: 531439438}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -667,6 +668,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &531439438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531439434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &582748366
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,12 +1111,12 @@ MonoBehaviour:
   hand: {fileID: 874629191}
   discardPile: {fileID: 394397182}
   cardsInDeck:
-  - {fileID: 11400000, guid: 34f8072bca512db498960494c24a7d47, type: 2}
-  - {fileID: 11400000, guid: 34f8072bca512db498960494c24a7d47, type: 2}
-  - {fileID: 11400000, guid: 34f8072bca512db498960494c24a7d47, type: 2}
-  - {fileID: 11400000, guid: 34f8072bca512db498960494c24a7d47, type: 2}
-  - {fileID: 11400000, guid: 34f8072bca512db498960494c24a7d47, type: 2}
-  - {fileID: 11400000, guid: 34f8072bca512db498960494c24a7d47, type: 2}
+  - {fileID: 11400000, guid: a3d11f9020fc15343813265cb9dff1c7, type: 2}
+  - {fileID: 11400000, guid: a3d11f9020fc15343813265cb9dff1c7, type: 2}
+  - {fileID: 11400000, guid: a3d11f9020fc15343813265cb9dff1c7, type: 2}
+  - {fileID: 11400000, guid: a3d11f9020fc15343813265cb9dff1c7, type: 2}
+  - {fileID: 11400000, guid: a3d11f9020fc15343813265cb9dff1c7, type: 2}
+  - {fileID: 11400000, guid: a3d11f9020fc15343813265cb9dff1c7, type: 2}
 --- !u!4 &792251684
 Transform:
   m_ObjectHideFlags: 0
