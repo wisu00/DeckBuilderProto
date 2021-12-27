@@ -42,11 +42,6 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         }
     }
 
-    //temp solution to make testing easier
-    public void ForceStart() {
-        PhotonNetwork.LoadLevel("Game");
-    }
-
     public void FindMatch() {
         RoomOptions roomoptions = new RoomOptions() {
             IsOpen = true,
