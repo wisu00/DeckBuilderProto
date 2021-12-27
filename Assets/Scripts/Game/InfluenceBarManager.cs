@@ -2,12 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class InfluenceBarManager : MonoBehaviour {
     [SerializeField] private Slider player1InfluenceBar;
     [SerializeField] private Slider player2InfluenceBar;
 
     private int changeAmount = 5; //will get replaced with parameters
+
+    public PhotonView photonView;
+
+    void updateValuesOnOpponent(){
+        photonView.RPC("SyncValues", RpcTarget.OthersBuffered, player1InfluenceBar.value, player2InfluenceBar.value);
+    }
+
+    [PunRPC]
+    void SyncValues (float player1, float player2) {
+        player1InfluenceBar.value = player1;
+        player2InfluenceBar.value = player2;
+    }
+
+
+    private void checkVariableAssignments() {
+        if(!player1InfluenceBar || !player2InfluenceBar) {
+            GameObject influenceBar = GameObject.FindWithTag("InfluenceBar");
+            player1InfluenceBar = influenceBar.transform.GetChild(1).GetComponent<Slider>();
+            player2InfluenceBar = influenceBar.transform.GetChild(2).GetComponent<Slider>();
+        }
+    }
 
     private void StealPoints(bool player1 ,float amount) {
         if(player1) {
@@ -35,17 +57,13 @@ public class InfluenceBarManager : MonoBehaviour {
             player1InfluenceBar.value += neutralLeft;
             StealPoints(true, pointsToBeStealed);
         }
+        updateValuesOnOpponent();
     }
 
     public void DecreasePlayer1Influence() {
         player1InfluenceBar.value -= changeAmount;
+        updateValuesOnOpponent();
     }
-
-
-
-
-
-
 
     public void IncreasePlayer2Influence() {
         if(player1InfluenceBar.value + player2InfluenceBar.value > 100){ Debug.Log("over 100");}
@@ -62,9 +80,11 @@ public class InfluenceBarManager : MonoBehaviour {
             player2InfluenceBar.value += neutralLeft;
             StealPoints(false, pointsToBeStealed);
         }
+        updateValuesOnOpponent();
     }
 
     public void DecreasePlayer2Influence() {
         player2InfluenceBar.value -= changeAmount;
+        updateValuesOnOpponent();
     }
 }
