@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 191ebde63ee578d4d8c7f59181840f94, type: 3}
-  m_Name: 1
+  m_Name: testSpell
   m_EditorClassIdentifier: 
-  cardName: TestSpell
-  description: do stuff
-  goldCost: 3
-  discardValueText: 4
-  objName: 5
+  cardName: Spell
+  cardArt: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  description: test
+  goldCost: 1
+  discardValueText: 2
+  objName: testSpell

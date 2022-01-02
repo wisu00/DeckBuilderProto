@@ -301,8 +301,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.49998}
-  m_SizeDelta: {x: 561, y: 248}
+  m_AnchoredPosition: {x: 0, y: -0.75002}
+  m_SizeDelta: {x: 561, y: 330.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &312867567
 GameObject:
@@ -1102,6 +1102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 792251684}
   - component: {fileID: 792251683}
+  - component: {fileID: 792251685}
   m_Layer: 0
   m_Name: Deck
   m_TagString: Untagged
@@ -1124,12 +1125,13 @@ MonoBehaviour:
   hand: {fileID: 874629191}
   discardPile: {fileID: 394397182}
   cardsInDeck:
-  - {fileID: 11400000, guid: a3d11f9020fc15343813265cb9dff1c7, type: 2}
-  - {fileID: 11400000, guid: a3d11f9020fc15343813265cb9dff1c7, type: 2}
-  - {fileID: 11400000, guid: a3d11f9020fc15343813265cb9dff1c7, type: 2}
-  - {fileID: 11400000, guid: a3d11f9020fc15343813265cb9dff1c7, type: 2}
-  - {fileID: 11400000, guid: a3d11f9020fc15343813265cb9dff1c7, type: 2}
-  - {fileID: 11400000, guid: a3d11f9020fc15343813265cb9dff1c7, type: 2}
+  - {fileID: 11400000, guid: 2143eea1a10e0ae4cbcb1318c29bf9a0, type: 2}
+  - {fileID: 11400000, guid: 2143eea1a10e0ae4cbcb1318c29bf9a0, type: 2}
+  - {fileID: 11400000, guid: 2143eea1a10e0ae4cbcb1318c29bf9a0, type: 2}
+  - {fileID: 11400000, guid: 2143eea1a10e0ae4cbcb1318c29bf9a0, type: 2}
+  - {fileID: 11400000, guid: 2143eea1a10e0ae4cbcb1318c29bf9a0, type: 2}
+  - {fileID: 11400000, guid: 2143eea1a10e0ae4cbcb1318c29bf9a0, type: 2}
+  photonViewFromOpponentsDeck: {fileID: 2045952410}
 --- !u!4 &792251684
 Transform:
   m_ObjectHideFlags: 0
@@ -1144,6 +1146,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &792251685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792251682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 3
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &874629190
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,6 +1215,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &876963516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 876963518}
+  - component: {fileID: 876963517}
+  m_Layer: 0
+  m_Name: OpponentsHand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &876963517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876963516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2c822aeb23d27448771eaeaf7bd3fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handArea: {fileID: 7397876}
+  discardPile: {fileID: 1653575200}
+  cardPrefab: {fileID: 4422418461076721767, guid: 6a2924c55b4b6ae4e8c93db8970767e7,
+    type: 3}
+  hand: []
+--- !u!4 &876963518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876963516}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1102.0586, y: 501.8404, z: -1495.8616}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &973566734
 PrefabInstance:
@@ -2096,6 +2168,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b709521860aab1949a21da9df6af70a4, type: 3}
+--- !u!1 &1653575199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1653575201}
+  - component: {fileID: 1653575200}
+  m_Layer: 0
+  m_Name: OpponentsDiscardPile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1653575200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653575199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2a67f681bda3054ab0a40b1da428b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deck: {fileID: 2045952408}
+--- !u!4 &1653575201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653575199}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1102.0586, y: 501.8404, z: -1495.8616}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1837885274
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2380,6 +2496,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2010682204}
   m_CullTransparentMesh: 1
+--- !u!1 &2045952407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2045952409}
+  - component: {fileID: 2045952408}
+  - component: {fileID: 2045952410}
+  m_Layer: 0
+  m_Name: OpponentsDeck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2045952408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045952407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7889ef74cbc9cec4ca9dd469d51165dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: {fileID: 876963517}
+  discardPile: {fileID: 1653575200}
+  cardsInDeck:
+  - {fileID: 11400000, guid: 1a458a78b843bee41825c1caf24bf108, type: 2}
+  - {fileID: 11400000, guid: 1a458a78b843bee41825c1caf24bf108, type: 2}
+  - {fileID: 11400000, guid: 1a458a78b843bee41825c1caf24bf108, type: 2}
+  - {fileID: 11400000, guid: 1a458a78b843bee41825c1caf24bf108, type: 2}
+  - {fileID: 11400000, guid: 1a458a78b843bee41825c1caf24bf108, type: 2}
+  - {fileID: 11400000, guid: 1a458a78b843bee41825c1caf24bf108, type: 2}
+  photonViewFromOpponentsDeck: {fileID: 792251685}
+--- !u!4 &2045952409
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045952407}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1227.7667, y: 422.94565, z: -312.68716}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2045952410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045952407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 4
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &2925353788062959373
 PrefabInstance:
   m_ObjectHideFlags: 0

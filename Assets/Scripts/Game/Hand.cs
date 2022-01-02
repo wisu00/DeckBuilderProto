@@ -9,7 +9,7 @@ public class Hand : MonoBehaviour
     [SerializeField] DiscardPile discardPile;
     [SerializeField] GameObject cardPrefab;
     [SerializeField] List<Card> hand;
-    
+
     private int maxHandSize = 5;
     private List<GameObject> physicalCardsInHand = new List<GameObject>();
 
@@ -49,4 +49,5 @@ public class Hand : MonoBehaviour
         physicalCardsInHand.Remove(PhysicalCard);
         OrganiseHand();
     }
+
 }
