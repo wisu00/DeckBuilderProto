@@ -8,14 +8,14 @@ using UnityEngine.EventSystems;
 public class CardBaseFunctionality : MonoBehaviour, IPointerClickHandler 
 {
     public Card card;
-    public Hand hand;
+    public HandManager hand;
     public TMP_Text cardName;
     public Image cardArt;
     public TMP_Text description;
     public TMP_Text goldCost;
     public TMP_Text discardValueText;
 
-    public void UpdateValues(Hand handScript) {
+    public void UpdateValues(HandManager handScript) {
         hand = handScript;
         cardArt.sprite = card.cardArt;
         cardName.text = card.cardName;

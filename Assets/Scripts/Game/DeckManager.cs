@@ -2,14 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
-public class Deck : MonoBehaviour
+public class DeckManager : MonoBehaviour
 {   
-    [SerializeField]Hand hand;
-    [SerializeField]DiscardPile discardPile;
+    [SerializeField]HandManager hand;
+    [SerializeField]DiscardPileManager discardPile;
+    [SerializeField]TMP_Text infoText;
     [SerializeField]List<Card> cardsInDeck;
     
     public PhotonView photonViewFromOpponentsDeck;
+
+    private void Start() {
+        UpdateInfoBox();
+    }
 
     public void DrawCard(){
         if(cardsInDeck.Count > 0) {
@@ -23,6 +29,11 @@ public class Deck : MonoBehaviour
            discardPile.ShuffleDiscardPileToDeck();
            DrawCard();
         }
+        UpdateInfoBox();
+    }
+
+    public void UpdateInfoBox() {        
+        infoText.text = "Cards in deck: " + cardsInDeck.Count;
     }
 
     [PunRPC]
@@ -32,5 +43,6 @@ public class Deck : MonoBehaviour
 
     public void ShuffleDiscardPileToDeck(List<Card> newDeck) {
         cardsInDeck = new List<Card>(newDeck);
+        UpdateInfoBox();
     }
 }

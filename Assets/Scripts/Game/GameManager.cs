@@ -7,9 +7,9 @@ using Photon.Realtime;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] Deck deck;
-    [SerializeField] Hand hand;
-    [SerializeField] DiscardPile discardPile;
+    [SerializeField] DeckManager deck;
+    [SerializeField] HandManager hand;
+    [SerializeField] DiscardPileManager discardPile;
 
     #region Photon Callbacks
 

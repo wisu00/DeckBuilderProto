@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class Hand : MonoBehaviour
+public class HandManager : MonoBehaviour
 {
     [SerializeField] GameObject handArea;
-    [SerializeField] DiscardPile discardPile;
+    [SerializeField] DiscardPileManager discardPile;
     [SerializeField] GameObject cardPrefab;
     [SerializeField] List<Card> hand;
 
