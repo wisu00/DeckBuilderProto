@@ -5,8 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class CardBaseFunctionality : MonoBehaviour
-    , IPointerClickHandler
+public class CardBaseFunctionality : MonoBehaviour, IPointerClickHandler 
 {
     public Card card;
     public Hand hand;
@@ -30,10 +29,10 @@ public class CardBaseFunctionality : MonoBehaviour
         } 
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        card.OnPlay();
-        hand.CardGetsPlayed(card, gameObject);
-        Destroy(gameObject);
+    public void OnPointerClick(PointerEventData eventData) {
+        if(!card.isCardBack()) {
+            card.OnPlay();
+            hand.CardGetsPlayed(card, gameObject);
+        }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Hand : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Hand : MonoBehaviour
     [SerializeField] DiscardPile discardPile;
     [SerializeField] GameObject cardPrefab;
     [SerializeField] List<Card> hand;
+
+    public PhotonView photonViewFromOpponentsHand;
 
     private int maxHandSize = 5;
     private List<GameObject> physicalCardsInHand = new List<GameObject>();
@@ -43,10 +46,22 @@ public class Hand : MonoBehaviour
         }
     }
 
-    public void CardGetsPlayed(Card cardThatGotPlayed, GameObject PhysicalCard) {
+    [PunRPC]
+    void OpponentPlaysACard (int cardPlaceInHand) {
+        Card cardThatGotPlayed = hand[cardPlaceInHand];
+        GameObject physicalCard = physicalCardsInHand[cardPlaceInHand];
+        CardGetsPlayed(cardThatGotPlayed, physicalCard);
+    }
+
+    public void CardGetsPlayed(Card cardThatGotPlayed, GameObject physicalCard) {
+        if(!cardThatGotPlayed.isCardBack()) {
+            int cardPlaceInHand = hand.IndexOf(cardThatGotPlayed);
+            photonViewFromOpponentsHand.RPC("OpponentPlaysACard", RpcTarget.OthersBuffered, cardPlaceInHand);
+        }
+        Destroy(physicalCard);
         discardPile.AddCardToDiscardPile(cardThatGotPlayed);
         hand.Remove(cardThatGotPlayed);
-        physicalCardsInHand.Remove(PhysicalCard);
+        physicalCardsInHand.Remove(physicalCard);
         OrganiseHand();
     }
 
