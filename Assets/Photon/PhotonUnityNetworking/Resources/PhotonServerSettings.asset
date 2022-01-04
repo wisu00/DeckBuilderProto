@@ -42,6 +42,8 @@ MonoBehaviour:
   - SyncValues
   - OpponentDrawsACard
   - OpponentPlaysACard
+  - DecreaseOpponentMoney
+  - IncreaseOpponentMoney
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

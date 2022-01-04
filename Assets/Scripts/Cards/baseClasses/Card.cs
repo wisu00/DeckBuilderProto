@@ -9,10 +9,40 @@ public abstract class Card : ScriptableObject {
     public int goldCost;
     public int discardValueText;
 
+    private GameManager gameManager;
+
+    public void FindReferences() {
+        gameManager = FindObjectOfType<GameManager>();
+    }
+
     public abstract void OnPlay();
 
     //gets override in cardBack
     public virtual bool isCardBack() {
         return false;
     }
+
+    #region card effects that can be used from other methods (like OnPlay()). 
+
+    protected virtual void PrintName() {
+        Debug.Log("derived name: " + cardName);
+    }
+
+    protected virtual void increasePlayerMoney(int amount) {
+        gameManager.IncreasePlayerMoney(amount);
+    }
+
+    protected virtual void decreasePlayerMoney(int amount) {
+        gameManager.DecreasePlayerMoney(amount);
+    }
+
+    protected virtual void increaseOpponentMoney(int amount) {
+        gameManager.IncreaseOpponentMoney(amount);
+    }
+
+    protected virtual void decreaseOpponentMoney(int amount) {
+        gameManager.DecreaseOpponentMoney(amount);
+    }
+
+    #endregion
 }

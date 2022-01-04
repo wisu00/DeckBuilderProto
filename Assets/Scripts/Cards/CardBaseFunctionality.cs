@@ -16,6 +16,7 @@ public class CardBaseFunctionality : MonoBehaviour, IPointerClickHandler
     public TMP_Text discardValueText;
 
     public void UpdateValues(HandManager handScript) {
+        card.FindReferences();
         hand = handScript;
         cardArt.sprite = card.cardArt;
         cardName.text = card.cardName;

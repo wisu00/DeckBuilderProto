@@ -1,36 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Photon.Pun;
-using Photon.Realtime;
+using TMPro;
 
-public class GameManager : MonoBehaviourPunCallbacks
+public class GameManager : MonoBehaviour
 {
     [SerializeField] DeckManager deck;
     [SerializeField] HandManager hand;
     [SerializeField] DiscardPileManager discardPile;
+    [SerializeField] TMP_Text moneyPlayerTxt;
+    [SerializeField] TMP_Text moneyOpponentTxt;
 
-    #region Photon Callbacks
+    [SerializeField] int startingMoney;
+    int moneyPlayer;
+    int moneyOpponent;
 
-    // Called when the local player left the room. We need to load the launcher scene.
-    public override void OnLeftRoom()
-    {
-        SceneManager.LoadScene("Lobby");
+    public PhotonView photonView;
+
+    #region Money management
+    void updateValuesOnOpponent(){
+        photonView.RPC("SyncValues", RpcTarget.OthersBuffered, moneyPlayer, moneyOpponent);
     }
 
-    #endregion
+    [PunRPC]
+    private void SyncValues (int amountPlayer, int amountOpponent) {
+        moneyPlayer = amountOpponent;
+        moneyOpponent = amountPlayer;
+        UpdateMoneyText();
+    }
 
-    #region Public Methods
+    private void UpdateMoneyText() {
+        moneyPlayerTxt.text = "" + moneyPlayer;
+        moneyOpponentTxt.text = "" + moneyOpponent;
+    }
 
-        public void LeaveRoom()
-        {
-            PhotonNetwork.LeaveRoom();
-        }
+    public void IncreasePlayerMoney(int amount) {
+        moneyPlayer += amount;
+        UpdateMoneyText();
+        updateValuesOnOpponent();
+    }
 
-    #endregion
+    public void DecreasePlayerMoney(int amount) {
+        moneyPlayer -= amount;
+        UpdateMoneyText();
+        updateValuesOnOpponent();
+    }
 
-    // Update is called once per frame
+    public void IncreaseOpponentMoney(int amount) {
+        moneyOpponent += amount;
+        UpdateMoneyText();
+        updateValuesOnOpponent();
+    }
+
+    public void DecreaseOpponentMoney(int amount) {
+        moneyOpponent -= amount;
+        UpdateMoneyText();
+        updateValuesOnOpponent();
+    }
+    #endregion money management
+
+    private void Start() {
+        moneyPlayer = startingMoney;
+        moneyOpponent = startingMoney;
+        UpdateMoneyText();
+    }
+
     void Update()
     {
         if(Input.GetKeyDown("space")) {
