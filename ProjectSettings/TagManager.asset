@@ -8,6 +8,7 @@ TagManager:
   - Hands
   - Bullet
   - InfluenceBar
+  - MainCanvas
   layers:
   - Default
   - TransparentFX

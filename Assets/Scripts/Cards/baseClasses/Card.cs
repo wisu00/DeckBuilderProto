@@ -10,15 +10,22 @@ public abstract class Card : ScriptableObject {
     public int discardValueText;
 
     private GameManager gameManager;
+    private HandManager handManager;
 
-    public void FindReferences() {
-        gameManager = FindObjectOfType<GameManager>();
+    public void AssignGameManager(GameManager manager, HandManager hand) {
+        gameManager = manager;
+        handManager = hand;
     }
 
     public abstract void OnPlay();
 
     //gets override in cardBack
     public virtual bool isCardBack() {
+        return false;
+    }
+
+    //gets override in buildingCards
+    public virtual bool goesOnBoard() {
         return false;
     }
 

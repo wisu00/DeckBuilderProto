@@ -13,12 +13,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text moneyOpponentTxt;
 
     [SerializeField] int startingMoney;
+    public PhotonView photonView;
     int moneyPlayer;
     int moneyOpponent;
 
-    public PhotonView photonView;
-
     #region Money management
+    public int getMoneyPlayer() {
+        return moneyPlayer;
+    }
+
     void updateValuesOnOpponent(){
         photonView.RPC("SyncValues", RpcTarget.OthersBuffered, moneyPlayer, moneyOpponent);
     }

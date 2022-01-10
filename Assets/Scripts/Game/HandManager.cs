@@ -8,6 +8,7 @@ public class HandManager : MonoBehaviour
 {
     [SerializeField] GameObject handArea;
     [SerializeField] DiscardPileManager discardPile;
+    [SerializeField] GameManager gameManager;
     [SerializeField] GameObject cardPrefab;
     [SerializeField] List<Card> hand;
 
@@ -27,7 +28,7 @@ public class HandManager : MonoBehaviour
             
             GameObject cardThatWasDrawn = Instantiate(cardPrefab, handArea.transform);
             cardThatWasDrawn.GetComponent<CardBaseFunctionality>().card = drawnCard;
-            cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValues(this);
+            cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValues(this, gameManager);
             physicalCardsInHand.Add(cardThatWasDrawn);
             OrganiseHand();
         }
@@ -47,16 +48,16 @@ public class HandManager : MonoBehaviour
     }
 
     [PunRPC]
-    void OpponentPlaysACard (int cardPlaceInHand) {
+    void OpponentsCardGoesToDiscardPile (int cardPlaceInHand) {
         Card cardThatGotPlayed = hand[cardPlaceInHand];
         GameObject physicalCard = physicalCardsInHand[cardPlaceInHand];
-        CardGetsPlayed(cardThatGotPlayed, physicalCard);
+        MoveCardToDiscardPile(cardThatGotPlayed, physicalCard);
     }
 
-    public void CardGetsPlayed(Card cardThatGotPlayed, GameObject physicalCard) {
+    public void MoveCardToDiscardPile(Card cardThatGotPlayed, GameObject physicalCard) {
         if(!cardThatGotPlayed.isCardBack()) {
             int cardPlaceInHand = hand.IndexOf(cardThatGotPlayed);
-            photonViewFromOpponentsHand.RPC("OpponentPlaysACard", RpcTarget.OthersBuffered, cardPlaceInHand);
+            photonViewFromOpponentsHand.RPC("OpponentsCardGoesToDiscardPile", RpcTarget.OthersBuffered, cardPlaceInHand);
         }
         Destroy(physicalCard);
         discardPile.AddCardToDiscardPile(cardThatGotPlayed);
@@ -64,5 +65,4 @@ public class HandManager : MonoBehaviour
         physicalCardsInHand.Remove(physicalCard);
         OrganiseHand();
     }
-
 }
