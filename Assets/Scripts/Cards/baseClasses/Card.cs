@@ -7,7 +7,7 @@ public abstract class Card : ScriptableObject {
     public Sprite cardArt;
     [TextArea(2,10)] public string description;
     public int goldCost;
-    public int discardValueText;
+    public int discardValue;
 
     private GameManager gameManager;
     private HandManager handManager;
@@ -18,6 +18,8 @@ public abstract class Card : ScriptableObject {
     }
 
     public abstract void OnPlay();
+
+    public abstract void OnDiscard();
 
     //gets override in cardBack
     public virtual bool isCardBack() {

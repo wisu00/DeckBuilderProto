@@ -16,5 +16,4 @@ MonoBehaviour:
   cardArt: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   description: test
   goldCost: 1
-  discardValueText: 2
-  objName: testSpell
+  discardValue: 2

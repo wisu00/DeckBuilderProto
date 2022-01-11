@@ -9,15 +9,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] DeckManager deck;
     [SerializeField] HandManager hand;
     [SerializeField] DiscardPileManager discardPile;
+    
+
+    
+    public PhotonView photonView;
+    
+
+    #region Money management
+
     [SerializeField] TMP_Text moneyPlayerTxt;
     [SerializeField] TMP_Text moneyOpponentTxt;
-
     [SerializeField] int startingMoney;
-    public PhotonView photonView;
     int moneyPlayer;
     int moneyOpponent;
 
-    #region Money management
     public int getMoneyPlayer() {
         return moneyPlayer;
     }
@@ -61,7 +66,19 @@ public class GameManager : MonoBehaviour
         UpdateMoneyText();
         updateValuesOnOpponent();
     }
+    
     #endregion money management
+
+    #region Card management
+
+    [SerializeField] Transform playArea;
+    [SerializeField] Transform discardArea;
+
+    public bool isOnTopOfPlayArea(Transform cardPos) {
+        return true;
+    }
+
+    #endregion Card management
 
     private void Start() {
         moneyPlayer = startingMoney;

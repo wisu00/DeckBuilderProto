@@ -8,6 +8,11 @@ public class CardBack : Card
     public override void OnPlay() {
         Debug.Log("Opponent played a card");
     }
+
+    public override void OnDiscard() {
+        Debug.Log("Opponent discarded a card");
+    }
+
     public override bool isCardBack() {
         return true;
     }

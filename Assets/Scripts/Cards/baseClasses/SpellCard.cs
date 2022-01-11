@@ -6,7 +6,10 @@ using UnityEngine;
 public class SpellCard : Card
 {
     public override void OnPlay() {
-        PrintName();
         decreasePlayerMoney(goldCost);
+    }
+
+    public override void OnDiscard() {
+        increasePlayerMoney(discardValue);
     }
 }

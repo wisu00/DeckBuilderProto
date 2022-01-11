@@ -16,14 +16,21 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
     public TMP_Text description;
     public TMP_Text goldCost;
     public TMP_Text discardValueText;
+    private CanvasGroup CanvasGroup;
 
     Vector3 startPosition;
+
+    private void Awake() {
+        CanvasGroup = GetComponent<CanvasGroup>();
+    }
 
     public void OnBeginDrag(PointerEventData eventData) {
         if(card.isCardBack()) {
             eventData.pointerDrag = null;
         }
         else {
+            CanvasGroup.alpha = 0.6f;
+            CanvasGroup.blocksRaycasts = false;
             PickCardUp();
         }
     }
@@ -35,11 +42,9 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
     }
 
     public void OnEndDrag(PointerEventData eventData) {
-        if(gameManager.getMoneyPlayer()>=card.goldCost) {
-            PlayTheCard();
-        } else {
-            transform.position = startPosition;
-        }
+        CanvasGroup.alpha = 1f;
+        CanvasGroup.blocksRaycasts = true;
+        transform.position = startPosition;
     }
 
     public void PickCardUp() {
@@ -55,7 +60,7 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
         cardName.text = card.cardName;
         description.text = card.description;
         goldCost.text = card.goldCost.ToString();
-        discardValueText.text = card.discardValueText.ToString();
+        discardValueText.text = card.discardValue.ToString();
         if(card.isCardBack()) {
             foreach (Transform child in cardArt.gameObject.transform) {
                 child.gameObject.SetActive(false);
@@ -64,12 +69,19 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
     }
 
     public void PlayTheCard() {
-        card.OnPlay();
-        if(!card.goesOnBoard()) {
-            hand.MoveCardToDiscardPile(card, gameObject);
+        if(gameManager.getMoneyPlayer()>=card.goldCost) {
+            card.OnPlay();
+            if(!card.goesOnBoard()) {
+                hand.MoveCardToDiscardPile(card, gameObject);
+            }
+            else {
+                //play card on board
+            }
         }
-        else {
-            //play card on board
-        }
+    }
+
+    public void DiscardTheCard() {
+        card.OnDiscard();
+        hand.MoveCardToDiscardPile(card, gameObject);
     }
 }
