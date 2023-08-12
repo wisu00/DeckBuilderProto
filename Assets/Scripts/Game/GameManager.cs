@@ -10,11 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] HandManager hand;
     [SerializeField] DiscardPileManager discardPile;
     
-
-    
     public PhotonView photonView;
     
-
     #region Money management
 
     [SerializeField] TMP_Text moneyPlayerTxt;
@@ -70,9 +67,6 @@ public class GameManager : MonoBehaviour
     #endregion money management
 
     #region Card management
-
-    [SerializeField] Transform playArea;
-    [SerializeField] Transform discardArea;
 
     public bool isOnTopOfPlayArea(Transform cardPos) {
         return true;

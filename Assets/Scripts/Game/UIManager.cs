@@ -9,8 +9,8 @@ public class UIManager : MonoBehaviour
 {
     public TMP_Text playersName;
     public TMP_Text opponentsName;
-
     public PhotonView photonView;
+    [SerializeField] private Button endTheTurnButton;
     
     private void Awake() {
         playersName.text = PhotonNetwork.LocalPlayer.NickName;
@@ -28,5 +28,9 @@ public class UIManager : MonoBehaviour
     [PunRPC]
     void SyncValues (string name) {
         opponentsName.text = name;
+    }
+
+    public void InPlayTurnState(bool b) {
+        endTheTurnButton.interactable = b;
     }
 }
