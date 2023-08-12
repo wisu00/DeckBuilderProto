@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 18237487}
   - component: {fileID: 18237486}
-  - component: {fileID: 18237485}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -141,28 +140,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &18237485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 18237484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 2
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!114 &18237486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,7 +154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playersName: {fileID: 1012881814}
   opponentsName: {fileID: 521490075}
-  photonView: {fileID: 18237485}
   endTheTurnButton: {fileID: 227784209}
 --- !u!4 &18237487
 Transform:
@@ -1427,7 +1403,6 @@ GameObject:
   m_Component:
   - component: {fileID: 738960902}
   - component: {fileID: 738960903}
-  - component: {fileID: 738960904}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -1465,32 +1440,9 @@ MonoBehaviour:
   deck: {fileID: 2247525653897978903}
   hand: {fileID: 874629191}
   discardPile: {fileID: 2308483127154020510}
-  photonView: {fileID: 738960904}
   moneyPlayerTxt: {fileID: 1219212848}
   moneyOpponentTxt: {fileID: 472369594}
   startingMoney: 10
---- !u!114 &738960904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738960901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 7
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!114 &874629191 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2364037165017716348, guid: 8ed5f8d4066ccdb42a0a914170072e10,
@@ -1501,18 +1453,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a2c822aeb23d27448771eaeaf7bd3fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &874629193 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 518411147811280342, guid: 8ed5f8d4066ccdb42a0a914170072e10,
-    type: 3}
-  m_PrefabInstance: {fileID: 5613926983707428371}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &976927341
@@ -2103,7 +2043,7 @@ PrefabInstance:
         type: 3}
       propertyPath: photonViewFromOpponentsHand
       value: 
-      objectReference: {fileID: 874629193}
+      objectReference: {fileID: 0}
     - target: {fileID: 4176494443980879939, guid: 8ed5f8d4066ccdb42a0a914170072e10,
         type: 3}
       propertyPath: m_Name
@@ -2219,7 +2159,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: HandAreaOpponent
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 518411147811280342, guid: 8ed5f8d4066ccdb42a0a914170072e10, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2242,18 +2183,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1306499395}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1306499398 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 518411147811280342, guid: 8ed5f8d4066ccdb42a0a914170072e10,
-    type: 3}
-  m_PrefabInstance: {fileID: 1306499395}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1640465521
 GameObject:
   m_ObjectHideFlags: 0
@@ -2263,7 +2192,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1640465522}
-  - component: {fileID: 1640465523}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -2286,18 +2214,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2108085453}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1640465523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1640465521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dccbf1ed8685fff4faa5a5ecec250693, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1684182414
 GameObject:
   m_ObjectHideFlags: 0
@@ -2308,7 +2224,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1684182415}
   - component: {fileID: 1684182417}
-  - component: {fileID: 1684182416}
   m_Layer: 0
   m_Name: TurnController
   m_TagString: Untagged
@@ -2331,28 +2246,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2108085453}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1684182416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1684182414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 8
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!114 &1684182417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2366,7 +2259,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTurnState: 4
-  photonView: {fileID: 1684182416}
   uIManager: {fileID: 18237486}
   deck: {fileID: 2247525653897978903}
 --- !u!1 &1776062441
@@ -2541,7 +2433,7 @@ PrefabInstance:
         type: 3}
       propertyPath: photonViewFromOpponentsDeck
       value: 
-      objectReference: {fileID: 2247525653897978904}
+      objectReference: {fileID: 0}
     - target: {fileID: 5052789243501474818, guid: 037add7f361e51e47b2d4faea36390b3,
         type: 3}
       propertyPath: m_Name
@@ -2719,7 +2611,8 @@ PrefabInstance:
       propertyPath: photonViewFromOpponentsDeck
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1311963583540269757, guid: 037add7f361e51e47b2d4faea36390b3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2730,18 +2623,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1783154429}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1783154431 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1311963583540269757, guid: 037add7f361e51e47b2d4faea36390b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1783154429}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1783154432 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
@@ -2987,7 +2868,8 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5331215299082062244, guid: b1a622030ce6db340991bbf4712b2cf5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3066,7 +2948,7 @@ PrefabInstance:
         type: 3}
       propertyPath: photonViewFromOpponentsDeck
       value: 
-      objectReference: {fileID: 1783154431}
+      objectReference: {fileID: 0}
     - target: {fileID: 5052789243501474818, guid: 037add7f361e51e47b2d4faea36390b3,
         type: 3}
       propertyPath: m_Name
@@ -3237,6 +3119,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8997559968945141328, guid: 037add7f361e51e47b2d4faea36390b3, type: 3}
     - {fileID: 8997559968945141329, guid: 037add7f361e51e47b2d4faea36390b3, type: 3}
+    - {fileID: 1311963583540269757, guid: 037add7f361e51e47b2d4faea36390b3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3257,18 +3140,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7889ef74cbc9cec4ca9dd469d51165dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2247525653897978904 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1311963583540269757, guid: 037add7f361e51e47b2d4faea36390b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 2247525653897978901}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2308483127154020509
@@ -3452,7 +3323,7 @@ PrefabInstance:
         type: 3}
       propertyPath: photonViewFromOpponentsHand
       value: 
-      objectReference: {fileID: 1306499398}
+      objectReference: {fileID: 0}
     - target: {fileID: 5613926985622623566, guid: 8ed5f8d4066ccdb42a0a914170072e10,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3563,7 +3434,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: HandArea
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 518411147811280342, guid: 8ed5f8d4066ccdb42a0a914170072e10, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

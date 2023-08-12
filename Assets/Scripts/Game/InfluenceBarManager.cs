@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Photon.Pun;
+//using Photon.Pun;
 
 public class InfluenceBarManager : MonoBehaviour {
     [SerializeField] private Slider player1InfluenceBar;
@@ -10,17 +10,17 @@ public class InfluenceBarManager : MonoBehaviour {
 
     private int changeAmount = 5; //will get replaced with parameters
 
-    public PhotonView photonView;
+ //   public PhotonView photonView;
 
     void updateValuesOnOpponent(){
-        photonView.RPC("SyncValues", RpcTarget.OthersBuffered, player1InfluenceBar.value, player2InfluenceBar.value);
+  //      photonView.RPC("SyncValues", RpcTarget.OthersBuffered, player1InfluenceBar.value, player2InfluenceBar.value);
     }
 
-    [PunRPC]
-    void SyncValues (float player1, float player2) {
-        player1InfluenceBar.value = player1;
-        player2InfluenceBar.value = player2;
-    }
+ //   [PunRPC]
+ //   void SyncValues (float player1, float player2) {
+ //       player1InfluenceBar.value = player1;
+ //       player2InfluenceBar.value = player2;
+ //   }
 
 
     private void checkVariableAssignments() {

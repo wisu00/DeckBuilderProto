@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
+//using Photon.Pun;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] HandManager hand;
     [SerializeField] DiscardPileManager discardPile;
     
-    public PhotonView photonView;
+ //   public PhotonView photonView;
     
     #region Money management
 
@@ -25,15 +25,15 @@ public class GameManager : MonoBehaviour
     }
 
     void updateValuesOnOpponent(){
-        photonView.RPC("SyncValues", RpcTarget.OthersBuffered, moneyPlayer, moneyOpponent);
+ //       photonView.RPC("SyncValues", RpcTarget.OthersBuffered, moneyPlayer, moneyOpponent);
     }
 
-    [PunRPC]
-    private void SyncValues (int amountPlayer, int amountOpponent) {
-        moneyPlayer = amountOpponent;
-        moneyOpponent = amountPlayer;
-        UpdateMoneyText();
-    }
+ //   [PunRPC]
+ //   private void SyncValues (int amountPlayer, int amountOpponent) {
+ //       moneyPlayer = amountOpponent;
+ //       moneyOpponent = amountPlayer;
+ //       UpdateMoneyText();
+ //   }
 
     private void UpdateMoneyText() {
         moneyPlayerTxt.text = "" + moneyPlayer;

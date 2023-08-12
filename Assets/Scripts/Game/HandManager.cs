@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Photon.Pun;
+//using Photon.Pun;
 
 public class HandManager : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class HandManager : MonoBehaviour
     [SerializeField] GameObject cardPrefab;
     [SerializeField] List<Card> hand;
 
-    public PhotonView photonViewFromOpponentsHand;
+ //   public PhotonView photonViewFromOpponentsHand;
 
     private int maxHandSize = 5;
     private List<GameObject> physicalCardsInHand = new List<GameObject>();
@@ -47,17 +47,17 @@ public class HandManager : MonoBehaviour
         }
     }
 
-    [PunRPC]
-    void OpponentsCardGoesToDiscardPile (int cardPlaceInHand) {
-        Card cardThatGotPlayed = hand[cardPlaceInHand];
-        GameObject physicalCard = physicalCardsInHand[cardPlaceInHand];
-        MoveCardToDiscardPile(cardThatGotPlayed, physicalCard);
-    }
+ //   [PunRPC]
+ //   void OpponentsCardGoesToDiscardPile (int cardPlaceInHand) {
+ //       Card cardThatGotPlayed = hand[cardPlaceInHand];
+ //       GameObject physicalCard = physicalCardsInHand[cardPlaceInHand];
+ //       MoveCardToDiscardPile(cardThatGotPlayed, physicalCard);
+ //   }
 
     public void MoveCardToDiscardPile(Card cardThatGotPlayed, GameObject physicalCard) {
         if(!cardThatGotPlayed.isCardBack()) {
             int cardPlaceInHand = hand.IndexOf(cardThatGotPlayed);
-            photonViewFromOpponentsHand.RPC("OpponentsCardGoesToDiscardPile", RpcTarget.OthersBuffered, cardPlaceInHand);
+  //          photonViewFromOpponentsHand.RPC("OpponentsCardGoesToDiscardPile", RpcTarget.OthersBuffered, cardPlaceInHand);
         }
         Destroy(physicalCard);
         discardPile.AddCardToDiscardPile(cardThatGotPlayed);
