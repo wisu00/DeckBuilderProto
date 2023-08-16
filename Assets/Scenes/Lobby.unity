@@ -1169,7 +1169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlobalObjectIdHash: 1499869328
   AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
+  SynchronizeTransform: 0
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
@@ -1187,7 +1187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 210007a69c880cd4696bdc552b73a8e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSceneName: 
+  gameSceneName: Game
 --- !u!4 &2128713061
 Transform:
   m_ObjectHideFlags: 0
@@ -1197,7 +1197,7 @@ Transform:
   m_GameObject: {fileID: 2128713058}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 932.01294, y: 529.56616, z: -38.44867}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
