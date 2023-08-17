@@ -2,10 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Unity.Netcode;
 
-public class SceneChanger : NetworkBehaviour {
-    [SerializeField] private string gameSceneName;
+public static class SceneChanger {
+
+    public enum Scene {
+        LobbyScene,
+        GameScene
+    }
+
+    private static Scene targetScene;
+
+    //public static void Load(Scene targetScene) {
+    //    SceneChanger.targetScene = targetScene;
+    //
+    //    SceneManager.LoadScene(Scene.LoadingScene.ToString());
+    //}
+
+    public static void LoadNetWork(Scene targetScene) {
+        NetworkManager.Singleton.SceneManager.LoadScene(targetScene.ToString(), LoadSceneMode.Single);
+    }
+
+    public static void SceneChangerCallBack() {
+        SceneManager.LoadScene(targetScene.ToString());
+    }
+
+    /*[SerializeField] private string gameSceneName;
 
     [ServerCallback]
     void Update()
@@ -26,4 +47,5 @@ public class SceneChanger : NetworkBehaviour {
                 $"with a {nameof(SceneEventProgressStatus)}: {status}");
         }
     }
+    */
 }
