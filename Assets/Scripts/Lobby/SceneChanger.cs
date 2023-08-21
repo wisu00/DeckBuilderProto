@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
 public static class SceneChanger {
 
@@ -10,21 +11,21 @@ public static class SceneChanger {
         GameScene
     }
 
-    private static Scene targetScene;
+    //private static Scene targetScene;
 
-    //public static void Load(Scene targetScene) {
-    //    SceneChanger.targetScene = targetScene;
-    //
-    //    SceneManager.LoadScene(Scene.LoadingScene.ToString());
-    //}
+    //should be used when there is no connection
+    public static void Load(Scene targetScene) {
+        SceneManager.LoadScene(targetScene.ToString());
+    }
 
+    //moves all connected players at the same time
     public static void LoadNetWork(Scene targetScene) {
         NetworkManager.Singleton.SceneManager.LoadScene(targetScene.ToString(), LoadSceneMode.Single);
     }
 
-    public static void SceneChangerCallBack() {
-        SceneManager.LoadScene(targetScene.ToString());
-    }
+    //public static void SceneChangerCallBack() {
+    //    SceneManager.LoadScene(targetScene.ToString());
+    //}
 
     /*[SerializeField] private string gameSceneName;
 
