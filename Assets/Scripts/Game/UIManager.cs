@@ -11,13 +11,9 @@ public class UIManager : MonoBehaviour
     public TMP_Text opponentsName;
  //   public PhotonView photonView;
     [SerializeField] private Button endTheTurnButton;
-    
-    private void Awake() {
-  //      playersName.text = PhotonNetwork.LocalPlayer.NickName;
-    }
 
-    void Start()
-    {
+    void Start() {
+        playersName.text = EditPlayerName.Instance.GetPlayerName();
         updateOpponentsNickName();
     }
 

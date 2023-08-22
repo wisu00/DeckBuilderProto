@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 //using Photon.Pun;
 using TMPro;
+using Unity.Netcode;
 
-public class GameManager : MonoBehaviour
-{
+public class GameManager : NetworkBehaviour {
     [SerializeField] DeckManager deck;
     [SerializeField] HandManager hand;
     [SerializeField] DiscardPileManager discardPile;
@@ -17,8 +17,29 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text moneyPlayerTxt;
     [SerializeField] TMP_Text moneyOpponentTxt;
     [SerializeField] int startingMoney;
+    private NetworkVariable<int> player1Money = new NetworkVariable<int>();
+    private NetworkVariable<int> player2Money = new NetworkVariable<int>();
     int moneyPlayer;
     int moneyOpponent;
+
+
+
+
+    //updates values on server
+    [ServerRpc(RequireOwnership = false)]
+    public void UpdateMoneyForPlayerServerRpc(ServerRpcParams serverRpcParams = default) {
+        var clientId = serverRpcParams.Receive.SenderClientId;
+        if (NetworkManager.ConnectedClients.ContainsKey(clientId)) {
+            var client = NetworkManager.ConnectedClients[clientId];
+            // Do things for this client
+        }
+    }
+
+    //server updates values on clients
+    [ClientRpc]
+    void UpdateValuesClientRpc(int moneyAmount, string sometext) { 
+    
+    }
 
     public int getMoneyPlayer() {
         return moneyPlayer;
@@ -36,8 +57,18 @@ public class GameManager : MonoBehaviour
  //   }
 
     private void UpdateMoneyText() {
-        moneyPlayerTxt.text = "" + moneyPlayer;
+
+        moneyPlayerTxt.text = "" + playerMoney.Value;
         moneyOpponentTxt.text = "" + moneyOpponent;
+    }
+
+    private void UpdateMoneyText(bool isOwner) {
+        if (isOwner) {
+            moneyPlayerTxt.text = "" + playerMoney.Value;
+        }
+        else {
+            moneyOpponentTxt.text = "" + playerMoney.Value;
+        }
     }
 
     public void IncreasePlayerMoney(int amount) {
@@ -74,8 +105,21 @@ public class GameManager : MonoBehaviour
 
     #endregion Card management
 
+    public override void OnNetworkSpawn() {
+        if() {
+
+        }
+        player1Money.OnValueChanged += (int previousValue, int newValue) => {
+            UpdateMoneyText(IsOwner);
+        };
+        player2Money.OnValueChanged += (int previousValue, int newValue) => {
+            UpdateMoneyText(IsOwner);
+        };
+    }
+
     private void Start() {
         moneyPlayer = startingMoney;
+        playerMoney.Value = startingMoney;
         moneyOpponent = startingMoney;
         UpdateMoneyText();
     }
