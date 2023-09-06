@@ -11,15 +11,33 @@ public class UIManager : MonoBehaviour
     public TMP_Text opponentsName;
     public PhotonView photonView;
     [SerializeField] private Button endTheTurnButton;
+
+    bool messageIsActive = false;
+    [SerializeField] private Image popUpMessageBox;
+    [SerializeField] private GameObject notYourTurnMessage;
     
     private void Awake() {
         playersName.text = PhotonNetwork.LocalPlayer.NickName;
     }
 
-    void Start()
-    {
+    void Start() {
         updateOpponentsNickName();
     }
+
+    public void ShowNotYourTurnMessage() {
+        if(!messageIsActive) {
+			messageIsActive = true;
+			popUpMessageBox.gameObject.SetActive(true);
+			notYourTurnMessage.SetActive(true);
+			Invoke("DisableMessage", 1.5f);
+		}
+	}
+
+    private void DisableMessage() {
+		messageIsActive = false;
+		popUpMessageBox.gameObject.SetActive(false);
+		notYourTurnMessage.SetActive(false);
+	}
 
     void updateOpponentsNickName(){
         photonView.RPC("SyncValues", RpcTarget.OthersBuffered, playersName.text);

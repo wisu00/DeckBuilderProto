@@ -10,6 +10,7 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
     public Card card;
     public HandManager hand;
     private GameManager gameManager;
+    private TurnStateController turnStateController;
     private Canvas canvas;
     public TMP_Text cardName;
     public Image cardArt;
@@ -51,10 +52,11 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
         startPosition = transform.position;
     } 
 
-    public void UpdateValues(HandManager handScript, GameManager gameManagerScript) {
+    public void UpdateValues(HandManager handScript, GameManager gameManagerScript, TurnStateController turnStateControllerScript) {
         hand = handScript;
         gameManager = gameManagerScript;
-        canvas = GameObject.FindWithTag("MainCanvas").GetComponent<Canvas>();
+        turnStateController = turnStateControllerScript;
+		canvas = GameObject.FindWithTag("MainCanvas").GetComponent<Canvas>();
         card.AssignGameManager(gameManager, handScript);
         cardArt.sprite = card.cardArt;
         cardName.text = card.cardName;
@@ -69,19 +71,23 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
     }
 
     public void PlayTheCard() {
-        if(gameManager.getMoneyPlayer()>=card.goldCost) {
-            card.OnPlay();
-            if(!card.goesOnBoard()) {
-                hand.MoveCardToDiscardPile(card, gameObject);
-            }
-            else {
-                //play card on board
-            }
-        }
+        if (turnStateController.CheckIfItIsPlayersTurn()) {
+			if(gameManager.getMoneyPlayer() >= card.goldCost) {
+				card.OnPlay();
+				if(!card.goesOnBoard()) {
+					hand.MoveCardToDiscardPile(card, gameObject);
+				}
+				else {
+					//play card on board
+				}
+			}
+		}
     }
 
     public void DiscardTheCard() {
-        card.OnDiscard();
-        hand.MoveCardToDiscardPile(card, gameObject);
+        if(turnStateController.CheckIfItIsPlayersTurn()) {
+            card.OnDiscard();
+            hand.MoveCardToDiscardPile(card, gameObject);
+        }
     }
 }

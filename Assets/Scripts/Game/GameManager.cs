@@ -79,11 +79,4 @@ public class GameManager : MonoBehaviour
         moneyOpponent = startingMoney;
         UpdateMoneyText();
     }
-
-    void Update()
-    {
-        if(Input.GetKeyDown("space")) {
-            deck.DrawCard();
-        }
-    }
 }

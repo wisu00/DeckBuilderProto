@@ -8,9 +8,9 @@ public enum TurnState {StartOfTurn, Draw, Play, EndOfTurn, OpponentsTurn}
 
 public class TurnStateController : MonoBehaviour {
 
-    public TurnState currentTurnState = TurnState.OpponentsTurn;
+    private TurnState currentTurnState = TurnState.OpponentsTurn;
     public PhotonView photonView;
-    public UIManager uIManager;
+    public UIManager uiManager;
     [SerializeField] DeckManager deck;
 
     private void Start() {
@@ -19,6 +19,15 @@ public class TurnStateController : MonoBehaviour {
             if(Random.Range(1, 3) == 1) startTheGame();
             else photonView.RPC("TurnReceived", RpcTarget.OthersBuffered);
         }
+    }
+
+    public bool CheckIfItIsPlayersTurn() {
+        if(currentTurnState != TurnState.Play) {
+            uiManager.ShowNotYourTurnMessage();
+            Debug.Log("notYourTurn");
+            return false;
+        }
+        else return true;
     }
 
     public void ChangeState(TurnState newState) {
@@ -58,14 +67,14 @@ public class TurnStateController : MonoBehaviour {
     }
 
     public void PlayStateEntered() {
-        //the phase where actions are enabled
-        //enable end turn button
-        uIManager.InPlayTurnState(true);
+		//the phase where actions are enabled
+		//enable end turn button
+		uiManager.InPlayTurnState(true);
     }
 
     public void EndTurnButtonPressed() {
-        //disable end turn button
-        uIManager.InPlayTurnState(false);
+		//disable end turn button
+		uiManager.InPlayTurnState(false);
         ChangeState(TurnState.EndOfTurn);
     }
 

@@ -9,6 +9,7 @@ public class HandManager : MonoBehaviour
     [SerializeField] GameObject handArea;
     [SerializeField] DiscardPileManager discardPile;
     [SerializeField] GameManager gameManager;
+    [SerializeField] TurnStateController turnStateController;
     [SerializeField] GameObject cardPrefab;
     [SerializeField] List<Card> hand;
 
@@ -28,7 +29,7 @@ public class HandManager : MonoBehaviour
             
             GameObject cardThatWasDrawn = Instantiate(cardPrefab, handArea.transform);
             cardThatWasDrawn.GetComponent<CardBaseFunctionality>().card = drawnCard;
-            cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValues(this, gameManager);
+            cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValues(this, gameManager, turnStateController);
             physicalCardsInHand.Add(cardThatWasDrawn);
             OrganiseHand();
         }
