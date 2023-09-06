@@ -9,12 +9,37 @@ public class GameManager : MonoBehaviour
     [SerializeField] DeckManager deck;
     [SerializeField] HandManager hand;
     [SerializeField] DiscardPileManager discardPile;
-    
-    public PhotonView photonView;
-    
-    #region Money management
+    [SerializeField] UIManager uiManager;
 
-    [SerializeField] TMP_Text moneyPlayerTxt;
+    CharacterClasses playerCharacter;
+    CharacterClasses opponentCharacter;
+
+	public PhotonView photonView;
+
+	#region Setting Up
+
+	private void Start() {
+		//update character selections for both players
+		playerCharacter = (CharacterClasses)System.Enum.Parse(typeof(CharacterClasses), PlayerPrefs.GetString("SelectedClass"));
+		uiManager.UpdatePlayerCharacterPortrait(playerCharacter);
+		photonView.RPC("UpdatePlayerClassForOpponent", RpcTarget.OthersBuffered, playerCharacter);
+
+		moneyPlayer = startingMoney;
+		moneyOpponent = startingMoney;
+		UpdateMoneyText();
+	}
+
+	[PunRPC]
+	private void UpdatePlayerClassForOpponent(CharacterClasses opponentChar) {
+        opponentCharacter = opponentChar;
+		uiManager.UpdateOpponentCharacterPortrait(opponentCharacter);
+	}
+
+	#endregion Setting Up
+
+	#region Money management
+
+	[SerializeField] TMP_Text moneyPlayerTxt;
     [SerializeField] TMP_Text moneyOpponentTxt;
     [SerializeField] int startingMoney;
     int moneyPlayer;
@@ -72,11 +97,9 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-    #endregion Card management
+	#endregion Card management
 
-    private void Start() {
-        moneyPlayer = startingMoney;
-        moneyOpponent = startingMoney;
-        UpdateMoneyText();
-    }
+	
+
+	
 }

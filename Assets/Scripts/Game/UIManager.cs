@@ -9,7 +9,11 @@ public class UIManager : MonoBehaviour
 {
     public TMP_Text playersName;
     public TMP_Text opponentsName;
-    public PhotonView photonView;
+	[SerializeField] Sprite[] characterSprites;
+    [SerializeField] Image playerCharacterPortrait;
+	[SerializeField] Image opponentCharacterPortrait;
+
+	public PhotonView photonView;
     [SerializeField] private Button endTheTurnButton;
 
     bool messageIsActive = false;
@@ -24,7 +28,15 @@ public class UIManager : MonoBehaviour
         updateOpponentsNickName();
     }
 
-    public void ShowNotYourTurnMessage() {
+    public void UpdatePlayerCharacterPortrait(CharacterClasses selectedClass) {
+        playerCharacterPortrait.sprite = characterSprites[(int)selectedClass];
+	}
+
+	public void UpdateOpponentCharacterPortrait(CharacterClasses selectedClass) {
+		opponentCharacterPortrait.sprite = characterSprites[(int)selectedClass];
+	}
+
+	public void ShowNotYourTurnMessage() {
         if(!messageIsActive) {
 			messageIsActive = true;
 			popUpMessageBox.gameObject.SetActive(true);

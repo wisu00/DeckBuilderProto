@@ -6,11 +6,11 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 
-public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
-{
+public class CreateAndJoinRooms : MonoBehaviourPunCallbacks {
     public TMP_InputField createInput;
     public GameObject searchingpanel;
     public GameObject mainpanel;
+    [SerializeField] CharacterSelection characterSelection;
 
     public void CreateRoom() {
         RoomOptions roomoptions = new RoomOptions() {
@@ -29,7 +29,8 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
         searchingpanel.SetActive(false);
         mainpanel.SetActive(true);
-    }
+		characterSelection.SetCharacterButtonsEnabled(true);
+	}
 
     public override void OnJoinedRoom() {
         searchingpanel.SetActive(true);
@@ -43,7 +44,11 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     }
 
     public void FindMatch() {
-        RoomOptions roomoptions = new RoomOptions() {
+        //disables character buttons
+        characterSelection.SetCharacterButtonsEnabled(false);
+        //saves selected class
+		PlayerPrefs.SetString("SelectedClass", characterSelection.GetSelectedClass().ToString());
+		RoomOptions roomoptions = new RoomOptions() {
             IsOpen = true,
             IsVisible = true,
             MaxPlayers = 2
