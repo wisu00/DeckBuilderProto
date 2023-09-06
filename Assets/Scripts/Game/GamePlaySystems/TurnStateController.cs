@@ -3,23 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 //using Photon.Pun;
 //using Photon.Realtime;
+using Unity.Netcode;
+using UnityEditor.PackageManager;
 
 public enum TurnState {StartOfTurn, Draw, Play, EndOfTurn, OpponentsTurn}
 
-public class TurnStateController : MonoBehaviour {
+public class TurnStateController : NetworkBehaviour {
 
     public TurnState currentTurnState = TurnState.OpponentsTurn;
   //  public PhotonView photonView;
     public UIManager uIManager;
     [SerializeField] DeckManager deck;
 
-    private void Start() {
- //      if(PhotonNetwork.IsMasterClient) {
- //          //min inclusive max exlusive
- //          if(Random.Range(1, 3) == 1) startTheGame();
- //          else photonView.RPC("TurnReceived", RpcTarget.OthersBuffered);
- //      }
-    }
+    public void ConnectionStarted(ulong client1Id, ulong client2id) {
+        if (!IsServer) return;
+
+        ulong startingClientId;
+
+        //min inclusive max exlusive
+        if (Random.Range(1, 3) == 1)
+			startingClientId = client1Id;
+        else {
+			startingClientId = client2id;
+		}
+
+		ClientRpcParams clientRpcParams = new ClientRpcParams {
+			Send = new ClientRpcSendParams {
+				TargetClientIds = new ulong[] { startingClientId }
+			}
+		};
+
+		StartFirstTurnClientRpc(clientRpcParams);
+	}
+
+	[ServerRpc(RequireOwnership = false)]
+	public void TurnPassedServerRpc(ServerRpcParams serverRpcParams = default) {
+		var clientId = serverRpcParams.Receive.SenderClientId;
+		
+	}
 
     public void ChangeState(TurnState newState) {
         currentTurnState = newState;
@@ -33,12 +54,13 @@ public class TurnStateController : MonoBehaviour {
         }
     }
 
- //  [PunRPC]
- //  public void TurnReceived() {
- //      ChangeState(TurnState.StartOfTurn);
- //  }
+    [ClientRpc]
+    public void TurnReceivedClientRpc(ClientRpcParams clientRpcParams = default) {
+        ChangeState(TurnState.StartOfTurn);
+    }
 
-    public void startTheGame() {
+    [ClientRpc]
+    public void StartFirstTurnClientRpc(ClientRpcParams clientRpcParams = default) {
         ChangeState(TurnState.StartOfTurn);
     }
 
