@@ -43,6 +43,9 @@ public class DeckManager : MonoBehaviour
 
     public void ShuffleDiscardPileToDeck(List<Card> newDeck) {
         cardsInDeck = new List<Card>(newDeck);
-        UpdateInfoBox();
+
+        IListExtensions.Shuffle(cardsInDeck);
+
+		UpdateInfoBox();
     }
 }

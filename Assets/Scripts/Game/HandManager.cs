@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class HandManager : MonoBehaviour
-{
+public class HandManager : MonoBehaviour {
     [SerializeField] GameObject handArea;
     [SerializeField] DiscardPileManager discardPile;
     [SerializeField] GameManager gameManager;

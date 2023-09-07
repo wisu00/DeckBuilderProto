@@ -5,7 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CardBack", menuName = "Cards/CardBack", order = 9)]
 public class CardBack : Card
 {
-    public override void OnPlay() {
+	public override void OnBuy() {
+	}
+
+	public override void OnPlay() {
         Debug.Log("Opponent played a card");
     }
 

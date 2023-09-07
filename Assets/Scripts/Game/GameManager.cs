@@ -4,8 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 
-public class GameManager : MonoBehaviour
-{
+public class GameManager : MonoBehaviour {
     [SerializeField] DeckManager deck;
     [SerializeField] HandManager hand;
     [SerializeField] DiscardPileManager discardPile;

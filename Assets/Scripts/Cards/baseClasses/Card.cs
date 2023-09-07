@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Card : ScriptableObject {
+    public int cardIndex;//identifier
     public string cardName;
     public Sprite cardArt;
     [TextArea(2,10)] public string description;
-    public int goldCost;
+    public int buyCost;
+    public int playCost;
     public int discardValue;
 
     private GameManager gameManager;
@@ -17,7 +19,9 @@ public abstract class Card : ScriptableObject {
         handManager = hand;
     }
 
-    public abstract void OnPlay();
+	public abstract void OnBuy();
+
+	public abstract void OnPlay();
 
     public abstract void OnDiscard();
 

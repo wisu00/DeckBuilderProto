@@ -11,12 +11,15 @@ public class TurnStateController : MonoBehaviour {
     private TurnState currentTurnState = TurnState.OpponentsTurn;
     public PhotonView photonView;
     public UIManager uiManager;
+    [SerializeField] StoreManager storeManager;
     [SerializeField] DeckManager deck;
+
+    private bool firstTurn = true;
 
     private void Start() {
         if(PhotonNetwork.IsMasterClient) {
             //min inclusive max exlusive
-            if(Random.Range(1, 3) == 1) startTheGame();
+            if(Random.Range(1, 3) == 1) TurnReceived();
             else photonView.RPC("TurnReceived", RpcTarget.OthersBuffered);
         }
     }
@@ -44,7 +47,9 @@ public class TurnStateController : MonoBehaviour {
 
     [PunRPC]
     public void TurnReceived() {
-        ChangeState(TurnState.StartOfTurn);
+		ChangeState(TurnState.StartOfTurn);
+		if(firstTurn) storeManager.ShuffleStorePiles();
+		storeManager.LoadStore();
     }
 
     public void startTheGame() {
@@ -80,7 +85,9 @@ public class TurnStateController : MonoBehaviour {
 
     public void EndOfTurnStateEntered() {
         //end of turn effects
-        TurnPassed();
+        storeManager.EmptyStore();
+
+		TurnPassed();
     }
 
     public void TurnPassed() {
