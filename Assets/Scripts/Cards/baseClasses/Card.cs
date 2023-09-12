@@ -10,6 +10,7 @@ public abstract class Card : ScriptableObject {
     public int buyCost;
     public int playCost;
     public int discardValue;
+    public int tier;
 
     private GameManager gameManager;
     private HandManager handManager;

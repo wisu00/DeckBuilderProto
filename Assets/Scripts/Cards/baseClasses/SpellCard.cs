@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SpellCard", menuName = "Cards/Spell", order = 1)]
 public class SpellCard : Card {
 	public override void OnBuy() {
-		decreasePlayerMoney(buyCost);
+		
 	}
 
 	public override void OnPlay() {

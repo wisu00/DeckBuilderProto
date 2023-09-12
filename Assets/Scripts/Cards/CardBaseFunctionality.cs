@@ -23,7 +23,8 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
     private CanvasGroup canvasGroup;
     private bool cardIsInStore = false;
     private GameObject cardBuyArea;
-    private bool ownedByPlayer = true;
+	private GameObject cardPlayArea;
+	private bool ownedByPlayer = true;
 
     Vector3 startPosition;
 
@@ -33,9 +34,11 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 
     public void OnBeginDrag(PointerEventData eventData) {
         if(card.isCardBack() || !ownedByPlayer) {
-            eventData.pointerDrag = null;
+			Debug.Log("cant drag");
+			eventData.pointerDrag = null;
         }
         else {
+			Debug.Log("begin drag");
 			canvasGroup.alpha = 0.6f;
 			canvasGroup.blocksRaycasts = false;
             PickCardUp();
@@ -55,21 +58,30 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 		if(cardIsInStore) {
 			cardBuyArea.SetActive(false);
 		}
+        else {
+			cardPlayArea.SetActive(false);
+		}
 	}
 
     public void PickCardUp() {
-        startPosition = transform.position;
+		Debug.Log("picked card up");
+		startPosition = transform.position;
         if(cardIsInStore) {
 			cardBuyArea.SetActive(true);
 		}
+        else {
+			cardPlayArea.SetActive(true);
+		}
     }
 
-    public void UpdateValuesInStore(StoreManager storeManager, DiscardPileManager discardPileManager, GameObject cardBuyArea, bool ownedByPlayer) {
+    public void UpdateValuesInStore(StoreManager storeManager, GameManager gameManager, DiscardPileManager discardPileManager, TurnStateController turnStateController, GameObject cardBuyArea, bool ownedByPlayer) {
 		this.storeManager = storeManager;
-        this.cardBuyArea = cardBuyArea;
+		this.gameManager = gameManager;
+		this.cardBuyArea = cardBuyArea;
 		this.discardPileManager = discardPileManager;
 		this.ownedByPlayer = ownedByPlayer;
-        cardIsInStore = true;
+		this.turnStateController = turnStateController;
+		cardIsInStore = true;
 		canvas = GameObject.FindWithTag("MainCanvas").GetComponent<Canvas>();
 		cardArt.sprite = card.cardArt;
 		cardName.text = card.cardName;
@@ -79,10 +91,11 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 		discardValueText.text = card.discardValue.ToString();
 	}
 
-    public void UpdateValues(HandManager handManager, GameManager gameManagerScript, TurnStateController turnStateControllerScript) {
+    public void UpdateValues(HandManager handManager, GameManager gameManager, TurnStateController turnStateController, GameObject cardPlayArea) {
 		this.handManager = handManager;
-        gameManager = gameManagerScript;
-        turnStateController = turnStateControllerScript;
+		this.cardPlayArea = cardPlayArea;
+		this.turnStateController = turnStateController;
+		this.gameManager = gameManager;
 		canvas = GameObject.FindWithTag("MainCanvas").GetComponent<Canvas>();
         card.AssignGameManager(gameManager, handManager);
         cardArt.sprite = card.cardArt;
@@ -100,10 +113,12 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
     public void BuyTheCard() {
 		if(turnStateController.CheckIfItIsPlayersTurn() && cardIsInStore) {
 			if(gameManager.getMoneyPlayer() >= card.buyCost) {
+				gameManager.DecreasePlayerMoney(card.buyCost);
+				card.OnBuy();
 				cardBuyArea.SetActive(false);
 				discardPileManager.AddCardToDiscardPile(card);
                 storeManager.CardIsBought(card);
-                Destroy(card);
+                Destroy(gameObject);
 			}
 		}
 	}

@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191ebde63ee578d4d8c7f59181840f94, type: 3}
   m_Name: testCardScrapperTier1
   m_EditorClassIdentifier: 
+  cardIndex: 0
   cardName: Scrapper Spell
   cardArt: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   description: Scapper Test Card Tier 1
   buyCost: 0
   playCost: 0
   discardValue: 2
+  tier: 1

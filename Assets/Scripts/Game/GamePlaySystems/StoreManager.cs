@@ -11,10 +11,6 @@ public class StoreManager : MonoBehaviour {
 	List<Card> cardsScrapperTier2;
 	List<Card> cardsScrapperTier3;
 
-	[SerializeField] GameObject tier1CardArea;
-	[SerializeField] GameObject tier2CardArea;
-	[SerializeField] GameObject tier3CardArea;
-
 	[SerializeField] GameObject[] cardStoreDisplayAreas; //5 slots for cards
 
 	[SerializeField] int numberOfCardsInStoreTier1 = 2;
@@ -26,7 +22,9 @@ public class StoreManager : MonoBehaviour {
 	[SerializeField] GameObject cardPrefab;
 	[SerializeField] GameObject storeArea;
 	[SerializeField] GameObject cardBuyArea;
+	[SerializeField] GameManager gameManager;
 	[SerializeField] DiscardPileManager discardPileManager;
+	[SerializeField] TurnStateController turnStateController;
 
 	[SerializeField] List<Card> displayedCardsTier1;
 	[SerializeField] List<Card> displayedCardsTier2;
@@ -71,7 +69,7 @@ public class StoreManager : MonoBehaviour {
 		int cardPos = 0; //used to determine where card will spawn
 		switch(playersCharacterClass) {
 			case CharacterClasses.Banker:
-				Debug.Log("loading banker cards");
+				//Debug.Log("loading banker cards");
 				for(int i = 0; i < numberOfCardsInStoreTier1; i++) {
 					displayedCardsTier1.Add(cardsBankerTier1[0]);
 					SpawnCardInStore(cardsBankerTier1[0], cardPos);
@@ -92,28 +90,34 @@ public class StoreManager : MonoBehaviour {
 				}
 				break;
 			case CharacterClasses.Scrapper:
-				Debug.Log("loading scrapper cards");
+				//Debug.Log("loading scrapper cards");
 				for(int i = 0; i < numberOfCardsInStoreTier1; i++) {
-					displayedCardsTier1.Add(cardsScrapperTier1[0]);
-					SpawnCardInStore(cardsScrapperTier1[0], cardPos);
+					if(cardsScrapperTier1.Count > 0) {// doesn't create cards in store if store decks are empty
+						displayedCardsTier1.Add(cardsScrapperTier1[0]);
+						SpawnCardInStore(cardsScrapperTier1[0], cardPos);
+						cardsScrapperTier1.RemoveAt(0);
+					} 
 					cardPos++;
-					cardsScrapperTier1.RemoveAt(0);
 				}
 				for(int i = 0; i < numberOfCardsInStoreTier2; i++) {
-					displayedCardsTier2.Add(cardsScrapperTier2[0]);
-					SpawnCardInStore(cardsScrapperTier2[0], cardPos);
+					if(cardsScrapperTier2.Count > 0) {
+						displayedCardsTier2.Add(cardsScrapperTier2[0]);
+						SpawnCardInStore(cardsScrapperTier2[0], cardPos);
+						cardsScrapperTier2.RemoveAt(0);
+					}
 					cardPos++;
-					cardsScrapperTier2.RemoveAt(0);
 				}
 				for(int i = 0; i < numberOfCardsInStoreTier3; i++) {
-					displayedCardsTier3.Add(cardsScrapperTier3[0]);
-					SpawnCardInStore(cardsScrapperTier3[0], cardPos);
+					if(cardsScrapperTier3.Count > 0) {
+						displayedCardsTier3.Add(cardsScrapperTier3[0]);
+						SpawnCardInStore(cardsScrapperTier3[0], cardPos);
+						cardsScrapperTier3.RemoveAt(0);
+					}
 					cardPos++;
-					cardsScrapperTier3.RemoveAt(0);
+					
 				}
 				break;
-			default:
-				break;
+			default: Debug.Log("character class not specified"); break;
 		}
 	}
 
@@ -130,8 +134,7 @@ public class StoreManager : MonoBehaviour {
 				cardsScrapperTier2.AddRange(displayedCardsTier2);
 				cardsScrapperTier3.AddRange(displayedCardsTier3);
 				break;
-			default:
-				break;
+			default: Debug.Log("character class not specified"); break;
 		}
 		displayedCardsTier1.Clear();
 		displayedCardsTier2.Clear();
@@ -157,7 +160,7 @@ public class StoreManager : MonoBehaviour {
 		GameObject cardThatWasDrawn;
 		cardThatWasDrawn = Instantiate(cardPrefab, cardStoreDisplayAreas[cardPos].transform); 
 		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().card = card;
-		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValuesInStore(this, discardPileManager, cardBuyArea, true);
+		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValuesInStore(this, gameManager, discardPileManager, turnStateController, cardBuyArea, true);
 		physicalCardsInStore.Add(cardThatWasDrawn);
 	}
 
@@ -166,11 +169,16 @@ public class StoreManager : MonoBehaviour {
 		GameObject cardThatWasDrawn;
 		cardThatWasDrawn = Instantiate(cardPrefab, cardStoreDisplayAreas[cardPos].transform);
 		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().card = cardDataBase.GetCardWithIndex(cardIndex);
-		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValuesInStore(this, discardPileManager, cardBuyArea, false);
+		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValuesInStore(this, gameManager, discardPileManager, turnStateController, cardBuyArea, false);
 		physicalCardsInStore.Add(cardThatWasDrawn);
 	}
 
 	public void CardIsBought(Card card) {
-		//displayedCards.Remove(card);
+		switch(card.tier) {
+			case 1: displayedCardsTier1.Remove(card); break;
+			case 2: displayedCardsTier2.Remove(card); break;
+			case 3: displayedCardsTier3.Remove(card); break;
+			default: Debug.Log(card.name + " doesn't have specified tier"); break;
+		}
 	}
 }

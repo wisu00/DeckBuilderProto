@@ -11,6 +11,7 @@ public class HandManager : MonoBehaviour {
     [SerializeField] TurnStateController turnStateController;
     [SerializeField] GameObject cardPrefab;
     [SerializeField] List<Card> hand;
+    [SerializeField] GameObject cardPlayArea;
 
     public PhotonView photonViewFromOpponentsHand;
 
@@ -28,7 +29,7 @@ public class HandManager : MonoBehaviour {
             
             GameObject cardThatWasDrawn = Instantiate(cardPrefab, handArea.transform);
             cardThatWasDrawn.GetComponent<CardBaseFunctionality>().card = drawnCard;
-            cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValues(this, gameManager, turnStateController);
+            cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValues(this, gameManager, turnStateController, cardPlayArea);
             physicalCardsInHand.Add(cardThatWasDrawn);
             OrganiseHand();
         }
