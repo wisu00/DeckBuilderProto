@@ -9,8 +9,10 @@ public class GameManager : MonoBehaviour {
     [SerializeField] HandManager hand;
     [SerializeField] DiscardPileManager discardPile;
     [SerializeField] UIManager uiManager;
+    [SerializeField] StoreManager storeManager;
+    [SerializeField] TurnStateController turnStateController;
 
-    CharacterClasses playerCharacter;
+	CharacterClasses playerCharacter;
     CharacterClasses opponentCharacter;
 
 	public PhotonView photonView;
@@ -21,11 +23,13 @@ public class GameManager : MonoBehaviour {
 		//update character selections for both players
 		playerCharacter = (CharacterClasses)System.Enum.Parse(typeof(CharacterClasses), PlayerPrefs.GetString("SelectedClass"));
 		uiManager.UpdatePlayerCharacterPortrait(playerCharacter);
+        storeManager.SetPlayerCharacter(playerCharacter);
 		photonView.RPC("UpdatePlayerClassForOpponent", RpcTarget.OthersBuffered, playerCharacter);
 
 		moneyPlayer = startingMoney;
 		moneyOpponent = startingMoney;
 		UpdateMoneyText();
+        turnStateController.StartTheGame();
 	}
 
 	[PunRPC]

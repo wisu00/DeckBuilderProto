@@ -15,14 +15,15 @@ public class TurnStateController : MonoBehaviour {
     [SerializeField] DeckManager deck;
 
     private bool firstTurn = true;
-
-    private void Start() {
-        if(PhotonNetwork.IsMasterClient) {
-            //min inclusive max exlusive
-            if(Random.Range(1, 3) == 1) TurnReceived();
-            else photonView.RPC("TurnReceived", RpcTarget.OthersBuffered);
-        }
-    }
+    
+    //called from game manager when game can start
+    public void StartTheGame() {
+		if(PhotonNetwork.IsMasterClient) {
+			//min inclusive max exlusive
+			if(Random.Range(1, 3) == 1) TurnReceived();
+			else photonView.RPC("TurnReceived", RpcTarget.OthersBuffered);
+		}
+	}
 
     public bool CheckIfItIsPlayersTurn() {
         if(currentTurnState != TurnState.Play) {

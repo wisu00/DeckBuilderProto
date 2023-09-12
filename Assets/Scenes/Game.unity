@@ -336,6 +336,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35829784}
   m_CullTransparentMesh: 1
+--- !u!1 &193217599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 193217600}
+  - component: {fileID: 193217601}
+  m_Layer: 5
+  m_Name: CardArea2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &193217600
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193217599}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1168375042}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -80, y: 0}
+  m_SizeDelta: {x: 70, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &193217601
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193217599}
+  m_CullTransparentMesh: 1
 --- !u!1 &227784207
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,6 +589,95 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 244258984}
   m_CullTransparentMesh: 1
+--- !u!1 &251441060
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 251441061}
+  - component: {fileID: 251441063}
+  - component: {fileID: 251441062}
+  m_Layer: 0
+  m_Name: StoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &251441061
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251441060}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2108085453}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &251441062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251441060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 9
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &251441063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251441060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2af3cb39fb96164cae93ca14df7d1ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier1CardArea: {fileID: 1801451515}
+  tier2CardArea: {fileID: 0}
+  tier3CardArea: {fileID: 0}
+  cardStoreDisplayAreas:
+  - {fileID: 1801451515}
+  - {fileID: 193217599}
+  - {fileID: 1305535011}
+  - {fileID: 1253198706}
+  - {fileID: 1979124677}
+  numberOfCardsInStoreTier1: 2
+  numberOfCardsInStoreTier2: 2
+  numberOfCardsInStoreTier3: 1
+  photonView: {fileID: 251441062}
+  cardDataBase: {fileID: 723103709}
+  cardPrefab: {fileID: 4422418461076721767, guid: 6a2924c55b4b6ae4e8c93db8970767e7,
+    type: 3}
+  storeArea: {fileID: 1168375041}
+  cardBuyArea: {fileID: 415765574}
+  discardPileManager: {fileID: 2308483127154020510}
+  displayedCardsTier1: []
+  displayedCardsTier2: []
+  displayedCardsTier3: []
 --- !u!1 &311872042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1923,6 +2056,48 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 253ba3939b2b8e84c80a14b9775e6204, type: 2}
   - {fileID: 11400000, guid: 6e31dae7948c65940a3ee1dbdb1fd8f4, type: 2}
   - {fileID: 11400000, guid: 1125c12f7df400746ba726f04b7c0668, type: 2}
+  cardsBankerTier1:
+  - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
+  - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
+  - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
+  - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
+  - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
+  - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
+  - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
+  cardsBankerTier2:
+  - {fileID: 11400000, guid: 22c61a34a01a5fd44bb4bc25b2c17b62, type: 2}
+  - {fileID: 11400000, guid: 22c61a34a01a5fd44bb4bc25b2c17b62, type: 2}
+  - {fileID: 11400000, guid: 22c61a34a01a5fd44bb4bc25b2c17b62, type: 2}
+  - {fileID: 11400000, guid: 22c61a34a01a5fd44bb4bc25b2c17b62, type: 2}
+  - {fileID: 11400000, guid: 22c61a34a01a5fd44bb4bc25b2c17b62, type: 2}
+  - {fileID: 11400000, guid: 22c61a34a01a5fd44bb4bc25b2c17b62, type: 2}
+  cardsBankerTier3:
+  - {fileID: 11400000, guid: 9c9a99d4fb8b7e348a3fc788a7dda862, type: 2}
+  - {fileID: 11400000, guid: 9c9a99d4fb8b7e348a3fc788a7dda862, type: 2}
+  - {fileID: 11400000, guid: 9c9a99d4fb8b7e348a3fc788a7dda862, type: 2}
+  - {fileID: 11400000, guid: 9c9a99d4fb8b7e348a3fc788a7dda862, type: 2}
+  - {fileID: 11400000, guid: 9c9a99d4fb8b7e348a3fc788a7dda862, type: 2}
+  cardsScrapperTier1:
+  - {fileID: 11400000, guid: 253ba3939b2b8e84c80a14b9775e6204, type: 2}
+  - {fileID: 11400000, guid: 253ba3939b2b8e84c80a14b9775e6204, type: 2}
+  - {fileID: 11400000, guid: 253ba3939b2b8e84c80a14b9775e6204, type: 2}
+  - {fileID: 11400000, guid: 253ba3939b2b8e84c80a14b9775e6204, type: 2}
+  - {fileID: 11400000, guid: 253ba3939b2b8e84c80a14b9775e6204, type: 2}
+  - {fileID: 11400000, guid: 253ba3939b2b8e84c80a14b9775e6204, type: 2}
+  cardsScrapperTier2:
+  - {fileID: 11400000, guid: 6e31dae7948c65940a3ee1dbdb1fd8f4, type: 2}
+  - {fileID: 11400000, guid: 6e31dae7948c65940a3ee1dbdb1fd8f4, type: 2}
+  - {fileID: 11400000, guid: 6e31dae7948c65940a3ee1dbdb1fd8f4, type: 2}
+  - {fileID: 11400000, guid: 6e31dae7948c65940a3ee1dbdb1fd8f4, type: 2}
+  - {fileID: 11400000, guid: 6e31dae7948c65940a3ee1dbdb1fd8f4, type: 2}
+  - {fileID: 11400000, guid: 6e31dae7948c65940a3ee1dbdb1fd8f4, type: 2}
+  cardsScrapperTier3:
+  - {fileID: 11400000, guid: 1125c12f7df400746ba726f04b7c0668, type: 2}
+  - {fileID: 11400000, guid: 1125c12f7df400746ba726f04b7c0668, type: 2}
+  - {fileID: 11400000, guid: 1125c12f7df400746ba726f04b7c0668, type: 2}
+  - {fileID: 11400000, guid: 1125c12f7df400746ba726f04b7c0668, type: 2}
+  - {fileID: 11400000, guid: 1125c12f7df400746ba726f04b7c0668, type: 2}
+  - {fileID: 11400000, guid: 1125c12f7df400746ba726f04b7c0668, type: 2}
 --- !u!4 &723103710
 Transform:
   m_ObjectHideFlags: 0
@@ -1987,6 +2162,8 @@ MonoBehaviour:
   hand: {fileID: 874629191}
   discardPile: {fileID: 2308483127154020510}
   uiManager: {fileID: 18237486}
+  storeManager: {fileID: 251441063}
+  turnStateController: {fileID: 1684182417}
   photonView: {fileID: 738960904}
   moneyPlayerTxt: {fileID: 1219212848}
   moneyOpponentTxt: {fileID: 472369594}
@@ -2307,8 +2484,6 @@ GameObject:
   - component: {fileID: 1168375042}
   - component: {fileID: 1168375046}
   - component: {fileID: 1168375045}
-  - component: {fileID: 1168375044}
-  - component: {fileID: 1168375043}
   m_Layer: 5
   m_Name: StoreArea
   m_TagString: Untagged
@@ -2327,7 +2502,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1801451516}
+  - {fileID: 193217600}
+  - {fileID: 1305535012}
+  - {fileID: 1253198707}
+  - {fileID: 1979124678}
   m_Father: {fileID: 542318552}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2335,75 +2515,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 420, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1168375043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1168375041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 9
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!114 &1168375044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1168375041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2af3cb39fb96164cae93ca14df7d1ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardsBankerTier1:
-  - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
-  - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
-  - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
-  - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
-  - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
-  - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
-  - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
-  cardsBankerTier2:
-  - {fileID: 11400000, guid: 22c61a34a01a5fd44bb4bc25b2c17b62, type: 2}
-  - {fileID: 11400000, guid: 22c61a34a01a5fd44bb4bc25b2c17b62, type: 2}
-  - {fileID: 11400000, guid: 22c61a34a01a5fd44bb4bc25b2c17b62, type: 2}
-  - {fileID: 11400000, guid: 22c61a34a01a5fd44bb4bc25b2c17b62, type: 2}
-  - {fileID: 11400000, guid: 22c61a34a01a5fd44bb4bc25b2c17b62, type: 2}
-  - {fileID: 11400000, guid: 22c61a34a01a5fd44bb4bc25b2c17b62, type: 2}
-  cardsBankerTier3:
-  - {fileID: 11400000, guid: 9c9a99d4fb8b7e348a3fc788a7dda862, type: 2}
-  - {fileID: 11400000, guid: 9c9a99d4fb8b7e348a3fc788a7dda862, type: 2}
-  - {fileID: 11400000, guid: 9c9a99d4fb8b7e348a3fc788a7dda862, type: 2}
-  - {fileID: 11400000, guid: 9c9a99d4fb8b7e348a3fc788a7dda862, type: 2}
-  - {fileID: 11400000, guid: 9c9a99d4fb8b7e348a3fc788a7dda862, type: 2}
-  cardsScrapperTier1: []
-  cardsScrapperTier2: []
-  cardsScrapperTier3: []
-  numberOfCardsInStoreTier1: 3
-  numberOfCardsInStoreTier2: 2
-  numberOfCardsInStoreTier3: 1
-  photonView: {fileID: 1168375043}
-  cardDataBase: {fileID: 723103709}
-  cardPrefab: {fileID: 4422418461076721767, guid: 6a2924c55b4b6ae4e8c93db8970767e7,
-    type: 3}
-  storeArea: {fileID: 1168375041}
-  cardBuyArea: {fileID: 415765574}
-  discardPileManager: {fileID: 2308483127154020510}
-  displayedCards: []
 --- !u!114 &1168375045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2623,6 +2734,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1253198706
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1253198707}
+  - component: {fileID: 1253198708}
+  m_Layer: 5
+  m_Name: CardArea4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1253198707
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253198706}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1168375042}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 80, y: 0}
+  m_SizeDelta: {x: 70, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1253198708
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253198706}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1265654711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2779,6 +2934,50 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1265654711}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1305535011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1305535012}
+  - component: {fileID: 1305535013}
+  m_Layer: 5
+  m_Name: CardArea3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1305535012
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305535011}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1168375042}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 70, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1305535013
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305535011}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1306499395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3075,7 +3274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photonView: {fileID: 1684182416}
   uiManager: {fileID: 18237486}
-  storeManager: {fileID: 1168375044}
+  storeManager: {fileID: 251441063}
   deck: {fileID: 2247525653897978903}
 --- !u!1 &1776062441
 GameObject:
@@ -3462,12 +3661,100 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7889ef74cbc9cec4ca9dd469d51165dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1801451515
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1801451516}
+  - component: {fileID: 1801451517}
+  m_Layer: 5
+  m_Name: CardArea1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1801451516
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801451515}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1168375042}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -160, y: 0}
+  m_SizeDelta: {x: 70, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1801451517
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801451515}
+  m_CullTransparentMesh: 1
 --- !u!224 &1837885275 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1446286847675297411, guid: b1a622030ce6db340991bbf4712b2cf5,
     type: 3}
   m_PrefabInstance: {fileID: 1446286848271485400}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1979124677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1979124678}
+  - component: {fileID: 1979124679}
+  m_Layer: 5
+  m_Name: CardArea5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1979124678
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979124677}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1168375042}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 160, y: 0}
+  m_SizeDelta: {x: 70, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1979124679
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979124677}
+  m_CullTransparentMesh: 1
 --- !u!224 &2010682205 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5613926985622623566, guid: 8ed5f8d4066ccdb42a0a914170072e10,
@@ -3544,6 +3831,7 @@ Transform:
   - {fileID: 738960902}
   - {fileID: 1640465522}
   - {fileID: 1684182415}
+  - {fileID: 251441061}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &473737701900037416 stripped
