@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CardType {
+	Event, Tool, Location
+}
+
 public abstract class Card : ScriptableObject {
-    public int cardIndex;//identifier
+    [HideInInspector]public int cardIndex;//identifier that is assigned during run time
     public string cardName;
     public Sprite cardArt;
     [TextArea(2,10)] public string description;
@@ -11,8 +15,9 @@ public abstract class Card : ScriptableObject {
     public int playCost;
     public int discardValue;
     public int tier;
+	public CardType cardType;
 
-    private GameManager gameManager;
+	private GameManager gameManager;
     private HandManager handManager;
 
     public void AssignGameManager(GameManager manager, HandManager hand) {
@@ -28,11 +33,6 @@ public abstract class Card : ScriptableObject {
 
     //gets override in cardBack
     public virtual bool isCardBack() {
-        return false;
-    }
-
-    //gets override in buildingCards
-    public virtual bool goesOnBoard() {
         return false;
     }
 

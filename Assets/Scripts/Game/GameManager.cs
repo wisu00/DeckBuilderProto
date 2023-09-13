@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] DeckManager deck;
     [SerializeField] HandManager hand;
     [SerializeField] DiscardPileManager discardPile;
-    [SerializeField] UIManager uiManager;
+    [SerializeField] UIManager uIManager;
     [SerializeField] StoreManager storeManager;
     [SerializeField] TurnStateController turnStateController;
 
@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour {
 	private void Start() {
 		//update character selections for both players
 		playerCharacter = (CharacterClasses)System.Enum.Parse(typeof(CharacterClasses), PlayerPrefs.GetString("SelectedClass"));
-		uiManager.UpdatePlayerCharacterPortrait(playerCharacter);
+		uIManager.UpdatePlayerCharacterPortrait(playerCharacter);
         storeManager.SetPlayerCharacter(playerCharacter);
 		photonView.RPC("UpdatePlayerClassForOpponent", RpcTarget.OthersBuffered, playerCharacter);
 
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour {
 	[PunRPC]
 	private void UpdatePlayerClassForOpponent(CharacterClasses opponentChar) {
         opponentCharacter = opponentChar;
-		uiManager.UpdateOpponentCharacterPortrait(opponentCharacter);
+		uIManager.UpdateOpponentCharacterPortrait(opponentCharacter);
 	}
 
 	#endregion Setting Up

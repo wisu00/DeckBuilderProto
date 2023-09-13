@@ -49,6 +49,7 @@ MonoBehaviour:
   - UpdatePlayerClassForOpponent
   - SpawnCardInOpponentsStore
   - EmptyOpponentsStore
+  - OpponentsCardWasPlayedOnBoard
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

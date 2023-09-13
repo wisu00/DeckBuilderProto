@@ -23,6 +23,7 @@ public class StoreManager : MonoBehaviour {
 	[SerializeField] GameObject storeArea;
 	[SerializeField] GameObject cardBuyArea;
 	[SerializeField] GameManager gameManager;
+	[SerializeField] UIManager uIManager;
 	[SerializeField] DiscardPileManager discardPileManager;
 	[SerializeField] TurnStateController turnStateController;
 
@@ -160,7 +161,7 @@ public class StoreManager : MonoBehaviour {
 		GameObject cardThatWasDrawn;
 		cardThatWasDrawn = Instantiate(cardPrefab, cardStoreDisplayAreas[cardPos].transform); 
 		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().card = card;
-		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValuesInStore(this, gameManager, discardPileManager, turnStateController, cardBuyArea, true);
+		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValuesInStore(this, gameManager, discardPileManager, uIManager, turnStateController, true);
 		physicalCardsInStore.Add(cardThatWasDrawn);
 	}
 
@@ -169,7 +170,7 @@ public class StoreManager : MonoBehaviour {
 		GameObject cardThatWasDrawn;
 		cardThatWasDrawn = Instantiate(cardPrefab, cardStoreDisplayAreas[cardPos].transform);
 		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().card = cardDataBase.GetCardWithIndex(cardIndex);
-		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValuesInStore(this, gameManager, discardPileManager, turnStateController, cardBuyArea, false);
+		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValuesInStore(this, gameManager, discardPileManager, uIManager, turnStateController, false);
 		physicalCardsInStore.Add(cardThatWasDrawn);
 	}
 

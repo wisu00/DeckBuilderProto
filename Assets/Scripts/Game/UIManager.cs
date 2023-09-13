@@ -12,6 +12,10 @@ public class UIManager : MonoBehaviour
 	[SerializeField] Sprite[] characterSprites;
     [SerializeField] Image playerCharacterPortrait;
 	[SerializeField] Image opponentCharacterPortrait;
+	[SerializeField] GameObject cardBuyArea;
+	[SerializeField] GameObject cardPlayArea;
+	[SerializeField] GameObject[] toolPlayAreas;
+	[SerializeField] GameObject locationPlayArea;
 
 	public PhotonView photonView;
     [SerializeField] private Button endTheTurnButton;
@@ -19,8 +23,9 @@ public class UIManager : MonoBehaviour
     bool messageIsActive = false;
     [SerializeField] private Image popUpMessageBox;
     [SerializeField] private GameObject notYourTurnMessage;
-    
-    private void Awake() {
+	[SerializeField] private GameObject toolSlotTakenMessage;
+
+	private void Awake() {
         playersName.text = PhotonNetwork.LocalPlayer.NickName;
     }
 
@@ -45,10 +50,20 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
+	public void ShowToolSlotTakenMessage() {
+		if(!messageIsActive) {
+			messageIsActive = true;
+			popUpMessageBox.gameObject.SetActive(true);
+			toolSlotTakenMessage.SetActive(true);
+			Invoke("DisableMessage", 1.5f);
+		}
+	}
+
     private void DisableMessage() {
 		messageIsActive = false;
 		popUpMessageBox.gameObject.SetActive(false);
 		notYourTurnMessage.SetActive(false);
+		toolSlotTakenMessage.SetActive(false);
 	}
 
     void updateOpponentsNickName(){
@@ -63,4 +78,17 @@ public class UIManager : MonoBehaviour
     public void InPlayTurnState(bool b) {
         endTheTurnButton.interactable = b;
     }
+
+	public void SetBuyAreaActiveStatus(bool active) {
+		cardBuyArea.SetActive(active);
+	}
+
+    public void SetPlayAreaActiveStatus(bool activeStatus, CardType cardType) {
+		if(cardType == CardType.Tool) {
+			foreach(GameObject area in toolPlayAreas) area.SetActive(activeStatus);
+		}
+		else if(cardType == CardType.Location) locationPlayArea.SetActive(activeStatus);
+		else cardPlayArea.SetActive(activeStatus);
+
+	}
 }
