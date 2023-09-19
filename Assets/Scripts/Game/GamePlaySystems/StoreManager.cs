@@ -161,7 +161,7 @@ public class StoreManager : MonoBehaviour {
 		GameObject cardThatWasDrawn;
 		cardThatWasDrawn = Instantiate(cardPrefab, cardStoreDisplayAreas[cardPos].transform); 
 		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().card = card;
-		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValuesInStore(this, gameManager, discardPileManager, uIManager, turnStateController, true);
+		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValuesInStore(this, gameManager, discardPileManager, uIManager, turnStateController, true, cardPos);
 		physicalCardsInStore.Add(cardThatWasDrawn);
 	}
 
@@ -170,16 +170,23 @@ public class StoreManager : MonoBehaviour {
 		GameObject cardThatWasDrawn;
 		cardThatWasDrawn = Instantiate(cardPrefab, cardStoreDisplayAreas[cardPos].transform);
 		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().card = cardDataBase.GetCardWithIndex(cardIndex);
-		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValuesInStore(this, gameManager, discardPileManager, uIManager, turnStateController, false);
+		cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValuesInStore(this, gameManager, discardPileManager, uIManager, turnStateController, false, cardPos);
 		physicalCardsInStore.Add(cardThatWasDrawn);
 	}
 
-	public void CardIsBought(Card card) {
+	public void CardIsBought(Card card, GameObject physicalCard, int cardPosInStore) {
 		switch(card.tier) {
 			case 1: displayedCardsTier1.Remove(card); break;
 			case 2: displayedCardsTier2.Remove(card); break;
 			case 3: displayedCardsTier3.Remove(card); break;
 			default: Debug.Log(card.name + " doesn't have specified tier"); break;
 		}
+		Destroy(physicalCard);
+		photonView.RPC("RemoveCardFromOpponentsStore", RpcTarget.OthersBuffered, cardPosInStore);
+	}
+
+	[PunRPC]
+	void RemoveCardFromOpponentsStore(int cardPosInStore) {
+		Destroy(physicalCardsInStore[cardPosInStore]);
 	}
 }

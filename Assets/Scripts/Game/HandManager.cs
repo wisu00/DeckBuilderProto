@@ -16,7 +16,14 @@ public class HandManager : MonoBehaviour {
 	[SerializeField] GameObject[] toolSlotsPlayer;
 	[SerializeField] GameObject[] toolSlotsOpponent;
 
-    public PhotonView photonViewFromOpponentsHand;
+	[SerializeField] CardDataBase cardDataBase;
+
+	private void Start() {
+        Debug.Log("tool slot length: " + toolSlotsPlayer.Length);
+		Debug.Log("tool slot opponent length: " + toolSlotsOpponent.Length);
+	}
+
+	public PhotonView photonViewFromOpponentsHand;
 
     private int maxHandSize = 5;
     private List<GameObject> physicalCardsInHand = new List<GameObject>();
@@ -24,11 +31,11 @@ public class HandManager : MonoBehaviour {
     public void DrawCard(Card drawnCard) {
         if(hand.Count == maxHandSize) {
             discardPile.AddCardToDiscardPile(drawnCard);
-            Debug.Log(drawnCard.cardName + " was put to discard pile");
+            //Debug.Log(drawnCard.cardName + " was put to discard pile");
         }
         else {
             hand.Add(drawnCard);
-            Debug.Log(drawnCard.cardName + " was drawn");
+            //Debug.Log(drawnCard.cardName + " was drawn");
             
             GameObject cardThatWasDrawn = Instantiate(cardPrefab, handArea.transform);
             cardThatWasDrawn.GetComponent<CardBaseFunctionality>().card = drawnCard;
@@ -71,23 +78,27 @@ public class HandManager : MonoBehaviour {
     }
 
     public void CardWasPlayedOnBoard(Card cardThatGotPlayed, GameObject physicalCard, int toolSlot) {
-		physicalCard.transform.SetParent(toolSlotsPlayer[toolSlot-1].transform);
-		physicalCard.transform.localPosition = new Vector3(0, 0, 0);
+		GameObject spawnedCard = Instantiate(cardPrefab, toolSlotsPlayer[toolSlot - 1].transform);
+        spawnedCard.GetComponent<CardBaseFunctionality>().card = cardThatGotPlayed;
+		spawnedCard.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(this, gameManager, turnStateController, uIManager);
+
+		if(!cardThatGotPlayed.isCardBack()) {
+			int cardPlaceInHand = hand.IndexOf(cardThatGotPlayed);
+			photonViewFromOpponentsHand.RPC("OpponentsCardWasPlayedOnBoard", RpcTarget.OthersBuffered, cardPlaceInHand, 
+                toolSlot, spawnedCard.GetComponent<CardBaseFunctionality>().card.cardIndex);
+		}
+
+		Destroy(physicalCard);
 		hand.Remove(cardThatGotPlayed);
 		physicalCardsInHand.Remove(physicalCard);
 		OrganiseHand();
-        
-		if(!cardThatGotPlayed.isCardBack()) {
-			int cardPlaceInHand = hand.IndexOf(cardThatGotPlayed);
-			photonViewFromOpponentsHand.RPC("OpponentsCardWasPlayedOnBoard", RpcTarget.OthersBuffered, cardPlaceInHand, toolSlot);
-		}
 	}
 
 	[PunRPC]
-	void OpponentsCardWasPlayedOnBoard(int cardPlaceInHand, int toolSlot) {
-        GameObject spawnedCard = Instantiate(cardPrefab, toolSlotsOpponent[toolSlot-1].transform);
-        spawnedCard.GetComponent<CardBaseFunctionality>().card = toolSlotsPlayer[toolSlot-1].GetComponentInChildren<Card>();
-		spawnedCard.GetComponent<CardBaseFunctionality>().UpdateValues(this, gameManager, turnStateController, uIManager);
+	void OpponentsCardWasPlayedOnBoard(int cardPlaceInHand, int toolSlot, int cardIndex) {
+		GameObject spawnedCard = Instantiate(cardPrefab, toolSlotsOpponent[toolSlot-1].transform);
+        spawnedCard.GetComponent<CardBaseFunctionality>().card = cardDataBase.GetCardWithIndex(cardIndex);
+		spawnedCard.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(this, gameManager, turnStateController, uIManager);
 
 		Card cardThatGotPlayed = hand[cardPlaceInHand];
 		GameObject physicalCard = physicalCardsInHand[cardPlaceInHand];

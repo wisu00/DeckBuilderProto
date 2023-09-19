@@ -26,6 +26,7 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 
 	private CanvasGroup canvasGroup;
 	private bool cardIsInStore = false;
+	private bool cardIsOnBoard = false;
 	private bool ownedByPlayer = true;
 
     Vector3 startPosition;
@@ -35,12 +36,10 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
-        if(card.isCardBack() || !ownedByPlayer) {
-			Debug.Log("cant drag");
+        if(card.isCardBack() || cardIsOnBoard || !ownedByPlayer) {
 			eventData.pointerDrag = null;
         }
         else {
-			Debug.Log("begin drag");
 			canvasGroup.alpha = 0.6f;
 			canvasGroup.blocksRaycasts = false;
             PickCardUp();
@@ -61,28 +60,29 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 			uIManager.SetBuyAreaActiveStatus(false);
 		}
         else {
-			uIManager.SetPlayAreaActiveStatus(false, cardType);
+			uIManager.SetPlayAreaActiveStatus(false, card.cardType);
 		}
 	}
 
     public void PickCardUp() {
-		Debug.Log("picked card up");
 		startPosition = transform.position;
         if(cardIsInStore) {
 			uIManager.SetBuyAreaActiveStatus(true);
 		}
         else {
-			uIManager.SetPlayAreaActiveStatus(true, cardType);
+			uIManager.SetPlayAreaActiveStatus(true, card.cardType);
 		}
     }
 
-    public void UpdateValuesInStore(StoreManager storeManager, GameManager gameManager, DiscardPileManager discardPileManager, UIManager uIManager, TurnStateController turnStateController, bool ownedByPlayer) {
+	int cardPosInStore = 0;
+    public void UpdateValuesInStore(StoreManager storeManager, GameManager gameManager, DiscardPileManager discardPileManager, UIManager uIManager, TurnStateController turnStateController, bool ownedByPlayer, int cardPosInStore) {
 		this.storeManager = storeManager;
 		this.gameManager = gameManager;
 		this.discardPileManager = discardPileManager;
 		this.ownedByPlayer = ownedByPlayer;
 		this.turnStateController = turnStateController;
 		this.uIManager = uIManager;
+		this.cardPosInStore = cardPosInStore;
 		cardIsInStore = true;
 		canvas = GameObject.FindWithTag("MainCanvas").GetComponent<Canvas>();
 		cardArt.sprite = card.cardArt;
@@ -91,7 +91,6 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 		buyCost.text = card.buyCost.ToString();
 		playCost.text = card.playCost.ToString();
 		discardValueText.text = card.discardValue.ToString();
-		cardType = card.cardType;
 	}
 
     public void UpdateValues(HandManager handManager, GameManager gameManager, TurnStateController turnStateController, UIManager uIManager) {
@@ -106,7 +105,6 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
         description.text = card.description;
 		playCost.text = card.playCost.ToString();
         discardValueText.text = card.discardValue.ToString();
-		cardType = card.cardType;
 
 		if(card.isCardBack()) {
             foreach (Transform child in cardArt.gameObject.transform) {
@@ -126,6 +124,7 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 		playCost.text = card.playCost.ToString();
 		discardValueText.text = card.discardValue.ToString();
 		cardType = card.cardType;
+		cardIsOnBoard = true;
 	}
 
     public void BuyTheCard() {
@@ -135,8 +134,7 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 				card.OnBuy();
 				uIManager.SetBuyAreaActiveStatus(false);
 				discardPileManager.AddCardToDiscardPile(card);
-                storeManager.CardIsBought(card);
-                Destroy(gameObject);
+                storeManager.CardIsBought(card, gameObject, cardPosInStore);
 			}
 		}
 	}
@@ -146,6 +144,7 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 			if(gameManager.getMoneyPlayer() >= card.playCost) {
 				card.OnPlay();
 				handManager.CardWasPlayedOnBoard(card, gameObject, toolSlotNumber);
+				uIManager.SetPlayAreaActiveStatus(false, card.cardType);
 			}
 		}
 	}
@@ -159,6 +158,7 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 				cardThatWasPlayed.GetComponent<CardBaseFunctionality>().card = card;
 				cardThatWasPlayed.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(handManager, gameManager, turnStateController, uIManager);
 				handManager.CardWasPlayedOnBoard(card, gameObject, 0);
+				uIManager.SetPlayAreaActiveStatus(false, card.cardType);
 			}
 		}
 	}
@@ -169,6 +169,7 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 				card.OnPlay();
 				if(card.cardType==CardType.Event) {
 					handManager.MoveCardToDiscardPile(card, gameObject);
+					uIManager.SetPlayAreaActiveStatus(false, card.cardType);
 				}
 			}
 		}
@@ -178,6 +179,7 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
         if(turnStateController.CheckIfItIsPlayersTurn() && !cardIsInStore) {
             card.OnDiscard();
 			handManager.MoveCardToDiscardPile(card, gameObject);
-        }
+			uIManager.SetPlayAreaActiveStatus(false, card.cardType);
+		}
     }
 }
