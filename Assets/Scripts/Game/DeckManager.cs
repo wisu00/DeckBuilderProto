@@ -12,15 +12,20 @@ public class DeckManager : MonoBehaviour
     [SerializeField]List<Card> cardsInDeck;
     
     public PhotonView photonViewFromOpponentsDeck;
+    PhotonView photonView;
 
-    private void Start() {
+	private void Awake() {
+		photonView = GetComponent<PhotonView>();
+	}
+
+	private void Start() {
         UpdateInfoBox();
     }
 
     public void DrawCard(){
         if(cardsInDeck.Count > 0) {
             if(!cardsInDeck[0].isCardBack()) {
-                photonViewFromOpponentsDeck.RPC("OpponentDrawsACard", RpcTarget.OthersBuffered);
+                photonViewFromOpponentsDeck.RPC("OpponentDrawsACardRPC", RpcTarget.OthersBuffered);
             }
             hand.DrawCard(cardsInDeck[0]);
             cardsInDeck.RemoveAt(0);
@@ -36,8 +41,12 @@ public class DeckManager : MonoBehaviour
         infoText.text = "Cards in deck: " + cardsInDeck.Count;
     }
 
+    public void OpponentDrawsACard() {
+		photonView.RPC("OpponentDrawsACardRPC", RpcTarget.OthersBuffered);
+	}
+
     [PunRPC]
-    void OpponentDrawsACard () {
+    void OpponentDrawsACardRPC () {
         DrawCard();
     }
 

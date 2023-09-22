@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler {
+public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler {
 	[HideInInspector] public Card card;
 	private HandManager handManager;
 	private DiscardPileManager discardPileManager;
@@ -19,10 +19,10 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 	public TMP_Text buyCost;
 	public TMP_Text playCost;
 	public TMP_Text discardValueText;
-	public CardType cardType;
 
 	[SerializeField] UIManager uIManager;
 	[SerializeField] GameObject cardPrefab;
+	[SerializeField] Image darkTint;
 
 	private CanvasGroup canvasGroup;
 	private bool cardIsInStore = false;
@@ -113,17 +113,17 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
         } 
     }
 
-	public void UpdateValueOnBoard(HandManager handManager, GameManager gameManager, TurnStateController turnStateController, UIManager uIManager) {
+	public void UpdateValueOnBoard(HandManager handManager, GameManager gameManager, TurnStateController turnStateController, bool ownedByPlayer, UIManager uIManager) {
 		this.handManager = handManager;
 		this.gameManager = gameManager;
 		this.turnStateController = turnStateController;
+		this.ownedByPlayer = ownedByPlayer;
 		card.AssignGameManager(gameManager, handManager);
 		cardArt.sprite = card.cardArt;
 		cardName.text = card.cardName;
 		description.text = card.description;
 		playCost.text = card.playCost.ToString();
 		discardValueText.text = card.discardValue.ToString();
-		cardType = card.cardType;
 		cardIsOnBoard = true;
 	}
 
@@ -156,7 +156,7 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 				GameObject cardThatWasPlayed;
 				cardThatWasPlayed = Instantiate(cardPrefab, cardPlaceOnBoard);
 				cardThatWasPlayed.GetComponent<CardBaseFunctionality>().card = card;
-				cardThatWasPlayed.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(handManager, gameManager, turnStateController, uIManager);
+				cardThatWasPlayed.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(handManager, gameManager, turnStateController, true, uIManager);
 				handManager.CardWasPlayedOnBoard(card, gameObject, 0);
 				uIManager.SetPlayAreaActiveStatus(false, card.cardType);
 			}
@@ -182,4 +182,21 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 			uIManager.SetPlayAreaActiveStatus(false, card.cardType);
 		}
     }
+
+	public void OnPointerEnter(PointerEventData eventData) {
+		//activates the dark tint only when tool is on board and getting hovered when holding another tool card
+		if(cardIsOnBoard && card.cardType ==CardType.Tool && eventData.pointerDrag != null && ownedByPlayer) {
+			if(eventData.pointerDrag.GetComponent<CardBaseFunctionality>().card.cardType == CardType.Tool) setDarkTintActive(true);
+		}
+	}
+
+	public void OnPointerExit(PointerEventData eventData) {
+		if(cardIsOnBoard && card.cardType == CardType.Tool) {
+			setDarkTintActive(false);
+		}
+	}
+
+	public void setDarkTintActive(bool state) {
+		darkTint.gameObject.SetActive(state);
+	}
 }

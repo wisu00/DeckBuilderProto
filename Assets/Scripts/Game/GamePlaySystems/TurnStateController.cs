@@ -19,10 +19,17 @@ public class TurnStateController : MonoBehaviour {
     //called from game manager when game can start
     public void StartTheGame() {
 		if(PhotonNetwork.IsMasterClient) {
-			//min inclusive max exlusive
-			if(Random.Range(1, 3) == 1) TurnReceived();
-			else photonView.RPC("TurnReceived", RpcTarget.OthersBuffered);
-		}
+            //min inclusive max exlusive
+            if(Random.Range(1, 3) == 1) {
+                TurnReceived();
+                deck.OpponentDrawsACard();
+
+			}
+            else {
+                photonView.RPC("TurnReceived", RpcTarget.OthersBuffered);
+                deck.DrawCard();
+            }
+        }
 	}
 
     public bool CheckIfItIsPlayersTurn() {

@@ -18,17 +18,12 @@ public class HandManager : MonoBehaviour {
 
 	[SerializeField] CardDataBase cardDataBase;
 
-	private void Start() {
-        Debug.Log("tool slot length: " + toolSlotsPlayer.Length);
-		Debug.Log("tool slot opponent length: " + toolSlotsOpponent.Length);
-	}
-
 	public PhotonView photonViewFromOpponentsHand;
 
     private int maxHandSize = 5;
     private List<GameObject> physicalCardsInHand = new List<GameObject>();
 
-    public void DrawCard(Card drawnCard) {
+	public void DrawCard(Card drawnCard) {
         if(hand.Count == maxHandSize) {
             discardPile.AddCardToDiscardPile(drawnCard);
             //Debug.Log(drawnCard.cardName + " was put to discard pile");
@@ -80,7 +75,7 @@ public class HandManager : MonoBehaviour {
     public void CardWasPlayedOnBoard(Card cardThatGotPlayed, GameObject physicalCard, int toolSlot) {
 		GameObject spawnedCard = Instantiate(cardPrefab, toolSlotsPlayer[toolSlot - 1].transform);
         spawnedCard.GetComponent<CardBaseFunctionality>().card = cardThatGotPlayed;
-		spawnedCard.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(this, gameManager, turnStateController, uIManager);
+		spawnedCard.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(this, gameManager, turnStateController, true, uIManager);
 
 		if(!cardThatGotPlayed.isCardBack()) {
 			int cardPlaceInHand = hand.IndexOf(cardThatGotPlayed);
@@ -98,7 +93,7 @@ public class HandManager : MonoBehaviour {
 	void OpponentsCardWasPlayedOnBoard(int cardPlaceInHand, int toolSlot, int cardIndex) {
 		GameObject spawnedCard = Instantiate(cardPrefab, toolSlotsOpponent[toolSlot-1].transform);
         spawnedCard.GetComponent<CardBaseFunctionality>().card = cardDataBase.GetCardWithIndex(cardIndex);
-		spawnedCard.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(this, gameManager, turnStateController, uIManager);
+		spawnedCard.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(this, gameManager, turnStateController, false, uIManager);
 
 		Card cardThatGotPlayed = hand[cardPlaceInHand];
 		GameObject physicalCard = physicalCardsInHand[cardPlaceInHand];
