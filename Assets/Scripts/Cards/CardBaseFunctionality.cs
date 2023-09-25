@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler {
 	[HideInInspector] public Card card;
 	private HandManager handManager;
+	private BoardManager boardManager;
 	private DiscardPileManager discardPileManager;
 	private GameManager gameManager;
 	private TurnStateController turnStateController;
@@ -93,8 +94,9 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 		discardValueText.text = card.discardValue.ToString();
 	}
 
-    public void UpdateValues(HandManager handManager, GameManager gameManager, TurnStateController turnStateController, UIManager uIManager) {
+    public void UpdateValues(HandManager handManager, BoardManager boardManager, GameManager gameManager, TurnStateController turnStateController, UIManager uIManager) {
 		this.handManager = handManager;
+		this.boardManager = boardManager;
 		this.gameManager = gameManager;
 		this.turnStateController = turnStateController;
 		this.uIManager = uIManager;
@@ -143,7 +145,8 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 		if(turnStateController.CheckIfItIsPlayersTurn() && !cardIsInStore) {
 			if(gameManager.getMoneyPlayer() >= card.playCost) {
 				card.OnPlay();
-				handManager.CardWasPlayedOnBoard(card, gameObject, toolSlotNumber);
+				handManager.RemoveCardFromHand(card, gameObject);
+				boardManager.CardWasPlayedOnBoard(card, toolSlotNumber);
 				uIManager.SetPlayAreaActiveStatus(false, card.cardType);
 			}
 		}
@@ -157,7 +160,8 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 				cardThatWasPlayed = Instantiate(cardPrefab, cardPlaceOnBoard);
 				cardThatWasPlayed.GetComponent<CardBaseFunctionality>().card = card;
 				cardThatWasPlayed.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(handManager, gameManager, turnStateController, true, uIManager);
-				handManager.CardWasPlayedOnBoard(card, gameObject, 0);
+				handManager.RemoveCardFromHand(card, gameObject);
+				boardManager.CardWasPlayedOnBoard(card, 0);
 				uIManager.SetPlayAreaActiveStatus(false, card.cardType);
 			}
 		}

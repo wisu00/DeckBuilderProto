@@ -5991,6 +5991,91 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1342767448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1342767451}
+  - component: {fileID: 1342767450}
+  - component: {fileID: 1342767449}
+  m_Layer: 0
+  m_Name: BoardManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1342767449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342767448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 10
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &1342767450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342767448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b32ad09c23ed9479f62a407119eb90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 738960903}
+  turnStateController: {fileID: 1684182417}
+  cardPrefab: {fileID: 4422418461076721767, guid: 6a2924c55b4b6ae4e8c93db8970767e7,
+    type: 3}
+  uIManager: {fileID: 18237486}
+  toolSlotsPlayer:
+  - {fileID: 432711798}
+  - {fileID: 2020772971}
+  - {fileID: 1462010943}
+  - {fileID: 1772262000}
+  toolSlotsOpponent:
+  - {fileID: 1713617399}
+  - {fileID: 346076989}
+  - {fileID: 366434826}
+  - {fileID: 924003536}
+  cardDataBase: {fileID: 723103709}
+  handManager: {fileID: 7864995376266170479}
+  OpponentsBoardManager: {fileID: 1605339863}
+--- !u!4 &1342767451
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342767448}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2108085453}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1462010943
 GameObject:
   m_ObjectHideFlags: 0
@@ -6202,6 +6287,91 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1506701242}
   m_CullTransparentMesh: 1
+--- !u!1 &1605339861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1605339862}
+  - component: {fileID: 1605339864}
+  - component: {fileID: 1605339863}
+  m_Layer: 0
+  m_Name: BoardManagerOpponent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1605339862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605339861}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2108085453}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1605339863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605339861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 11
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &1605339864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605339861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b32ad09c23ed9479f62a407119eb90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 738960903}
+  turnStateController: {fileID: 1684182417}
+  cardPrefab: {fileID: 4422418461076721767, guid: 6a2924c55b4b6ae4e8c93db8970767e7,
+    type: 3}
+  uIManager: {fileID: 18237486}
+  toolSlotsPlayer:
+  - {fileID: 432711798}
+  - {fileID: 2020772971}
+  - {fileID: 1462010943}
+  - {fileID: 1772262000}
+  toolSlotsOpponent:
+  - {fileID: 1713617399}
+  - {fileID: 346076989}
+  - {fileID: 366434826}
+  - {fileID: 924003536}
+  cardDataBase: {fileID: 723103709}
+  handManager: {fileID: 7864995376266170479}
+  OpponentsBoardManager: {fileID: 1342767449}
 --- !u!1 &1639853787
 GameObject:
   m_ObjectHideFlags: 0
@@ -6449,6 +6619,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photonView: {fileID: 1684182416}
   uiManager: {fileID: 18237486}
+  boardManager: {fileID: 1342767450}
   storeManager: {fileID: 251441063}
   deck: {fileID: 2247525653897978903}
 --- !u!1 &1684970394
@@ -8005,6 +8176,8 @@ Transform:
   - {fileID: 251441061}
   - {fileID: 4706757822072601977}
   - {fileID: 916886682663297577}
+  - {fileID: 1342767451}
+  - {fileID: 1605339862}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &473737701900037416 stripped
@@ -8652,6 +8825,7 @@ MonoBehaviour:
   hand: []
   cardPlayArea: {fileID: 1776062441}
   uIManager: {fileID: 18237486}
+  boardManager: {fileID: 1342767450}
   toolSlotsPlayer:
   - {fileID: 432711798}
   - {fileID: 2020772971}
@@ -8816,6 +8990,7 @@ MonoBehaviour:
   hand: []
   cardPlayArea: {fileID: 1776062441}
   uIManager: {fileID: 18237486}
+  boardManager: {fileID: 1342767450}
   toolSlotsPlayer:
   - {fileID: 432711798}
   - {fileID: 2020772971}

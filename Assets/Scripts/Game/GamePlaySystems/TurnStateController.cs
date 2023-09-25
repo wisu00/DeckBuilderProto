@@ -11,8 +11,10 @@ public class TurnStateController : MonoBehaviour {
     private TurnState currentTurnState = TurnState.OpponentsTurn;
     public PhotonView photonView;
     public UIManager uiManager;
+    [SerializeField] BoardManager boardManager;
     [SerializeField] StoreManager storeManager;
     [SerializeField] DeckManager deck;
+
 
     private bool firstTurn = true;
     
@@ -56,18 +58,21 @@ public class TurnStateController : MonoBehaviour {
     [PunRPC]
     public void TurnReceived() {
 		ChangeState(TurnState.StartOfTurn);
-		if(firstTurn) storeManager.ShuffleStorePiles();
-		storeManager.LoadStore();
     }
 
-    public void startTheGame() {
-        ChangeState(TurnState.StartOfTurn);
-    }
+    //public void startTheGame() {
+    //    ChangeState(TurnState.StartOfTurn);
+    //}
 
     public void StartOfTurnStateEntered() {
-        //refress cards in store
-        //start of turn effects
-        ChangeState(TurnState.Draw);
+        //shuffles store piles before taking first turn
+		if(firstTurn) storeManager.ShuffleStorePiles();
+		//refress cards in store
+		storeManager.LoadStore();
+		//start of turn effects
+		boardManager.DoRoundStartEffects();
+
+		ChangeState(TurnState.Draw);
     }
 
     public void DrawStateEntered() {

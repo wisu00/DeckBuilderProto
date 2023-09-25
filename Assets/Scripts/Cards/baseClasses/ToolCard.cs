@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ToolCard", menuName = "Cards/Tool", order = 2)]
-public class ToolCard : Card {
+public class ToolCard : CardThatStaysOnBoard {
+	[SerializeField] CardEffect[] turnStartEffects;
+
 	public override void OnBuy() {
 		
 	}
@@ -14,5 +16,11 @@ public class ToolCard : Card {
 
     public override void OnDiscard() {
         increasePlayerMoney(discardValue);
+    }
+
+	public override void TurnStartEffects() {
+        foreach (CardEffect effect in turnStartEffects) {
+			effect.DoEffect(gameManager);
+		}
     }
 }

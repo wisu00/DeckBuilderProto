@@ -9,15 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d6aea63696375149bb7d1cf63d81888, type: 3}
-  m_Name: testBankerToolCard
+  m_Script: {fileID: 11500000, guid: 191ebde63ee578d4d8c7f59181840f94, type: 3}
+  m_Name: SpellCard
   m_EditorClassIdentifier: 
   cardIndex: 0
-  cardName: Banker tool card
-  cardArt: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  description: gpes into tool slot
+  cardName: 
+  cardArt: {fileID: 0}
+  description: 
   buyCost: 0
   playCost: 0
   discardValue: 0
-  tier: 1
-  cardType: 1
+  tier: 0
+  cardType: 0
+  gameManager: {fileID: 0}
+  handManager: {fileID: 0}

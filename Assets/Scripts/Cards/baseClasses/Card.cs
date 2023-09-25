@@ -17,8 +17,8 @@ public abstract class Card : ScriptableObject {
     public int tier;
 	public CardType cardType;
 
-	private GameManager gameManager;
-    private HandManager handManager;
+	[HideInInspector] public GameManager gameManager;
+	[HideInInspector] public HandManager handManager;
 
     public void AssignGameManager(GameManager manager, HandManager hand) {
         gameManager = manager;
