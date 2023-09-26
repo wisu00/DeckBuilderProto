@@ -130,10 +130,13 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 	}
 
     public void BuyTheCard() {
+		Debug.Log("buing a card");
+		Debug.Log("is players turn: " + turnStateController.CheckIfItIsPlayersTurn());
+		Debug.Log("card is in store: " + cardIsInStore);
 		if(turnStateController.CheckIfItIsPlayersTurn() && cardIsInStore) {
 			if(gameManager.getMoneyPlayer() >= card.buyCost) {
 				gameManager.DecreasePlayerMoney(card.buyCost);
-				card.OnBuy();
+				//card.OnBuy();
 				uIManager.SetBuyAreaActiveStatus(false);
 				discardPileManager.AddCardToDiscardPile(card);
                 storeManager.CardIsBought(card, gameObject, cardPosInStore);

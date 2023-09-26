@@ -20,14 +20,25 @@ public abstract class Card : ScriptableObject {
 	[HideInInspector] public GameManager gameManager;
 	[HideInInspector] public HandManager handManager;
 
+	[SerializeField] CardEffect[] onBuyEffects;
+	[SerializeField] CardEffect[] onPlayEffects;
+
     public void AssignGameManager(GameManager manager, HandManager hand) {
         gameManager = manager;
         handManager = hand;
     }
 
-	public abstract void OnBuy();
+	public void OnBuy() { 
+        foreach(CardEffect effect in onBuyEffects) {
+			    effect.DoEffect(gameManager, this);
+	    }
+    }
 
-	public abstract void OnPlay();
+	public void OnPlay() {
+		foreach(CardEffect effect in onPlayEffects) {
+			effect.DoEffect(gameManager, this);
+		}
+	}
 
     public abstract void OnDiscard();
 

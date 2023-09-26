@@ -6,7 +6,7 @@ using UnityEngine;
 public class DebugLogMessage : CardEffect {
 	[SerializeField] string message;
 
-	public override void DoEffect(GameManager gameManager) {
+	public override void DoEffect(GameManager gameManager, Card card) {
 		Debug.Log(message);
 	}
 }

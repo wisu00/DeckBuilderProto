@@ -23,6 +23,10 @@ MonoBehaviour:
   cardType: 1
   gameManager: {fileID: 0}
   handManager: {fileID: 0}
+  onBuyEffects:
+  - {fileID: 11400000, guid: 53505a524f28a1644933fd440719f5cb, type: 2}
+  onPlayEffects:
+  - {fileID: 11400000, guid: 9cb58be8b023fdb41a3d454a5187dc9f, type: 2}
   turnStartEffects:
   - {fileID: 11400000, guid: f4dcd9a1faa4e1c42a3a5dd605a0fcb6, type: 2}
   - {fileID: 11400000, guid: 0a292ab85bd4aae479ae7d4e585038a2, type: 2}

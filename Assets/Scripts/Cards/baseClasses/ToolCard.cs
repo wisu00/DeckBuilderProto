@@ -6,21 +6,13 @@ using UnityEngine;
 public class ToolCard : CardThatStaysOnBoard {
 	[SerializeField] CardEffect[] turnStartEffects;
 
-	public override void OnBuy() {
-		
-	}
-
-	public override void OnPlay() {
-        decreasePlayerMoney(playCost);
-    }
-
     public override void OnDiscard() {
         increasePlayerMoney(discardValue);
     }
 
 	public override void TurnStartEffects() {
         foreach (CardEffect effect in turnStartEffects) {
-			effect.DoEffect(gameManager);
+			effect.DoEffect(gameManager, this);
 		}
     }
 }

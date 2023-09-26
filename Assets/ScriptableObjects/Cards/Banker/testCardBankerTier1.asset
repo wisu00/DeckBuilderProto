@@ -20,3 +20,10 @@ MonoBehaviour:
   playCost: 0
   discardValue: 3
   tier: 1
+  cardType: 0
+  gameManager: {fileID: 0}
+  handManager: {fileID: 0}
+  onBuyEffects:
+  - {fileID: 11400000, guid: 53505a524f28a1644933fd440719f5cb, type: 2}
+  onPlayEffects:
+  - {fileID: 11400000, guid: 9cb58be8b023fdb41a3d454a5187dc9f, type: 2}
