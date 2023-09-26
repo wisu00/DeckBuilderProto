@@ -16,9 +16,9 @@ MonoBehaviour:
   cardName: Banker tool card
   cardArt: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   description: 'Turn Start: Gain 1 Gold'
-  buyCost: 0
-  playCost: 0
-  discardValue: 0
+  buyCost: 2
+  playCost: 1
+  discardValue: 4
   tier: 1
   cardType: 1
   gameManager: {fileID: 0}
