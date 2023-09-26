@@ -9,21 +9,22 @@ public class ToolCardPlayArea : MonoBehaviour, IDropHandler, IPointerEnterHandle
 	[SerializeField] UIManager uIManager;
 	bool isOccupied = false;
 	[SerializeField] Image darkTint;
+	[SerializeField] BoardManager boardManager;
 
 	public void OnDrop(PointerEventData eventData) {
-        //Debug.Log("DroppedOnPlayArea");
         if(eventData.pointerDrag != null) {
-            if(!isOccupied) {
-				eventData.pointerDrag.GetComponent<CardBaseFunctionality>().PlayToolCard(toolSlotNumber);
-				isOccupied = true;
-				//keeps area interactable by moving it on top
-				transform.SetAsLastSibling();
-			}
-            else {
-				uIManager.ShowToolSlotTakenMessage();
-				//Debug.Log("Slot already taken");
+			if(isOccupied) {
+				Debug.Log("replacing tool");
+				//uIManager.ShowToolSlotTakenMessage();
+				boardManager.RemoveToolFromBoard(toolSlotNumber);
+				isOccupied = false;
 				SetDarkTintActive(false);
 			}
+
+			eventData.pointerDrag.GetComponent<CardBaseFunctionality>().PlayToolCard(toolSlotNumber);
+			isOccupied = true;
+			//keeps area interactable by moving it on top
+			transform.SetAsLastSibling();
 		}
     }
 

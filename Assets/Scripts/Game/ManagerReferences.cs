@@ -11,6 +11,7 @@ public class ManagerReferences : MonoBehaviour {
     [SerializeField] HandManager handManager;
     [SerializeField] HandManager handManagerOpponent;
 	[SerializeField] DiscardPileManager discardPileManager;
+	[SerializeField] DiscardPileManager discardPileManagerOpponent;
 	[SerializeField] DeckManager deckManager;
     [SerializeField] BoardManager boardManager;
     [SerializeField] BoardManager boardManagerOpponent;
@@ -38,6 +39,9 @@ public class ManagerReferences : MonoBehaviour {
 	}
 	public DiscardPileManager GetDiscardPileManager() {
 		return discardPileManager;
+	}
+	public DiscardPileManager GetDiscardPileManagerOpponent() {
+		return discardPileManagerOpponent;
 	}
 	public DeckManager GetDeckManager() {
 		return deckManager;

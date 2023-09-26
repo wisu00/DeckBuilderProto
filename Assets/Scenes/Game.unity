@@ -908,6 +908,7 @@ MonoBehaviour:
   toolSlotNumber: 1
   uIManager: {fileID: 18237486}
   darkTint: {fileID: 1042052324}
+  boardManager: {fileID: 1342767450}
 --- !u!114 &184875561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1313,6 +1314,9 @@ MonoBehaviour:
   cardPrefab: {fileID: 4422418461076721767, guid: 6a2924c55b4b6ae4e8c93db8970767e7,
     type: 3}
   managerReferences: {fileID: 2108085454}
+  displayedCardsTier1: []
+  displayedCardsTier2: []
+  displayedCardsTier3: []
 --- !u!1 &295162524
 GameObject:
   m_ObjectHideFlags: 0
@@ -3315,6 +3319,7 @@ MonoBehaviour:
   toolSlotNumber: 2
   uIManager: {fileID: 18237486}
   darkTint: {fileID: 1847760676}
+  boardManager: {fileID: 1342767450}
 --- !u!114 &711503292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7720,6 +7725,7 @@ MonoBehaviour:
   toolSlotNumber: 3
   uIManager: {fileID: 18237486}
   darkTint: {fileID: 1116311855}
+  boardManager: {fileID: 1342767450}
 --- !u!114 &1850630748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7995,6 +8001,7 @@ MonoBehaviour:
   toolSlotNumber: 4
   uIManager: {fileID: 18237486}
   darkTint: {fileID: 1371938179}
+  boardManager: {fileID: 1342767450}
 --- !u!114 &1989964342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8495,6 +8502,7 @@ MonoBehaviour:
   handManager: {fileID: 7864995376266170479}
   handManagerOpponent: {fileID: 2364037164157390655}
   discardPileManager: {fileID: 2308483127154020510}
+  discardPileManagerOpponent: {fileID: 0}
   deckManager: {fileID: 2247525653897978903}
   boardManager: {fileID: 1342767450}
   boardManagerOpponent: {fileID: 1605339864}

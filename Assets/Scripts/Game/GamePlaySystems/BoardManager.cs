@@ -40,4 +40,16 @@ public class BoardManager : MonoBehaviour {
 		spawnedCard.GetComponent<CardBaseFunctionality>().card = cardDataBase.GetCardWithIndex(cardIndex);
 		spawnedCard.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(managerReferences, false);
 	}
+
+	public void RemoveToolFromBoard(int toolSlot) {
+		GameObject cardToBeDestroyed = toolSlotsPlayer[toolSlot - 1].GetComponentInChildren<CardBaseFunctionality>().gameObject;
+		managerReferences.GetDiscardPileManager().AddCardToDiscardPile(cardToBeDestroyed.GetComponent<CardBaseFunctionality>().card);
+		Destroy(cardToBeDestroyed);
+		OpponentsBoardManager.RPC("RemoveToolFromBoardOpponent", RpcTarget.OthersBuffered, toolSlot);
+	}
+	[PunRPC]
+	void RemoveToolFromBoardOpponent(int toolSlot) {
+		Destroy(toolSlotsOpponent[toolSlot - 1].GetComponentInChildren<CardBaseFunctionality>().gameObject);
+		managerReferences.GetDiscardPileManagerOpponent().AddCardBackToDiscardPile();
+	}
 }
