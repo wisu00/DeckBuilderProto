@@ -17,15 +17,16 @@ public abstract class Card : ScriptableObject {
     public int tier;
 	public CardType cardType;
 
+    [HideInInspector] public ManagerReferences managerReferences;
 	[HideInInspector] public GameManager gameManager;
 	[HideInInspector] public HandManager handManager;
 
 	[SerializeField] CardEffect[] onBuyEffects;
 	[SerializeField] CardEffect[] onPlayEffects;
 
-    public void AssignGameManager(GameManager manager, HandManager hand) {
-        gameManager = manager;
-        handManager = hand;
+    public void AssignGameManager(ManagerReferences managerReferences) {
+        gameManager = managerReferences.GetGameManager();
+        handManager = managerReferences.GetHandManager();
     }
 
 	public void OnBuy() { 

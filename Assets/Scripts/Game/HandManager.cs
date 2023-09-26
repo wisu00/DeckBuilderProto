@@ -7,13 +7,9 @@ using Photon.Pun;
 public class HandManager : MonoBehaviour {
     [SerializeField] GameObject handArea;
     [SerializeField] DiscardPileManager discardPile;
-    [SerializeField] GameManager gameManager;
-    [SerializeField] TurnStateController turnStateController;
     [SerializeField] GameObject cardPrefab;
     [SerializeField] List<Card> hand;
-    [SerializeField] GameObject cardPlayArea;
-    [SerializeField] UIManager uIManager;
-	[SerializeField] BoardManager boardManager;
+    [SerializeField] ManagerReferences managerReferences;
 	[SerializeField] GameObject[] toolSlotsPlayer;
 	[SerializeField] GameObject[] toolSlotsOpponent;
 
@@ -36,7 +32,7 @@ public class HandManager : MonoBehaviour {
             
             GameObject cardThatWasDrawn = Instantiate(cardPrefab, handArea.transform);
             cardThatWasDrawn.GetComponent<CardBaseFunctionality>().card = drawnCard;
-            cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValues(this, boardManager, gameManager, turnStateController, uIManager);
+            cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValues(managerReferences);
             physicalCardsInHand.Add(cardThatWasDrawn);
             OrganiseHand();
         }
@@ -99,7 +95,7 @@ public class HandManager : MonoBehaviour {
 	public void CardWasPlayedOnBoard(Card cardThatGotPlayed, GameObject physicalCard, int toolSlot) {
 		GameObject spawnedCard = Instantiate(cardPrefab, toolSlotsPlayer[toolSlot - 1].transform);
         spawnedCard.GetComponent<CardBaseFunctionality>().card = cardThatGotPlayed;
-		spawnedCard.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(this, gameManager, turnStateController, true, uIManager);
+		spawnedCard.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(managerReferences, true);
 
 		if(!cardThatGotPlayed.isCardBack()) {
 			int cardPlaceInHand = hand.IndexOf(cardThatGotPlayed);
@@ -117,7 +113,7 @@ public class HandManager : MonoBehaviour {
 	void OpponentsCardWasPlayedOnBoard(int cardPlaceInHand, int toolSlot, int cardIndex) {
 		GameObject spawnedCard = Instantiate(cardPrefab, toolSlotsOpponent[toolSlot-1].transform);
         spawnedCard.GetComponent<CardBaseFunctionality>().card = cardDataBase.GetCardWithIndex(cardIndex);
-		spawnedCard.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(this, gameManager, turnStateController, false, uIManager);
+		spawnedCard.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(managerReferences, false);
 
 		Card cardThatGotPlayed = hand[cardPlaceInHand];
 		GameObject physicalCard = physicalCardsInHand[cardPlaceInHand];
