@@ -15,6 +15,7 @@ public class ManagerReferences : MonoBehaviour {
 	[SerializeField] DeckManager deckManager;
     [SerializeField] BoardManager boardManager;
     [SerializeField] BoardManager boardManagerOpponent;
+	[SerializeField] InfluenceBarManager influenceBarManager;
 
     public UIManager GetUIManager() { 
 		return uIManager;
@@ -51,5 +52,8 @@ public class ManagerReferences : MonoBehaviour {
 	}
 	public BoardManager GetBoardManagerOpponent() {
 		return boardManagerOpponent;
+	}
+	public InfluenceBarManager GetInfluenceBarManager() {
+		return influenceBarManager;
 	}
 }

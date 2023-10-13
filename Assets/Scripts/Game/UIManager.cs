@@ -24,6 +24,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image popUpMessageBox;
     [SerializeField] private GameObject notYourTurnMessage;
 	[SerializeField] private GameObject toolSlotTakenMessage;
+	[SerializeField] private GameObject victoryMessage;
+	[SerializeField] private GameObject defeatMessage;
 
 	private void Awake() {
         playersName.text = PhotonNetwork.LocalPlayer.NickName;
@@ -59,7 +61,21 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
-    private void DisableMessage() {
+	public void ShowVictoryMessage() {
+		DisableMessage();
+		messageIsActive = true;
+		popUpMessageBox.gameObject.SetActive(true);
+		victoryMessage.SetActive(true);
+	}
+
+	public void ShowDefeatMessage() {
+		DisableMessage();
+		messageIsActive = true;
+		popUpMessageBox.gameObject.SetActive(true);
+		defeatMessage.SetActive(true);
+	}
+
+	private void DisableMessage() {
 		messageIsActive = false;
 		popUpMessageBox.gameObject.SetActive(false);
 		notYourTurnMessage.SetActive(false);

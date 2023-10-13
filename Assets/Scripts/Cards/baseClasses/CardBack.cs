@@ -5,10 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CardBack", menuName = "Cards/CardBack", order = 9)]
 public class CardBack : Card
 {
-    public override void OnDiscard() {
-        Debug.Log("Opponent discarded a card");
-    }
-
     public override bool isCardBack() {
         return true;
     }

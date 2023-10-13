@@ -23,30 +23,37 @@ public abstract class Card : ScriptableObject {
 
 	[SerializeField] CardEffect[] onBuyEffects;
 	[SerializeField] CardEffect[] onPlayEffects;
+    [SerializeField] CardEffect[] onDiscardEffects;
 
     public void AssignGameManager(ManagerReferences managerReferences) {
+        this.managerReferences = managerReferences;
         gameManager = managerReferences.GetGameManager();
         handManager = managerReferences.GetHandManager();
     }
 
 	public void OnBuy() { 
         foreach(CardEffect effect in onBuyEffects) {
-			    effect.DoEffect(gameManager, this);
+			    effect.DoEffect(managerReferences, this);
 	    }
     }
 
 	public void OnPlay() {
 		foreach(CardEffect effect in onPlayEffects) {
-			effect.DoEffect(gameManager, this);
+			effect.DoEffect(managerReferences, this);
 		}
 	}
 
-    public abstract void OnDiscard();
+	public void OnDiscard() {
+		foreach(CardEffect effect in onDiscardEffects) {
+			effect.DoEffect(managerReferences, this);
+		}
+	}
 
     //gets override in cardBack
     public virtual bool isCardBack() {
         return false;
     }
+    /*
 
     #region card effects that can be used from other methods (like OnPlay()). 
 
@@ -71,4 +78,5 @@ public abstract class Card : ScriptableObject {
     }
 
     #endregion
+    */
 }

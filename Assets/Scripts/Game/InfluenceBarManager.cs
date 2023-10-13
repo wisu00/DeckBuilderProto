@@ -5,86 +5,90 @@ using UnityEngine.UI;
 using Photon.Pun;
 
 public class InfluenceBarManager : MonoBehaviour {
-    [SerializeField] private Slider player1InfluenceBar;
-    [SerializeField] private Slider player2InfluenceBar;
+    [SerializeField] UIManager uiManager;
+    [SerializeField] private Slider playerInfluenceBar;
+    [SerializeField] private Slider opponentInfluenceBar;
 
-    private int changeAmount = 5; //will get replaced with parameters
+    int influenceBarMaxValue;
 
     public PhotonView photonView;
 
-    void updateValuesOnOpponent(){
-        photonView.RPC("SyncValues", RpcTarget.OthersBuffered, player1InfluenceBar.value, player2InfluenceBar.value);
+	private void Start() {
+        influenceBarMaxValue = (int)playerInfluenceBar.GetComponent<Slider>().maxValue;
+	}
+
+	void UpdateValuesOnOpponent() {
+		checkForWinner();
+		photonView.RPC("SyncValues", RpcTarget.OthersBuffered, playerInfluenceBar.value, opponentInfluenceBar.value);
     }
 
     [PunRPC]
-    void SyncValues (float player1, float player2) {
-        player1InfluenceBar.value = player1;
-        player2InfluenceBar.value = player2;
-    }
+    void SyncValues (float Opponent, float player) {
+        playerInfluenceBar.value = player;
+        opponentInfluenceBar.value = Opponent;
+        checkForWinner();
+	}
 
-
-    private void checkVariableAssignments() {
-        if(!player1InfluenceBar || !player2InfluenceBar) {
-            GameObject influenceBar = GameObject.FindWithTag("InfluenceBar");
-            player1InfluenceBar = influenceBar.transform.GetChild(1).GetComponent<Slider>();
-            player2InfluenceBar = influenceBar.transform.GetChild(2).GetComponent<Slider>();
-        }
-    }
-
-    private void StealPoints(bool player1 ,float amount) {
-        if(player1) {
-            player1InfluenceBar.value += amount;
-            player2InfluenceBar.value -= amount;
+    private void StealPoints(bool player ,float amount) {
+        if(player) {
+            playerInfluenceBar.value += amount;
+            opponentInfluenceBar.value -= amount;
         }
         else {
-            player1InfluenceBar.value -= amount;
-            player2InfluenceBar.value += amount;
+            playerInfluenceBar.value -= amount;
+            opponentInfluenceBar.value += amount;
         }
     }
 
-    public void IncreasePlayer1Influence() {
-        if(player1InfluenceBar.value + player2InfluenceBar.value > 100){ Debug.Log("over 100");}
-        if(player1InfluenceBar.value + player2InfluenceBar.value + 2*changeAmount <= 100) {
-            player1InfluenceBar.value += 2*changeAmount;
-        }
-        else if(player1InfluenceBar.value + player2InfluenceBar.value == 100) {
-            StealPoints(true, changeAmount);
-        }
-        else {
-            float neutralLeft = 100 - player2InfluenceBar.value - player1InfluenceBar.value;
-            float pointsToBeStealed = (changeAmount*2 - neutralLeft)/2;
+    public void IncreasePlayerInfluence(int amount) {
+		IncreasePlayerInfluence(true, amount);
+	}
 
-            player1InfluenceBar.value += neutralLeft;
-            StealPoints(true, pointsToBeStealed);
-        }
-        updateValuesOnOpponent();
+    public void DecreasePlayerInfluence(int amount) {
+        playerInfluenceBar.value -= amount;
+        UpdateValuesOnOpponent();
     }
 
-    public void DecreasePlayer1Influence() {
-        player1InfluenceBar.value -= changeAmount;
-        updateValuesOnOpponent();
+    public void IncreaseOpponentInfluence(int amount) {
+        IncreasePlayerInfluence(false, amount);
+	}
+
+	public void DecreaseOpponentInfluence(int amount) {
+		opponentInfluenceBar.value -= amount;
+		UpdateValuesOnOpponent();
+	}
+
+	private void IncreasePlayerInfluence(bool increasingPlayersPoints, int amount) {
+		if(playerInfluenceBar.value + opponentInfluenceBar.value > influenceBarMaxValue) { Debug.LogError("influence is over 100"); }
+		//there is enough empty space in bar
+		if(playerInfluenceBar.value + opponentInfluenceBar.value + amount <= influenceBarMaxValue) {
+            if(increasingPlayersPoints) playerInfluenceBar.value += amount;
+            else opponentInfluenceBar.value += amount;
+		}
+		//there is no empty space between players
+		else if(playerInfluenceBar.value + opponentInfluenceBar.value == influenceBarMaxValue) {
+			StealPoints(increasingPlayersPoints, amount);
+		}
+		//there is some space but not enough -> fill empty and steal rest
+		else {
+			float neutralLeft = influenceBarMaxValue - opponentInfluenceBar.value - playerInfluenceBar.value;
+			float pointsToBeStealed = amount - neutralLeft;
+
+			if(increasingPlayersPoints) playerInfluenceBar.value += neutralLeft;
+			else opponentInfluenceBar.value += neutralLeft;
+
+			StealPoints(increasingPlayersPoints, pointsToBeStealed);
+		}
+		UpdateValuesOnOpponent();
+	}
+
+    private void checkForWinner() {
+        if(playerInfluenceBar.value == influenceBarMaxValue) {
+            uiManager.ShowVictoryMessage();
+		}
+        else if(opponentInfluenceBar.value == influenceBarMaxValue) {
+			uiManager.ShowDefeatMessage();
+		}
     }
 
-    public void IncreasePlayer2Influence() {
-        if(player1InfluenceBar.value + player2InfluenceBar.value > 100){ Debug.Log("over 100");}
-        if(player2InfluenceBar.value + player1InfluenceBar.value + changeAmount*2 <= 100) {
-            player2InfluenceBar.value += changeAmount*2;
-        }
-        else if(player1InfluenceBar.value + player2InfluenceBar.value == 100) {
-            StealPoints(false, changeAmount);
-        }
-        else {
-            float neutralLeft = 100 - player2InfluenceBar.value - player1InfluenceBar.value;
-            float pointsToBeStealed = (changeAmount*2 - neutralLeft)/2;
-
-            player2InfluenceBar.value += neutralLeft;
-            StealPoints(false, pointsToBeStealed);
-        }
-        updateValuesOnOpponent();
-    }
-
-    public void DecreasePlayer2Influence() {
-        player2InfluenceBar.value -= changeAmount;
-        updateValuesOnOpponent();
-    }
 }
