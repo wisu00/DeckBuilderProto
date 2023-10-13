@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour {
         return moneyPlayer;
     }
 
-    void updateValuesOnOpponent(){
+    void UpdateValuesOnOpponent(){
         photonView.RPC("SyncValues", RpcTarget.OthersBuffered, moneyPlayer, moneyOpponent);
     }
 
@@ -71,25 +71,25 @@ public class GameManager : MonoBehaviour {
     public void IncreasePlayerMoney(int amount) {
         moneyPlayer += amount;
         UpdateMoneyText();
-        updateValuesOnOpponent();
+        UpdateValuesOnOpponent();
     }
 
     public void DecreasePlayerMoney(int amount) {
         moneyPlayer -= amount;
         UpdateMoneyText();
-        updateValuesOnOpponent();
+        UpdateValuesOnOpponent();
     }
 
     public void IncreaseOpponentMoney(int amount) {
         moneyOpponent += amount;
         UpdateMoneyText();
-        updateValuesOnOpponent();
+        UpdateValuesOnOpponent();
     }
 
     public void DecreaseOpponentMoney(int amount) {
         moneyOpponent -= amount;
         UpdateMoneyText();
-        updateValuesOnOpponent();
+        UpdateValuesOnOpponent();
     }
     
     #endregion money management
