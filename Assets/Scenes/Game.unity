@@ -3209,6 +3209,10 @@ MonoBehaviour:
   uiManager: {fileID: 18237486}
   playerInfluenceBar: {fileID: 1837885278}
   opponentInfluenceBar: {fileID: 1837885277}
+  influenceBarColorBankerPlayer: {r: 0.8396226, g: 0.7689254, b: 0.35248306, a: 1}
+  influenceBarColorScrapperPlayer: {r: 0.15477037, g: 0.6981132, b: 0.3657803, a: 1}
+  influenceBarColorBankerOpponent: {r: 0.6792453, g: 0.6220386, b: 0.28515485, a: 1}
+  influenceBarColorScrapperOpponent: {r: 0.12709148, g: 0.5283019, b: 0.2829574, a: 1}
   photonView: {fileID: 6768477205235269756}
 --- !u!1 &653179665
 GameObject:
@@ -3924,12 +3928,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84568eb1a79f0fc4db35c75e22b2176b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deck: {fileID: 2247525653897978903}
-  hand: {fileID: 7864995376266170479}
-  discardPile: {fileID: 2308483127154020510}
   uIManager: {fileID: 18237486}
   storeManager: {fileID: 251441063}
   turnStateController: {fileID: 1684182417}
+  influenceBarManager: {fileID: 646643881}
   photonView: {fileID: 738960904}
   moneyPlayerTxt: {fileID: 1219212848}
   moneyOpponentTxt: {fileID: 472369594}

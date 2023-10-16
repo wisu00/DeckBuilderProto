@@ -15,18 +15,24 @@ MonoBehaviour:
   cardIndex: 0
   cardName: Banker tool card
   cardArt: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  description: 'Turn Start: Gain 1 Gold'
+  description: 'Turn Start: if money < 5 gain 2g else gain 1g'
   buyCost: 2
   playCost: 1
   discardValue: 4
   tier: 1
   cardType: 1
+  managerReferences: {fileID: 0}
   gameManager: {fileID: 0}
   handManager: {fileID: 0}
   onBuyEffects:
-  - {fileID: 11400000, guid: 53505a524f28a1644933fd440719f5cb, type: 2}
+  - condition: {fileID: 0}
+    cardEffect: {fileID: 11400000, guid: 53505a524f28a1644933fd440719f5cb, type: 2}
   onPlayEffects:
-  - {fileID: 11400000, guid: 9cb58be8b023fdb41a3d454a5187dc9f, type: 2}
+  - condition: {fileID: 0}
+    cardEffect: {fileID: 11400000, guid: 9cb58be8b023fdb41a3d454a5187dc9f, type: 2}
+  onDiscardEffects: []
   turnStartEffects:
-  - {fileID: 11400000, guid: f4dcd9a1faa4e1c42a3a5dd605a0fcb6, type: 2}
-  - {fileID: 11400000, guid: 0a292ab85bd4aae479ae7d4e585038a2, type: 2}
+  - condition: {fileID: 11400000, guid: d350ea6dc84b25645a972d8a8359f58a, type: 2}
+    cardEffect: {fileID: 11400000, guid: f4dcd9a1faa4e1c42a3a5dd605a0fcb6, type: 2}
+  - condition: {fileID: 0}
+    cardEffect: {fileID: 11400000, guid: f4dcd9a1faa4e1c42a3a5dd605a0fcb6, type: 2}

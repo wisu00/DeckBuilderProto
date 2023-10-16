@@ -21,9 +21,13 @@ MonoBehaviour:
   discardValue: 5
   tier: 3
   cardType: 0
+  managerReferences: {fileID: 0}
   gameManager: {fileID: 0}
   handManager: {fileID: 0}
   onBuyEffects:
-  - {fileID: 11400000, guid: 53505a524f28a1644933fd440719f5cb, type: 2}
+  - condition: {fileID: 0}
+    cardEffect: {fileID: 11400000, guid: 53505a524f28a1644933fd440719f5cb, type: 2}
   onPlayEffects:
-  - {fileID: 11400000, guid: 9cb58be8b023fdb41a3d454a5187dc9f, type: 2}
+  - condition: {fileID: 0}
+    cardEffect: {fileID: 11400000, guid: 9cb58be8b023fdb41a3d454a5187dc9f, type: 2}
+  onDiscardEffects: []

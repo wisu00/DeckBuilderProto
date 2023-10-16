@@ -5,12 +5,10 @@ using Photon.Pun;
 using TMPro;
 
 public class GameManager : MonoBehaviour {
-    [SerializeField] DeckManager deck;
-    [SerializeField] HandManager hand;
-    [SerializeField] DiscardPileManager discardPile;
     [SerializeField] UIManager uIManager;
     [SerializeField] StoreManager storeManager;
     [SerializeField] TurnStateController turnStateController;
+    [SerializeField] InfluenceBarManager influenceBarManager;
 
 	CharacterClasses playerCharacter;
     CharacterClasses opponentCharacter;
@@ -23,7 +21,8 @@ public class GameManager : MonoBehaviour {
 		//update character selections for both players
 		playerCharacter = (CharacterClasses)System.Enum.Parse(typeof(CharacterClasses), PlayerPrefs.GetString("SelectedClass"));
 		uIManager.UpdatePlayerCharacterPortrait(playerCharacter);
-        storeManager.SetPlayerCharacter(playerCharacter);
+		influenceBarManager.UpdatePlayerInfluenceBarColor(playerCharacter);
+		storeManager.SetPlayerCharacter(playerCharacter);
 		photonView.RPC("UpdatePlayerClassForOpponent", RpcTarget.OthersBuffered, playerCharacter);
 
 		moneyPlayer = startingMoney;
@@ -36,6 +35,7 @@ public class GameManager : MonoBehaviour {
 	private void UpdatePlayerClassForOpponent(CharacterClasses opponentChar) {
         opponentCharacter = opponentChar;
 		uIManager.UpdateOpponentCharacterPortrait(opponentCharacter);
+		influenceBarManager.UpdateOpponentInfluenceBarColor(opponentCharacter);
 	}
 
 	#endregion Setting Up

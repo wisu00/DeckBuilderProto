@@ -9,12 +9,43 @@ public class InfluenceBarManager : MonoBehaviour {
     [SerializeField] private Slider playerInfluenceBar;
     [SerializeField] private Slider opponentInfluenceBar;
 
-    int influenceBarMaxValue;
+    [SerializeField] Color influenceBarColorBankerPlayer;
+	[SerializeField] Color influenceBarColorScrapperPlayer;
+	[SerializeField] Color influenceBarColorBankerOpponent;
+	[SerializeField] Color influenceBarColorScrapperOpponent;
+
+	int influenceBarMaxValue;
 
     public PhotonView photonView;
 
 	private void Start() {
         influenceBarMaxValue = (int)playerInfluenceBar.GetComponent<Slider>().maxValue;
+	}
+
+	public void UpdatePlayerInfluenceBarColor(CharacterClasses selectedClass) {
+		switch(selectedClass) {
+			case CharacterClasses.Banker:
+				playerInfluenceBar.GetComponentInChildren<Image>().color = influenceBarColorBankerPlayer;
+				break;
+			case CharacterClasses.Scrapper:
+				playerInfluenceBar.GetComponentInChildren<Image>().color = influenceBarColorScrapperPlayer;
+				break;
+			default:
+				break;
+		}
+	}
+
+	public void UpdateOpponentInfluenceBarColor(CharacterClasses selectedClass) {
+		switch(selectedClass) {
+			case CharacterClasses.Banker:
+				opponentInfluenceBar.GetComponentInChildren<Image>().color = influenceBarColorBankerOpponent;
+				break;
+			case CharacterClasses.Scrapper:
+				opponentInfluenceBar.GetComponentInChildren<Image>().color = influenceBarColorScrapperOpponent;
+				break;
+			default:
+				break;
+		}
 	}
 
 	void UpdateValuesOnOpponent() {

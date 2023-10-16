@@ -4,11 +4,11 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "ToolCard", menuName = "Cards/Tool", order = 2)]
 public class ToolCard : CardThatStaysOnBoard {
-	[SerializeField] CardEffect[] turnStartEffects;
+	[SerializeField] ConditionalEffect[] turnStartEffects;
 
 	public override void TurnStartEffects() {
-        foreach (CardEffect effect in turnStartEffects) {
-			effect.DoEffect(managerReferences, this);
+        foreach (ConditionalEffect effect in turnStartEffects) {
+			effect.DoEffectConditionally(managerReferences, this);
 		}
     }
 }

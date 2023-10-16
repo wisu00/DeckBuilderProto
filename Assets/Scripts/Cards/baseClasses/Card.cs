@@ -21,31 +21,49 @@ public abstract class Card : ScriptableObject {
 	[HideInInspector] public GameManager gameManager;
 	[HideInInspector] public HandManager handManager;
 
-	[SerializeField] CardEffect[] onBuyEffects;
-	[SerializeField] CardEffect[] onPlayEffects;
-    [SerializeField] CardEffect[] onDiscardEffects;
+	[SerializeField] ConditionalEffect[] onBuyEffects;
+	[SerializeField] ConditionalEffect[] onPlayEffects;
+    [SerializeField] ConditionalEffect[] onDiscardEffects;
 
-    public void AssignGameManager(ManagerReferences managerReferences) {
+	[System.Serializable]
+	public class ConditionalEffect {
+		[SerializeField]
+		public EffectCondition condition;
+
+		[SerializeField]
+		public CardEffect cardEffect;
+
+		public void DoEffectConditionally(ManagerReferences managerReferences, Card card) {
+            if(condition == null) {
+				cardEffect.DoEffect(managerReferences, card);
+			} 
+            else if (condition.CheckCondition(managerReferences, card)) {
+				cardEffect.DoEffect(managerReferences, card);
+			}
+		}
+	}
+
+	public void AssignGameManager(ManagerReferences managerReferences) {
         this.managerReferences = managerReferences;
         gameManager = managerReferences.GetGameManager();
         handManager = managerReferences.GetHandManager();
     }
 
 	public void OnBuy() { 
-        foreach(CardEffect effect in onBuyEffects) {
-			    effect.DoEffect(managerReferences, this);
+        foreach(ConditionalEffect effect in onBuyEffects) {
+		    effect.DoEffectConditionally(managerReferences, this);
 	    }
     }
 
 	public void OnPlay() {
-		foreach(CardEffect effect in onPlayEffects) {
-			effect.DoEffect(managerReferences, this);
+		foreach(ConditionalEffect effect in onPlayEffects) {
+			effect.DoEffectConditionally(managerReferences, this);
 		}
 	}
 
 	public void OnDiscard() {
-		foreach(CardEffect effect in onDiscardEffects) {
-			effect.DoEffect(managerReferences, this);
+		foreach(ConditionalEffect effect in onDiscardEffects) {
+			effect.DoEffectConditionally(managerReferences, this);
 		}
 	}
 

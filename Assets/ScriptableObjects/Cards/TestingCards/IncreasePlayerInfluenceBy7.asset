@@ -24,7 +24,12 @@ MonoBehaviour:
   managerReferences: {fileID: 0}
   gameManager: {fileID: 0}
   handManager: {fileID: 0}
-  onBuyEffects: []
+  onBuyEffects:
+  - condition: {fileID: 0}
+    cardEffect: {fileID: 11400000, guid: 53505a524f28a1644933fd440719f5cb, type: 2}
   onPlayEffects:
-  - {fileID: 11400000, guid: e890000e814414647b5c3c9ceb2178e3, type: 2}
+  - condition: {fileID: 0}
+    cardEffect: {fileID: 11400000, guid: 9cb58be8b023fdb41a3d454a5187dc9f, type: 2}
+  - condition: {fileID: 0}
+    cardEffect: {fileID: 11400000, guid: e890000e814414647b5c3c9ceb2178e3, type: 2}
   onDiscardEffects: []
