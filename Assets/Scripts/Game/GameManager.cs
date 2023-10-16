@@ -5,10 +5,7 @@ using Photon.Pun;
 using TMPro;
 
 public class GameManager : MonoBehaviour {
-    [SerializeField] UIManager uIManager;
-    [SerializeField] StoreManager storeManager;
-    [SerializeField] TurnStateController turnStateController;
-    [SerializeField] InfluenceBarManager influenceBarManager;
+    [SerializeField] ManagerReferences managerReferences;
 
 	CharacterClasses playerCharacter;
     CharacterClasses opponentCharacter;
@@ -20,23 +17,25 @@ public class GameManager : MonoBehaviour {
 	private void Start() {
 		//update character selections for both players
 		playerCharacter = (CharacterClasses)System.Enum.Parse(typeof(CharacterClasses), PlayerPrefs.GetString("SelectedClass"));
-		uIManager.UpdatePlayerCharacterPortrait(playerCharacter);
-		influenceBarManager.UpdatePlayerInfluenceBarColor(playerCharacter);
-		storeManager.SetPlayerCharacter(playerCharacter);
+        managerReferences.GetUIManager().UpdatePlayerCharacterPortrait(playerCharacter);
+        managerReferences.GetInfluenceBarManager().UpdatePlayerInfluenceBarColor(playerCharacter);
+        managerReferences.GetBoardManager().CreateStartingLocationPlayer(playerCharacter);
+        managerReferences.GetStoreManager().SetPlayerCharacter(playerCharacter);
 		photonView.RPC("UpdatePlayerClassForOpponent", RpcTarget.OthersBuffered, playerCharacter);
 
 		moneyPlayer = startingMoney;
 		moneyOpponent = startingMoney;
 		UpdateMoneyText();
-        turnStateController.StartTheGame();
+        managerReferences.GetTurnStateController().StartTheGame();
 	}
 
 	[PunRPC]
 	private void UpdatePlayerClassForOpponent(CharacterClasses opponentChar) {
         opponentCharacter = opponentChar;
-		uIManager.UpdateOpponentCharacterPortrait(opponentCharacter);
-		influenceBarManager.UpdateOpponentInfluenceBarColor(opponentCharacter);
-	}
+        managerReferences.GetUIManager().UpdateOpponentCharacterPortrait(opponentCharacter);
+        managerReferences.GetInfluenceBarManager().UpdateOpponentInfluenceBarColor(opponentCharacter);
+        managerReferences.GetBoardManager().CreateStartingLocationOpponent(opponentCharacter);
+    }
 
 	#endregion Setting Up
 

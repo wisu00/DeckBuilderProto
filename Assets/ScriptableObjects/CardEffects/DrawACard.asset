@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d96b4c98fceab584f9d3048c6a08e532, type: 3}
-  m_Name: PlayerMoney+1 If moneyIsLessThan5
+  m_Script: {fileID: 11500000, guid: 1cf12359e360ab842b9d4489f8d09603, type: 3}
+  m_Name: DrawACard
   m_EditorClassIdentifier: 
-  condition: {fileID: 11400000, guid: d350ea6dc84b25645a972d8a8359f58a, type: 2}
-  cardEffect: {fileID: 11400000, guid: f4dcd9a1faa4e1c42a3a5dd605a0fcb6, type: 2}

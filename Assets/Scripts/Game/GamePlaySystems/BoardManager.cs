@@ -6,14 +6,51 @@ using UnityEngine;
 // Takes care of board state related stuff
 public class BoardManager : MonoBehaviour {
 	[SerializeField] GameObject cardPrefab;
+	[SerializeField] GameObject locationPrefab;
 	[SerializeField] GameObject[] toolSlotsPlayer;
 	[SerializeField] GameObject[] toolSlotsOpponent;
-	[SerializeField] CardDataBase cardDataBase;
+	[SerializeField] GameObject locationSlotPlayer;
+    [SerializeField] GameObject locationSlotOpponent;
+    [SerializeField] CardDataBase cardDataBase;
 	[SerializeField] ManagerReferences managerReferences;
 
 	public PhotonView OpponentsBoardManager;
 
 	public static List<CardThatStaysOnBoard> activeCardsOnBoard = new List<CardThatStaysOnBoard>();
+
+	[SerializeField] LocationCard startingLocationBanker;
+    [SerializeField] LocationCard startingLocationScrapper;
+
+    public void CreateStartingLocationPlayer(CharacterClasses selectedClass) {
+        GameObject createdLocation = Instantiate(locationPrefab, locationSlotPlayer.transform);
+        switch (selectedClass) {
+            case CharacterClasses.Banker:
+                createdLocation.GetComponent<CardBaseFunctionality>().card = startingLocationBanker;
+                break;
+            case CharacterClasses.Scrapper:
+                createdLocation.GetComponent<CardBaseFunctionality>().card = startingLocationScrapper;
+                break;
+            default:
+                break;
+        }
+        createdLocation.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(managerReferences, true);
+        activeCardsOnBoard.Add((CardThatStaysOnBoard)createdLocation.GetComponent<CardBaseFunctionality>().card);
+    }
+
+    public void CreateStartingLocationOpponent(CharacterClasses selectedClass) {
+        GameObject createdLocation = Instantiate(locationPrefab, locationSlotOpponent.transform);
+        switch (selectedClass) {
+            case CharacterClasses.Banker:
+                createdLocation.GetComponent<CardBaseFunctionality>().card = startingLocationBanker;
+                break;
+            case CharacterClasses.Scrapper:
+                createdLocation.GetComponent<CardBaseFunctionality>().card = startingLocationScrapper;
+                break;
+            default:
+                break;
+        }
+        createdLocation.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(managerReferences, true);
+    }
 
     public void DoRoundStartEffects() {
         foreach (CardThatStaysOnBoard card in activeCardsOnBoard) {

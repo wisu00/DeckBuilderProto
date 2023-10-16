@@ -3928,10 +3928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84568eb1a79f0fc4db35c75e22b2176b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uIManager: {fileID: 18237486}
-  storeManager: {fileID: 251441063}
-  turnStateController: {fileID: 1684182417}
-  influenceBarManager: {fileID: 646643881}
+  managerReferences: {fileID: 2108085454}
   photonView: {fileID: 738960904}
   moneyPlayerTxt: {fileID: 1219212848}
   moneyOpponentTxt: {fileID: 472369594}
@@ -6487,6 +6484,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 4422418461076721767, guid: 6a2924c55b4b6ae4e8c93db8970767e7,
     type: 3}
+  locationPrefab: {fileID: 4422418461076721767, guid: fe27f8bf928cc0f4496f3435a1f5dc1a,
+    type: 3}
   toolSlotsPlayer:
   - {fileID: 432711798}
   - {fileID: 2020772971}
@@ -6497,9 +6496,15 @@ MonoBehaviour:
   - {fileID: 346076989}
   - {fileID: 366434826}
   - {fileID: 924003536}
+  locationSlotPlayer: {fileID: 2032127627}
+  locationSlotOpponent: {fileID: 1127452460}
   cardDataBase: {fileID: 723103709}
   managerReferences: {fileID: 2108085454}
   OpponentsBoardManager: {fileID: 1605339863}
+  startingLocationBanker: {fileID: 11400000, guid: 202e3f3fcc51272479edbddabadd9c88,
+    type: 2}
+  startingLocationScrapper: {fileID: 11400000, guid: a4f6e82695e07a04eaa6b2f384c04bdc,
+    type: 2}
 --- !u!4 &1342767451
 Transform:
   m_ObjectHideFlags: 0
@@ -6870,6 +6875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 4422418461076721767, guid: 6a2924c55b4b6ae4e8c93db8970767e7,
     type: 3}
+  locationPrefab: {fileID: 0}
   toolSlotsPlayer:
   - {fileID: 432711798}
   - {fileID: 2020772971}
@@ -6880,9 +6886,13 @@ MonoBehaviour:
   - {fileID: 346076989}
   - {fileID: 366434826}
   - {fileID: 924003536}
+  locationSlotPlayer: {fileID: 0}
+  locationSlotOpponent: {fileID: 0}
   cardDataBase: {fileID: 723103709}
   managerReferences: {fileID: 2108085454}
   OpponentsBoardManager: {fileID: 1342767449}
+  startingLocationBanker: {fileID: 0}
+  startingLocationScrapper: {fileID: 0}
 --- !u!1 &1639853787
 GameObject:
   m_ObjectHideFlags: 0
@@ -8912,7 +8922,7 @@ MonoBehaviour:
   handManager: {fileID: 7864995376266170479}
   handManagerOpponent: {fileID: 2364037164157390655}
   discardPileManager: {fileID: 2308483127154020510}
-  discardPileManagerOpponent: {fileID: 0}
+  discardPileManagerOpponent: {fileID: 1265654712}
   deckManager: {fileID: 2247525653897978903}
   boardManager: {fileID: 1342767450}
   boardManagerOpponent: {fileID: 1605339864}
