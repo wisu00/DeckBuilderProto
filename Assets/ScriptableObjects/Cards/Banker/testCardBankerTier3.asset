@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191ebde63ee578d4d8c7f59181840f94, type: 3}
   m_Name: testCardBankerTier3
   m_EditorClassIdentifier: 
-  cardIndex: 0
+  cardIndex: 5
   cardName: Banker Spell
-  cardArt: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  cardArt: {fileID: 0}
   description: Banker Tier 1 Card Tier 3
   buyCost: 4
   playCost: 2

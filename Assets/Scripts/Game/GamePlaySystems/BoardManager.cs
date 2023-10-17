@@ -20,6 +20,7 @@ public class BoardManager : MonoBehaviour {
 
 	[SerializeField] LocationCard startingLocationBanker;
     [SerializeField] LocationCard startingLocationScrapper;
+	[SerializeField] LocationCard startingLocationCultist;
 
     public void CreateStartingLocationPlayer(CharacterClasses selectedClass) {
         GameObject createdLocation = Instantiate(locationPrefab, locationSlotPlayer.transform);
@@ -30,7 +31,10 @@ public class BoardManager : MonoBehaviour {
             case CharacterClasses.Scrapper:
                 createdLocation.GetComponent<CardBaseFunctionality>().card = startingLocationScrapper;
                 break;
-            default:
+			case CharacterClasses.Cultist:
+				createdLocation.GetComponent<CardBaseFunctionality>().card = startingLocationCultist;
+				break;
+			default:
                 break;
         }
         createdLocation.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(managerReferences, true);
@@ -46,7 +50,10 @@ public class BoardManager : MonoBehaviour {
             case CharacterClasses.Scrapper:
                 createdLocation.GetComponent<CardBaseFunctionality>().card = startingLocationScrapper;
                 break;
-            default:
+			case CharacterClasses.Cultist:
+				createdLocation.GetComponent<CardBaseFunctionality>().card = startingLocationCultist;
+				break;
+			default:
                 break;
         }
         createdLocation.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(managerReferences, true);

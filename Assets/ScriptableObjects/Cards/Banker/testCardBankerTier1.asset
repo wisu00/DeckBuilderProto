@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 3
   cardName: Banker Spell
-  cardArt: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  cardArt: {fileID: 0}
   description: Banker Tier 1 Card Tier 1
   buyCost: 2
   playCost: 0

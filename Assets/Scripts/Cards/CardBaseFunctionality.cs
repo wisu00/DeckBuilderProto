@@ -111,12 +111,6 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
         description.text = card.description;
 		playCost.text = card.playCost.ToString();
         discardValueText.text = card.discardValue.ToString();
-
-		if(card.isCardBack()) {
-            foreach (Transform child in cardArt.gameObject.transform) {
-                child.gameObject.SetActive(false);
-            }
-        } 
     }
 
 	public void UpdateValueOnBoard(ManagerReferences managerReferences, bool ownedByPlayer) {

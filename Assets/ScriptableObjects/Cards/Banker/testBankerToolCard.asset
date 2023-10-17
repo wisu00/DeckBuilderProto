@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 0
   cardName: Banker tool card
-  cardArt: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  cardArt: {fileID: 0}
   description: 'Turn Start: if money < 5 gain 2g else gain 1g'
   buyCost: 2
   playCost: 1

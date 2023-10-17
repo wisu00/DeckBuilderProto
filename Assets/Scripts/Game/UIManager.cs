@@ -9,7 +9,9 @@ public class UIManager : MonoBehaviour
 {
     public TMP_Text playersName;
     public TMP_Text opponentsName;
-	[SerializeField] Sprite[] characterSprites;
+	[SerializeField] Sprite bankerSprite;
+	[SerializeField] Sprite scrapperSprite;
+	[SerializeField] Sprite cultistSprite;
     [SerializeField] Image playerCharacterPortrait;
 	[SerializeField] Image opponentCharacterPortrait;
 	[SerializeField] GameObject cardBuyArea;
@@ -36,11 +38,35 @@ public class UIManager : MonoBehaviour
     }
 
     public void UpdatePlayerCharacterPortrait(CharacterClasses selectedClass) {
-        playerCharacterPortrait.sprite = characterSprites[(int)selectedClass];
+		switch(selectedClass) {
+			case CharacterClasses.Banker:
+				playerCharacterPortrait.sprite = bankerSprite;
+				break;
+			case CharacterClasses.Scrapper:
+				playerCharacterPortrait.sprite = scrapperSprite;
+				break;
+			case CharacterClasses.Cultist:
+				playerCharacterPortrait.sprite = cultistSprite;
+				break;
+			default:
+				break;
+		}
 	}
 
 	public void UpdateOpponentCharacterPortrait(CharacterClasses selectedClass) {
-		opponentCharacterPortrait.sprite = characterSprites[(int)selectedClass];
+		switch(selectedClass) {
+			case CharacterClasses.Banker:
+				opponentCharacterPortrait.sprite = bankerSprite;
+				break;
+			case CharacterClasses.Scrapper:
+				opponentCharacterPortrait.sprite = scrapperSprite;
+				break;
+			case CharacterClasses.Cultist:
+				opponentCharacterPortrait.sprite = cultistSprite;
+				break;
+			default:
+				break;
+		}
 	}
 
 	public void ShowNotYourTurnMessage() {

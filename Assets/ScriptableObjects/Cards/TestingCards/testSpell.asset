@@ -12,16 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191ebde63ee578d4d8c7f59181840f94, type: 3}
   m_Name: testSpell
   m_EditorClassIdentifier: 
-  cardIndex: 0
+  cardIndex: 2
   cardName: Spell
-  cardArt: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  cardArt: {fileID: 0}
   description: test
   buyCost: 3
   playCost: 1
   discardValue: 2
   tier: 0
   cardType: 0
+  managerReferences: {fileID: 0}
   gameManager: {fileID: 0}
   handManager: {fileID: 0}
+  onBuyEffects: []
   onPlayEffects:
-  - {fileID: 11400000, guid: 9cb58be8b023fdb41a3d454a5187dc9f, type: 2}
+  - condition: {fileID: 0}
+    cardEffect: {fileID: 0}
+  onDiscardEffects: []

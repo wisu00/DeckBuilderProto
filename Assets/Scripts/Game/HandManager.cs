@@ -32,7 +32,10 @@ public class HandManager : MonoBehaviour {
             
             GameObject cardThatWasDrawn = Instantiate(cardPrefab, handArea.transform);
             cardThatWasDrawn.GetComponent<CardBaseFunctionality>().card = drawnCard;
-            cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValues(managerReferences);
+			if(!drawnCard.isCardBack()) {
+				cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValues(managerReferences);
+			}
+			
             physicalCardsInHand.Add(cardThatWasDrawn);
             OrganiseHand();
         }

@@ -177,10 +177,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playersName: {fileID: 1012881814}
   opponentsName: {fileID: 521490075}
-  characterSprites:
-  - {fileID: 21300000, guid: 6daeb9cc4c1875f4683b8cd7cd89a12a, type: 3}
-  - {fileID: 21300000, guid: c3cd4dd301b47fe4c93c9afa1a08b2e6, type: 3}
-  - {fileID: 21300000, guid: f7381fef8ae325e47a6783745fff33ce, type: 3}
+  bankerSprite: {fileID: 21300000, guid: 6daeb9cc4c1875f4683b8cd7cd89a12a, type: 3}
+  scrapperSprite: {fileID: 21300000, guid: c3cd4dd301b47fe4c93c9afa1a08b2e6, type: 3}
+  cultistSprite: {fileID: 21300000, guid: 4bce051eeb254214988fbce8bf28c327, type: 3}
   playerCharacterPortrait: {fileID: 330569484}
   opponentCharacterPortrait: {fileID: 671651155}
   cardBuyArea: {fileID: 415765574}
@@ -3211,8 +3210,10 @@ MonoBehaviour:
   opponentInfluenceBar: {fileID: 1837885277}
   influenceBarColorBankerPlayer: {r: 0.8396226, g: 0.7689254, b: 0.35248306, a: 1}
   influenceBarColorScrapperPlayer: {r: 0.15477037, g: 0.6981132, b: 0.3657803, a: 1}
+  influenceBarColorCultistPlayer: {r: 0.8301887, g: 0.13705944, b: 0.13705944, a: 1}
   influenceBarColorBankerOpponent: {r: 0.6792453, g: 0.6220386, b: 0.28515485, a: 1}
   influenceBarColorScrapperOpponent: {r: 0.12709148, g: 0.5283019, b: 0.2829574, a: 1}
+  influenceBarColorCultistOpponent: {r: 0.7075472, g: 0.09678713, b: 0.09678713, a: 1}
   photonView: {fileID: 6768477205235269756}
 --- !u!1 &653179665
 GameObject:
@@ -6505,6 +6506,8 @@ MonoBehaviour:
     type: 2}
   startingLocationScrapper: {fileID: 11400000, guid: a4f6e82695e07a04eaa6b2f384c04bdc,
     type: 2}
+  startingLocationCultist: {fileID: 11400000, guid: 998eb86de68e80b40b10a5870e599f3d,
+    type: 2}
 --- !u!4 &1342767451
 Transform:
   m_ObjectHideFlags: 0
@@ -6893,6 +6896,7 @@ MonoBehaviour:
   OpponentsBoardManager: {fileID: 1342767449}
   startingLocationBanker: {fileID: 0}
   startingLocationScrapper: {fileID: 0}
+  startingLocationCultist: {fileID: 0}
 --- !u!1 &1639853787
 GameObject:
   m_ObjectHideFlags: 0
@@ -9492,7 +9496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handArea: {fileID: 5613926984344898572}
   discardPile: {fileID: 1265654712}
-  cardPrefab: {fileID: 4422418461076721767, guid: 6a2924c55b4b6ae4e8c93db8970767e7,
+  cardPrefab: {fileID: 4422418461076721767, guid: a4a7d84a2f525d2469e674b215cfc708,
     type: 3}
   hand: []
   managerReferences: {fileID: 2108085454}

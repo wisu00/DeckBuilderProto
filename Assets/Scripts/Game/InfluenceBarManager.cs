@@ -11,8 +11,11 @@ public class InfluenceBarManager : MonoBehaviour {
 
     [SerializeField] Color influenceBarColorBankerPlayer;
 	[SerializeField] Color influenceBarColorScrapperPlayer;
+	[SerializeField] Color influenceBarColorCultistPlayer;
+
 	[SerializeField] Color influenceBarColorBankerOpponent;
 	[SerializeField] Color influenceBarColorScrapperOpponent;
+	[SerializeField] Color influenceBarColorCultistOpponent;
 
 	int influenceBarMaxValue;
 
@@ -30,6 +33,9 @@ public class InfluenceBarManager : MonoBehaviour {
 			case CharacterClasses.Scrapper:
 				playerInfluenceBar.GetComponentInChildren<Image>().color = influenceBarColorScrapperPlayer;
 				break;
+			case CharacterClasses.Cultist:
+				playerInfluenceBar.GetComponentInChildren<Image>().color = influenceBarColorCultistPlayer;
+				break;
 			default:
 				break;
 		}
@@ -42,6 +48,9 @@ public class InfluenceBarManager : MonoBehaviour {
 				break;
 			case CharacterClasses.Scrapper:
 				opponentInfluenceBar.GetComponentInChildren<Image>().color = influenceBarColorScrapperOpponent;
+				break;
+			case CharacterClasses.Cultist:
+				opponentInfluenceBar.GetComponentInChildren<Image>().color = influenceBarColorCultistOpponent;
 				break;
 			default:
 				break;

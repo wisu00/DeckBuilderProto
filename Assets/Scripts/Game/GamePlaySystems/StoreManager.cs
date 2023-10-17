@@ -10,6 +10,9 @@ public class StoreManager : MonoBehaviour {
 	List<Card> cardsScrapperTier1;
 	List<Card> cardsScrapperTier2;
 	List<Card> cardsScrapperTier3;
+	List<Card> cardsCultistTier1;
+	List<Card> cardsCultistTier2;
+	List<Card> cardsCultistTier3;
 
 	[SerializeField] GameObject[] cardStoreDisplayAreas; //5 slots for cards
 
@@ -37,6 +40,9 @@ public class StoreManager : MonoBehaviour {
 		cardsScrapperTier1 = cardDataBase.cardsScrapperTier1;
 		cardsScrapperTier2 = cardDataBase.cardsScrapperTier2;
 		cardsScrapperTier3 = cardDataBase.cardsScrapperTier3;
+		cardsCultistTier1 = cardDataBase.cardsCultistTier1;
+		cardsCultistTier2 = cardDataBase.cardsCultistTier2;
+		cardsCultistTier3 = cardDataBase.cardsCultistTier3;
 	}
 
 	public void SetPlayerCharacter(CharacterClasses playerCharacter) {
@@ -55,6 +61,11 @@ public class StoreManager : MonoBehaviour {
 				IListExtensions.Shuffle(cardsScrapperTier1);
 				IListExtensions.Shuffle(cardsScrapperTier2);
 				IListExtensions.Shuffle(cardsScrapperTier3);
+				break;
+			case CharacterClasses.Cultist:
+				IListExtensions.Shuffle(cardsCultistTier1);
+				IListExtensions.Shuffle(cardsCultistTier2);
+				IListExtensions.Shuffle(cardsCultistTier3);
 				break;
 			default:
 				break;
@@ -110,7 +121,35 @@ public class StoreManager : MonoBehaviour {
 						cardsScrapperTier3.RemoveAt(0);
 					}
 					cardPos++;
-					
+
+				}
+				break;
+			case CharacterClasses.Cultist:
+				//Debug.Log("loading cultist cards");
+				for(int i = 0; i < numberOfCardsInStoreTier1; i++) {
+					if(cardsCultistTier1.Count > 0) {// doesn't create cards in store if store decks are empty
+						displayedCardsTier1.Add(cardsCultistTier1[0]);
+						SpawnCardInStore(cardsCultistTier1[0], cardPos);
+						cardsCultistTier1.RemoveAt(0);
+					}
+					cardPos++;
+				}
+				for(int i = 0; i < numberOfCardsInStoreTier2; i++) {
+					if(cardsCultistTier2.Count > 0) {
+						displayedCardsTier2.Add(cardsCultistTier2[0]);
+						SpawnCardInStore(cardsCultistTier2[0], cardPos);
+						cardsCultistTier2.RemoveAt(0);
+					}
+					cardPos++;
+				}
+				for(int i = 0; i < numberOfCardsInStoreTier3; i++) {
+					if(cardsCultistTier3.Count > 0) {
+						displayedCardsTier3.Add(cardsCultistTier3[0]);
+						SpawnCardInStore(cardsCultistTier3[0], cardPos);
+						cardsCultistTier3.RemoveAt(0);
+					}
+					cardPos++;
+
 				}
 				break;
 			default: Debug.Log("character class not specified"); break;
@@ -129,6 +168,11 @@ public class StoreManager : MonoBehaviour {
 				cardsScrapperTier1.AddRange(displayedCardsTier1);
 				cardsScrapperTier2.AddRange(displayedCardsTier2);
 				cardsScrapperTier3.AddRange(displayedCardsTier3);
+				break;
+			case CharacterClasses.Cultist:
+				cardsCultistTier1.AddRange(displayedCardsTier1);
+				cardsCultistTier2.AddRange(displayedCardsTier2);
+				cardsCultistTier3.AddRange(displayedCardsTier3);
 				break;
 			default: Debug.Log("character class not specified"); break;
 		}
