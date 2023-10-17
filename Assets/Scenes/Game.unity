@@ -3815,16 +3815,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67320482770ff804b854c891f7af764e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardFolderTestCards: ScriptableObjects/Cards/TestingCards
+  cardFolderBanker: ScriptableObjects/Cards/Banker
+  cardFolderScrapper: ScriptableObjects/Cards/Scrapper
+  cardFolderCultist: ScriptableObjects/Cards/Cultist
   allCards:
-  - {fileID: 11400000, guid: 17cf8c515e651e448bd48943ac271c16, type: 2}
-  - {fileID: 11400000, guid: 1a458a78b843bee41825c1caf24bf108, type: 2}
+  - {fileID: 11400000, guid: 8813072844ec7ba4582fe375f3b94db7, type: 2}
   - {fileID: 11400000, guid: 2143eea1a10e0ae4cbcb1318c29bf9a0, type: 2}
+  - {fileID: 11400000, guid: 202e3f3fcc51272479edbddabadd9c88, type: 2}
+  - {fileID: 11400000, guid: 17cf8c515e651e448bd48943ac271c16, type: 2}
   - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
   - {fileID: 11400000, guid: 22c61a34a01a5fd44bb4bc25b2c17b62, type: 2}
   - {fileID: 11400000, guid: 9c9a99d4fb8b7e348a3fc788a7dda862, type: 2}
+  - {fileID: 11400000, guid: a4f6e82695e07a04eaa6b2f384c04bdc, type: 2}
   - {fileID: 11400000, guid: 253ba3939b2b8e84c80a14b9775e6204, type: 2}
   - {fileID: 11400000, guid: 6e31dae7948c65940a3ee1dbdb1fd8f4, type: 2}
   - {fileID: 11400000, guid: 1125c12f7df400746ba726f04b7c0668, type: 2}
+  - {fileID: 11400000, guid: 998eb86de68e80b40b10a5870e599f3d, type: 2}
   cardsBankerTier1:
   - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
   - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
@@ -3869,6 +3876,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1125c12f7df400746ba726f04b7c0668, type: 2}
   - {fileID: 11400000, guid: 1125c12f7df400746ba726f04b7c0668, type: 2}
   - {fileID: 11400000, guid: 1125c12f7df400746ba726f04b7c0668, type: 2}
+  cardsCultistTier1: []
+  cardsCultistTier2: []
+  cardsCultistTier3: []
 --- !u!4 &723103710
 Transform:
   m_ObjectHideFlags: 0
