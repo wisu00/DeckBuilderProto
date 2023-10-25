@@ -37,6 +37,13 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 		canvasGroup = GetComponent<CanvasGroup>();
     }
 
+	public void UpdateCardCostVisuals(int notoriety) {
+		if(notoriety > 0) {
+			buyCost.color = Color.red;
+		}
+		buyCost.text = (notoriety + card.buyCost).ToString();
+	}
+
     public void OnBeginDrag(PointerEventData eventData) {
         if(card.isCardBack() || cardIsOnBoard || !ownedByPlayer) {
 			eventData.pointerDrag = null;
@@ -129,9 +136,12 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 	}
 
     public void BuyTheCard() {
-		if(turnStateController.CheckIfItIsPlayersTurn() && cardIsInStore) {
-			if(gameManager.getMoneyPlayer() >= card.buyCost) {
-				//gameManager.DecreasePlayerMoney(card.buyCost);
+		if(!turnStateController.CheckIfItIsPlayersTurn()) {
+			managerReferences.GetUIManager().ShowNotYourTurnMessage();
+			return;
+		}
+		if(cardIsInStore) {
+			if(gameManager.getMoneyPlayer() >= card.buyCost + managerReferences.GetGameManager().GetPlayerNotoriety()) {
 				card.OnBuy();
 				uIManager.SetBuyAreaActiveStatus(false);
 				discardPileManager.AddCardToDiscardPile(card);
@@ -141,7 +151,11 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 	}
 
 	public void PlayToolCard(int toolSlotNumber) {
-		if(turnStateController.CheckIfItIsPlayersTurn() && !cardIsInStore) {
+		if(!turnStateController.CheckIfItIsPlayersTurn()) {
+			managerReferences.GetUIManager().ShowNotYourTurnMessage();
+			return;
+		}
+		if(!cardIsInStore) {
 			if(gameManager.getMoneyPlayer() >= card.playCost) {
 				card.OnPlay();
 				handManager.RemoveCardFromHand(card, gameObject);
@@ -152,7 +166,11 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 	}
 
 	public void PlayLocationCard(Transform cardPlaceOnBoard) {
-		if(turnStateController.CheckIfItIsPlayersTurn() && !cardIsInStore) {
+		if(!turnStateController.CheckIfItIsPlayersTurn()) {
+			managerReferences.GetUIManager().ShowNotYourTurnMessage();
+			return;
+		}
+		if(!cardIsInStore) {
 			if(gameManager.getMoneyPlayer() >= card.playCost) {
 				card.OnPlay();
 				GameObject cardThatWasPlayed;
@@ -167,7 +185,11 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 	}
 
 	public void PlayEventCard() {
-        if (turnStateController.CheckIfItIsPlayersTurn() && !cardIsInStore) {
+		if(!turnStateController.CheckIfItIsPlayersTurn()) {
+			managerReferences.GetUIManager().ShowNotYourTurnMessage();
+			return;
+		}
+		if (!cardIsInStore) {
 			if(gameManager.getMoneyPlayer() >= card.playCost) {
 				card.OnPlay();
 				if(card.cardType==CardType.Event) {
@@ -179,7 +201,11 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
     }
 
     public void DiscardTheCard() {
-        if(turnStateController.CheckIfItIsPlayersTurn() && !cardIsInStore) {
+		if(!turnStateController.CheckIfItIsPlayersTurn()) {
+			managerReferences.GetUIManager().ShowNotYourTurnMessage();
+			return;
+		}
+		if(!cardIsInStore) {
             card.OnDiscard();
 			handManager.MoveCardToDiscardPile(card, gameObject);
 			uIManager.SetPlayAreaActiveStatus(false, card.cardType);

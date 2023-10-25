@@ -11,6 +11,7 @@ public class TurnStateController : MonoBehaviour {
     private TurnState currentTurnState = TurnState.OpponentsTurn;
     public PhotonView photonView;
     public UIManager uiManager;
+    [SerializeField] InfluenceBarManager influenceBarManager;
     [SerializeField] BoardManager boardManager;
     [SerializeField] StoreManager storeManager;
     [SerializeField] DeckManager deck;
@@ -35,12 +36,10 @@ public class TurnStateController : MonoBehaviour {
 	}
 
     public bool CheckIfItIsPlayersTurn() {
-        if(currentTurnState != TurnState.Play) {
-            uiManager.ShowNotYourTurnMessage();
-            Debug.Log("notYourTurn");
-            return false;
+        if(currentTurnState != TurnState.OpponentsTurn) {
+            return true;
         }
-        else return true;
+        else return false;
     }
 
     public void ChangeState(TurnState newState) {
@@ -80,6 +79,10 @@ public class TurnStateController : MonoBehaviour {
         for(int i=0; i<2; i++) {
             deck.DrawCard();
         }
+        //extra draw if player has enough influence
+        if(influenceBarManager.GetPlayerInfluence() > influenceBarManager.GetInfluenceNeededForExtraDraw()) {
+			deck.DrawCard();
+		}
         
         ChangeState(TurnState.Play);
     }

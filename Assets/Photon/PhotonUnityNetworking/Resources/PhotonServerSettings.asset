@@ -54,6 +54,8 @@ MonoBehaviour:
   - OpponentDrawsACardRPC
   - RemoveCardFromHandOpponent
   - RemoveToolFromBoardOpponent
+  - SyncNotorietyValues
+  - UpdateCardPrizesInStore
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

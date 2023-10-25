@@ -8,8 +8,9 @@ public class InfluenceBarManager : MonoBehaviour {
     [SerializeField] UIManager uiManager;
     [SerializeField] private Slider playerInfluenceBar;
     [SerializeField] private Slider opponentInfluenceBar;
+	[SerializeField] int neededValueForExtraCardDraw = 15;
 
-    [SerializeField] Color influenceBarColorBankerPlayer;
+	[SerializeField] Color influenceBarColorBankerPlayer;
 	[SerializeField] Color influenceBarColorScrapperPlayer;
 	[SerializeField] Color influenceBarColorCultistPlayer;
 
@@ -69,7 +70,19 @@ public class InfluenceBarManager : MonoBehaviour {
         checkForWinner();
 	}
 
-    private void StealPoints(bool player ,float amount) {
+	public int GetPlayerInfluence() {
+		return (int)playerInfluenceBar.value;
+	}
+
+	public int GetOpponentInfluence() {
+		return (int)opponentInfluenceBar.value;
+	}
+
+	public int GetInfluenceNeededForExtraDraw() {
+		return neededValueForExtraCardDraw;
+	}
+
+	private void StealPoints(bool player ,float amount) {
         if(player) {
             playerInfluenceBar.value += amount;
             opponentInfluenceBar.value -= amount;

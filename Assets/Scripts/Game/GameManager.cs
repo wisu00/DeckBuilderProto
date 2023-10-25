@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour {
 		moneyPlayer = startingMoney;
 		moneyOpponent = startingMoney;
 		UpdateMoneyText();
+		notorietyPlayer = 0;
+		notorietyOpponent = 0;
+		UpdateNotorietyText();
         managerReferences.GetTurnStateController().StartTheGame();
 	}
 
@@ -90,18 +93,69 @@ public class GameManager : MonoBehaviour {
         UpdateMoneyText();
         UpdateValuesOnOpponent();
     }
-    
-    #endregion money management
 
-    #region Card management
+	#endregion money management
 
-    public bool isOnTopOfPlayArea(Transform cardPos) {
+	#region Notoriety management
+
+	[SerializeField] TMP_Text notorietyPlayerTxt;
+	[SerializeField] TMP_Text notorietyOpponentTxt;
+	int notorietyPlayer;
+	int notorietyOpponent;
+
+	public int GetPlayerNotoriety() {
+		return notorietyPlayer;
+	}
+
+	public int GetOpponentNotoriety() {
+		return notorietyOpponent;
+	}
+
+	void UpdateNotorietyValuesOnOpponent() {
+		photonView.RPC("SyncNotorietyValues", RpcTarget.OthersBuffered, notorietyPlayer, notorietyOpponent);
+	}
+
+	[PunRPC]
+	private void SyncNotorietyValues(int amountPlayer, int amountOpponent) {
+		notorietyPlayer = amountOpponent;
+		notorietyOpponent = amountPlayer;
+		UpdateNotorietyText();
+	}
+
+	private void UpdateNotorietyText() {
+		notorietyPlayerTxt.text = "" + notorietyPlayer;
+		notorietyOpponentTxt.text = "" + notorietyOpponent;
+	}
+
+	public void IncreasePlayerNotoriety(int amount) {
+		notorietyPlayer += amount;
+		UpdateNotorietyText();
+		UpdateNotorietyValuesOnOpponent();
+		if(managerReferences.GetTurnStateController().CheckIfItIsPlayersTurn()) {
+			managerReferences.GetStoreManager().UpdateCardPrizesInStore();
+			managerReferences.GetStoreManager().UpdateCardPrizesInStoreForOpponent();
+		}
+	}
+
+	public void DecreasePlayerNotoriety(int amount) {
+		notorietyPlayer -= amount;
+		UpdateNotorietyText();
+		UpdateNotorietyValuesOnOpponent();
+	}
+
+	public void IncreaseOpponentNotoriety(int amount) {
+		notorietyOpponent += amount;
+		UpdateNotorietyText();
+		UpdateNotorietyValuesOnOpponent();
+	}
+
+	#endregion notoriety management
+
+	#region Card management
+
+	public bool isOnTopOfPlayArea(Transform cardPos) {
         return true;
     }
 
 	#endregion Card management
-
-	
-
-	
 }

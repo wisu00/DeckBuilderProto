@@ -72,6 +72,26 @@ public class StoreManager : MonoBehaviour {
 		}
 	}
 
+	[PunRPC]
+	public void UpdateCardPrizesInStore() {
+		if(managerReferences.GetTurnStateController().CheckIfItIsPlayersTurn()) {
+			int playerNotoriety = managerReferences.GetGameManager().GetPlayerNotoriety();
+			foreach(GameObject card in physicalCardsInStore) {
+				card.GetComponent<CardBaseFunctionality>().UpdateCardCostVisuals(playerNotoriety);
+			}
+		}
+		else {
+			int opponentNotoriety = managerReferences.GetGameManager().GetOpponentNotoriety();
+			foreach(GameObject card in physicalCardsInStore) {
+				card.GetComponent<CardBaseFunctionality>().UpdateCardCostVisuals(opponentNotoriety);
+			}
+		}
+    }
+
+	public void UpdateCardPrizesInStoreForOpponent() {
+		photonView.RPC("UpdateCardPrizesInStore", RpcTarget.OthersBuffered);
+	}
+
 	public void LoadStore() {
 		int cardPos = 0; //used to determine where card will spawn
 		switch(playersCharacterClass) {
@@ -154,6 +174,8 @@ public class StoreManager : MonoBehaviour {
 				break;
 			default: Debug.Log("character class not specified"); break;
 		}
+		UpdateCardPrizesInStore();
+		UpdateCardPrizesInStoreForOpponent();
 	}
 
 	public void EmptyStore() {
