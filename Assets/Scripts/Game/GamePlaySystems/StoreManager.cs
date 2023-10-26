@@ -242,6 +242,7 @@ public class StoreManager : MonoBehaviour {
 			case 3: displayedCardsTier3.Remove(card); break;
 			default: Debug.Log(card.name + " doesn't have specified tier"); break;
 		}
+		physicalCardsInStore.Remove(physicalCard);
 		Destroy(physicalCard);
 		photonView.RPC("RemoveCardFromOpponentsStore", RpcTarget.OthersBuffered, cardPosInStore);
 	}
@@ -249,5 +250,6 @@ public class StoreManager : MonoBehaviour {
 	[PunRPC]
 	void RemoveCardFromOpponentsStore(int cardPosInStore) {
 		Destroy(physicalCardsInStore[cardPosInStore]);
+		physicalCardsInStore.RemoveAt(cardPosInStore);
 	}
 }

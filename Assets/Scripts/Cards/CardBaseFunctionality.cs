@@ -142,12 +142,18 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 		}
 		if(cardIsInStore) {
 			if(gameManager.getMoneyPlayer() >= card.buyCost + managerReferences.GetGameManager().GetPlayerNotoriety()) {
+				gameManager.DecreasePlayerMoney(card.buyCost + managerReferences.GetGameManager().GetPlayerNotoriety());
 				card.OnBuy();
 				uIManager.SetBuyAreaActiveStatus(false);
 				discardPileManager.AddCardToDiscardPile(card);
                 storeManager.CardIsBought(card, gameObject, cardPosInStore);
 			}
 		}
+	}
+
+	public bool CardCanBePlayed() {
+		if(turnStateController.CheckIfItIsPlayersTurn() && gameManager.getMoneyPlayer() >= card.playCost && card.ClearsAdditionalPlayConditions()) return true; 
+		else return false;
 	}
 
 	public void PlayToolCard(int toolSlotNumber) {
@@ -157,6 +163,7 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 		}
 		if(!cardIsInStore) {
 			if(gameManager.getMoneyPlayer() >= card.playCost) {
+				gameManager.DecreasePlayerMoney(card.playCost);
 				card.OnPlay();
 				handManager.RemoveCardFromHand(card, gameObject);
 				boardManager.CardWasPlayedOnBoard(card, toolSlotNumber);
@@ -165,7 +172,9 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 		}
 	}
 
+	/*
 	public void PlayLocationCard(Transform cardPlaceOnBoard) {
+		Debug.Log("playing location card");
 		if(!turnStateController.CheckIfItIsPlayersTurn()) {
 			managerReferences.GetUIManager().ShowNotYourTurnMessage();
 			return;
@@ -183,21 +192,25 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 			}
 		}
 	}
-
+	*/
 	public void PlayEventCard() {
 		if(!turnStateController.CheckIfItIsPlayersTurn()) {
 			managerReferences.GetUIManager().ShowNotYourTurnMessage();
 			return;
 		}
 		if (!cardIsInStore) {
-			if(gameManager.getMoneyPlayer() >= card.playCost) {
+			if(CardCanBePlayed()) {
+				gameManager.DecreasePlayerMoney(card.playCost);
 				card.OnPlay();
 				if(card.cardType==CardType.Event) {
 					handManager.MoveCardToDiscardPile(card, gameObject);
 					uIManager.SetPlayAreaActiveStatus(false, card.cardType);
 				}
 			}
-		}
+            else {
+				uIManager.ShowCardCantBePlayedMessage();
+			}
+        }
     }
 
     public void DiscardTheCard() {

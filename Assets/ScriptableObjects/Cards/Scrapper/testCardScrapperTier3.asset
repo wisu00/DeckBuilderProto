@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191ebde63ee578d4d8c7f59181840f94, type: 3}
   m_Name: testCardScrapperTier3
   m_EditorClassIdentifier: 
-  cardIndex: 8
+  cardIndex: 10
   cardName: Scrapper Spell
   cardArt: {fileID: 0}
   description: Scapper Test Card Tier 3
@@ -24,10 +24,6 @@ MonoBehaviour:
   managerReferences: {fileID: 0}
   gameManager: {fileID: 0}
   handManager: {fileID: 0}
-  onBuyEffects:
-  - condition: {fileID: 0}
-    cardEffect: {fileID: 11400000, guid: 53505a524f28a1644933fd440719f5cb, type: 2}
-  onPlayEffects:
-  - condition: {fileID: 0}
-    cardEffect: {fileID: 11400000, guid: 9cb58be8b023fdb41a3d454a5187dc9f, type: 2}
+  onBuyEffects: []
+  onPlayEffects: []
   onDiscardEffects: []

@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
 	[SerializeField] Image opponentCharacterPortrait;
 	[SerializeField] GameObject cardBuyArea;
 	[SerializeField] GameObject cardPlayArea;
+	[SerializeField] GameObject cardDiscardArea;
 	[SerializeField] GameObject[] toolPlayAreas;
 	[SerializeField] GameObject locationPlayArea;
 
@@ -26,6 +27,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image popUpMessageBox;
     [SerializeField] private GameObject notYourTurnMessage;
 	[SerializeField] private GameObject toolSlotTakenMessage;
+	[SerializeField] private GameObject cardCantBePlayedMessage;
 	[SerializeField] private GameObject victoryMessage;
 	[SerializeField] private GameObject defeatMessage;
 
@@ -87,6 +89,15 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
+	public void ShowCardCantBePlayedMessage() {
+		if(!messageIsActive) {
+			messageIsActive = true;
+			popUpMessageBox.gameObject.SetActive(true);
+			cardCantBePlayedMessage.SetActive(true);
+			Invoke("DisableMessage", 1.5f);
+		}
+	}
+
 	public void ShowVictoryMessage() {
 		DisableMessage();
 		messageIsActive = true;
@@ -106,6 +117,7 @@ public class UIManager : MonoBehaviour
 		popUpMessageBox.gameObject.SetActive(false);
 		notYourTurnMessage.SetActive(false);
 		toolSlotTakenMessage.SetActive(false);
+		cardCantBePlayedMessage.SetActive(false);
 	}
 
     void updateOpponentsNickName(){
@@ -132,5 +144,10 @@ public class UIManager : MonoBehaviour
 		else if(cardType == CardType.Location) locationPlayArea.SetActive(activeStatus);
 		else cardPlayArea.SetActive(activeStatus);
 
+		SetCardDiscardAreaStatus(activeStatus);
+	}
+
+	public void SetCardDiscardAreaStatus(bool activeStatus) {
+		cardDiscardArea.SetActive(activeStatus);
 	}
 }

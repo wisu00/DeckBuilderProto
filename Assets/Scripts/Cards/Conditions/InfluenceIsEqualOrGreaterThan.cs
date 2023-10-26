@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "InfluenceIsEqualOrGreaterThan", menuName = "EffectConditions/InfluenceIsEqualOrGreaterThan")]
-public class InfluenceIsEqualOrGreaterThan : EffectCondition {
+public class InfluenceIsEqualOrGreaterThan : Condition {
 	[SerializeField] int value = 15;
 
 	public override bool CheckCondition(ManagerReferences managerReferences, Card card) {

@@ -13,6 +13,13 @@ public class ToolCardPlayArea : MonoBehaviour, IDropHandler, IPointerEnterHandle
 
 	public void OnDrop(PointerEventData eventData) {
         if(eventData.pointerDrag != null) {
+			//check if card can be played
+			if(!eventData.pointerDrag.GetComponent<CardBaseFunctionality>().CardCanBePlayed()) {
+				SetDarkTintActive(false);
+				uIManager.ShowCardCantBePlayedMessage();
+				return;
+			}
+			//clear slot if already taken
 			if(isOccupied) {
 				Debug.Log("replacing tool");
 				//uIManager.ShowToolSlotTakenMessage();

@@ -9,7 +9,7 @@ public class LocationCardPlayArea : MonoBehaviour, IDropHandler {
     public void OnDrop(PointerEventData eventData) {
         Debug.Log("DroppedOnPlayArea");
         if(eventData.pointerDrag != null) {
-            eventData.pointerDrag.GetComponent<CardBaseFunctionality>().PlayLocationCard(cardPlaceOnBoard);
+        //    eventData.pointerDrag.GetComponent<CardBaseFunctionality>().PlayLocationCard(cardPlaceOnBoard);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerMoneyLessThan", menuName = "EffectConditions/PlayerMoneyLessThan")]
-public class PlayerMoneyLessThan : EffectCondition {
+public class PlayerMoneyLessThan : Condition {
 	[SerializeField] int value = 5;
 
 	public override bool CheckCondition(ManagerReferences managerReferences, Card card) {

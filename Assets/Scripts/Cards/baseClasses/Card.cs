@@ -21,6 +21,8 @@ public abstract class Card : ScriptableObject {
 	[HideInInspector] public GameManager gameManager;
 	[HideInInspector] public HandManager handManager;
 
+    [SerializeField] Condition[] additionalPlayConditions;
+
 	[SerializeField] ConditionalEffect[] onBuyEffects;
 	[SerializeField] ConditionalEffect[] onPlayEffects;
     [SerializeField] ConditionalEffect[] onDiscardEffects;
@@ -28,7 +30,7 @@ public abstract class Card : ScriptableObject {
 	[System.Serializable]
 	public class ConditionalEffect {
 		[SerializeField]
-		public EffectCondition condition;
+		public Condition condition;
 
 		[SerializeField]
 		public CardEffect cardEffect;
@@ -53,6 +55,17 @@ public abstract class Card : ScriptableObject {
         foreach(ConditionalEffect effect in onBuyEffects) {
 		    effect.DoEffectConditionally(managerReferences, this);
 	    }
+    }
+
+    public bool ClearsAdditionalPlayConditions() {
+        if(additionalPlayConditions == null) return true;
+		
+        foreach(Condition playCondition in additionalPlayConditions) {
+            if(playCondition == null) Debug.LogError("card has empty play condition");
+            if(!playCondition) return false;
+		}
+
+		return true;
     }
 
 	public void OnPlay() {

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6aea63696375149bb7d1cf63d81888, type: 3}
   m_Name: testBankerToolCard
   m_EditorClassIdentifier: 
-  cardIndex: 0
+  cardIndex: 3
   cardName: Banker tool card
   cardArt: {fileID: 0}
   description: 'Turn Start: if money < 5 gain 2g else gain 1g'
@@ -24,12 +24,8 @@ MonoBehaviour:
   managerReferences: {fileID: 0}
   gameManager: {fileID: 0}
   handManager: {fileID: 0}
-  onBuyEffects:
-  - condition: {fileID: 0}
-    cardEffect: {fileID: 11400000, guid: 53505a524f28a1644933fd440719f5cb, type: 2}
-  onPlayEffects:
-  - condition: {fileID: 0}
-    cardEffect: {fileID: 11400000, guid: 9cb58be8b023fdb41a3d454a5187dc9f, type: 2}
+  onBuyEffects: []
+  onPlayEffects: []
   onDiscardEffects: []
   turnStartEffects:
   - condition: {fileID: 11400000, guid: d350ea6dc84b25645a972d8a8359f58a, type: 2}
