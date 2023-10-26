@@ -16,9 +16,10 @@ public class StoreManager : MonoBehaviour {
 
 	[SerializeField] GameObject[] cardStoreDisplayAreas; //5 slots for cards
 
-	[SerializeField] int numberOfCardsInStoreTier1 = 2;
+	int currentStoreProgressTier = 0;
+	[SerializeField] int numberOfCardsInStoreTier1 = 3;
 	[SerializeField] int numberOfCardsInStoreTier2 = 2;
-	[SerializeField] int numberOfCardsInStoreTier3 = 1;
+	[SerializeField] int numberOfCardsInStoreTier3 = 0;
 
 	public PhotonView photonView;
 	[SerializeField] CardDataBase cardDataBase;
@@ -66,6 +67,24 @@ public class StoreManager : MonoBehaviour {
 				IListExtensions.Shuffle(cardsCultistTier1);
 				IListExtensions.Shuffle(cardsCultistTier2);
 				IListExtensions.Shuffle(cardsCultistTier3);
+				break;
+			default:
+				break;
+		}
+	}
+
+	public void ProgressInStoresTierBalancing() {
+		currentStoreProgressTier++;
+		switch(currentStoreProgressTier) {
+			case 1:
+				numberOfCardsInStoreTier1 = 2;
+				numberOfCardsInStoreTier2 = 2;
+				numberOfCardsInStoreTier3 = 1;
+				break;
+			case 2:
+				numberOfCardsInStoreTier1 = 1;
+				numberOfCardsInStoreTier2 = 2;
+				numberOfCardsInStoreTier3 = 2;
 				break;
 			default:
 				break;

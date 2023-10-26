@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using Photon.Pun;
 using TMPro;
 
-public class UIManager : MonoBehaviour
-{
+public class UIManager : MonoBehaviour {
+
     public TMP_Text playersName;
     public TMP_Text opponentsName;
 	[SerializeField] Sprite bankerSprite;

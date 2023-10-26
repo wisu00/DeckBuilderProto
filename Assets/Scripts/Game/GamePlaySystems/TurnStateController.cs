@@ -16,7 +16,10 @@ public class TurnStateController : MonoBehaviour {
     [SerializeField] StoreManager storeManager;
     [SerializeField] DeckManager deck;
 
+    [SerializeField] int firstTurnStoreChanges = 4;
+	[SerializeField] int secondTurnStoreChanges = 8;
 
+	private int turnCounter = 0;
     private bool firstTurn = true;
     
     //called from game manager when game can start
@@ -64,7 +67,11 @@ public class TurnStateController : MonoBehaviour {
     //}
 
     public void StartOfTurnStateEntered() {
-        //shuffles store piles before taking first turn
+        turnCounter++;
+        if(turnCounter == firstTurnStoreChanges || turnCounter == secondTurnStoreChanges) {
+            storeManager.ProgressInStoresTierBalancing();
+		}
+		//shuffles store piles before taking first turn
 		if(firstTurn) storeManager.ShuffleStorePiles();
 		//refress cards in store
 		storeManager.LoadStore();
