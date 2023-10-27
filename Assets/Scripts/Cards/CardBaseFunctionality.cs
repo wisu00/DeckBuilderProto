@@ -14,6 +14,7 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 	private TurnStateController turnStateController;
 	private StoreManager storeManager;
 	private Canvas canvas;
+	[SerializeField] GameObject cardVisuals;
 	public TMP_Text cardName;
 	public Image cardArt;
 	public TMP_Text description;
@@ -22,7 +23,7 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 	public TMP_Text discardValueText;
 
 	[SerializeField] UIManager uIManager;
-	[SerializeField] GameObject cardPrefab;
+	//[SerializeField] GameObject cardPrefab;
 
 	private ManagerReferences managerReferences;
 
@@ -31,11 +32,13 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 	private bool cardIsOnBoard = false;
 	private bool ownedByPlayer = true;
 
-    Vector3 startPosition;
+	GameObject handArea;
+	bool targetIsActive = false;
+	Vector3 startPosition;
 
     private void Awake() {
 		canvasGroup = GetComponent<CanvasGroup>();
-    }
+	}
 
 	public void UpdateCardCostVisuals(int notoriety) {
 		if(notoriety > 0) {
@@ -55,11 +58,25 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
         }
     }
 
+	public void SetTargetState(bool state) {
+		if(handArea==null) handArea = handManager.GetHandArea();
+		targetIsActive = state;
+		if(state) {
+			cardVisuals.transform.SetParent(handArea.transform, true);
+			cardVisuals.transform.position = startPosition;
+		}
+		else {
+			cardVisuals.transform.SetParent(transform, true);
+			cardVisuals.transform.localPosition = Vector3.zero;
+		}
+	}
+
     public void OnDrag(PointerEventData eventData) {
         Vector2 pos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, Input.mousePosition, canvas.worldCamera, out pos);
         transform.position = canvas.transform.TransformPoint(pos);
-    }
+		//if(targetIsActive) cardVisuals.transform.position = startPosition;
+	}
 
     public void OnEndDrag(PointerEventData eventData) {
 		canvasGroup.alpha = 1f;
@@ -200,6 +217,7 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 		}
 		if (!cardIsInStore) {
 			if(CardCanBePlayed()) {
+				if(targetIsActive) cardVisuals.transform.SetParent(transform);
 				gameManager.DecreasePlayerMoney(card.playCost);
 				card.OnPlay();
 				if(card.cardType==CardType.Event) {

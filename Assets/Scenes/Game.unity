@@ -7115,7 +7115,7 @@ PrefabInstance:
     - target: {fileID: 2781655301769248181, guid: 868e02cb5ee8b1a4aab609023516cc1a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -250
+      value: -260
       objectReference: {fileID: 0}
     - target: {fileID: 2781655301769248181, guid: 868e02cb5ee8b1a4aab609023516cc1a,
         type: 3}
@@ -8485,6 +8485,8 @@ MonoBehaviour:
   boardManager: {fileID: 1342767450}
   storeManager: {fileID: 251441063}
   deck: {fileID: 2247525653897978903}
+  firstTurnStoreChanges: 4
+  secondTurnStoreChanges: 8
 --- !u!1 &1684970394
 GameObject:
   m_ObjectHideFlags: 0
@@ -8807,8 +8809,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.16250001, y: 0.21222223}
   m_AnchorMax: {x: 0.8375001, y: 0.79111105}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.8223877, y: -0.74998474}
+  m_SizeDelta: {x: -111.2872, y: 29.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1776062443
 MonoBehaviour:
@@ -9033,7 +9035,7 @@ PrefabInstance:
     - target: {fileID: 5280811756066820522, guid: 037add7f361e51e47b2d4faea36390b3,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 250
+      value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 5280811756066820522, guid: 037add7f361e51e47b2d4faea36390b3,
         type: 3}
@@ -10801,7 +10803,7 @@ PrefabInstance:
     - target: {fileID: 5280811756066820522, guid: 037add7f361e51e47b2d4faea36390b3,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -250
+      value: -260
       objectReference: {fileID: 0}
     - target: {fileID: 5280811756066820522, guid: 037add7f361e51e47b2d4faea36390b3,
         type: 3}
@@ -11028,7 +11030,7 @@ PrefabInstance:
     - target: {fileID: 2781655301769248181, guid: 868e02cb5ee8b1a4aab609023516cc1a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 250
+      value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 2781655301769248181, guid: 868e02cb5ee8b1a4aab609023516cc1a,
         type: 3}

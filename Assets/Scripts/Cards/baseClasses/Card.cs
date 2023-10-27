@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CardType {
-	Event, Tool, Location
-}
+public enum CardType {Event, Tool, Location}
+
+public enum TargetTypes {OwnTool, OpponentTool, OwnLocation, OpponentLocation}
 
 public abstract class Card : ScriptableObject {
     [HideInInspector]public int cardIndex;//identifier that is assigned during run time
@@ -22,6 +22,9 @@ public abstract class Card : ScriptableObject {
 	[HideInInspector] public HandManager handManager;
 
     [SerializeField] Condition[] additionalPlayConditions;
+
+	public bool cardIsTargeted;
+	[SerializeField] TargetTypes[] allowedTargets;
 
 	[SerializeField] ConditionalEffect[] onBuyEffects;
 	[SerializeField] ConditionalEffect[] onPlayEffects;

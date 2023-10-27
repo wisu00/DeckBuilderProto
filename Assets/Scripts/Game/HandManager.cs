@@ -19,7 +19,10 @@ public class HandManager : MonoBehaviour {
 
     private int maxHandSize = 5;
     private List<GameObject> physicalCardsInHand = new List<GameObject>();
-	
+
+    public GameObject GetHandArea() {
+        return handArea;
+	}
 
 	public void DrawCard(Card drawnCard) {
         if(hand.Count == maxHandSize) {

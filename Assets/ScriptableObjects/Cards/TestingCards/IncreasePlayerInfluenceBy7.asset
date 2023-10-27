@@ -24,6 +24,9 @@ MonoBehaviour:
   managerReferences: {fileID: 0}
   gameManager: {fileID: 0}
   handManager: {fileID: 0}
+  additionalPlayConditions: []
+  cardIsTargeted: 1
+  allowedTargets: 
   onBuyEffects: []
   onPlayEffects:
   - condition: {fileID: 0}
