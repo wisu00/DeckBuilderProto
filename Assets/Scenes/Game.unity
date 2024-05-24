@@ -177,9 +177,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playersName: {fileID: 1012881814}
   opponentsName: {fileID: 521490075}
-  bankerSprite: {fileID: 21300000, guid: 6daeb9cc4c1875f4683b8cd7cd89a12a, type: 3}
-  scrapperSprite: {fileID: 21300000, guid: c3cd4dd301b47fe4c93c9afa1a08b2e6, type: 3}
-  cultistSprite: {fileID: 21300000, guid: 4bce051eeb254214988fbce8bf28c327, type: 3}
+  bankerSprite: {fileID: 21300000, guid: cc38bd350becd6d4197c377240399a08, type: 3}
+  scrapperSprite: {fileID: 21300000, guid: 5e592620ff1fef14c91e1b506af4d136, type: 3}
+  cultistSprite: {fileID: 21300000, guid: df467755bf5518b4a8446987be29101a, type: 3}
   playerCharacterPortrait: {fileID: 330569484}
   opponentCharacterPortrait: {fileID: 671651155}
   cardBuyArea: {fileID: 415765574}
@@ -2691,7 +2691,7 @@ PrefabInstance:
     - target: {fileID: 2879989908364338339, guid: a43834aa87499de49b9e600f49048372,
         type: 3}
       propertyPath: m_text
-      value: 300
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2879989908364338339, guid: a43834aa87499de49b9e600f49048372,
         type: 3}
@@ -3428,7 +3428,7 @@ PrefabInstance:
     - target: {fileID: 2879989908364338339, guid: a43834aa87499de49b9e600f49048372,
         type: 3}
       propertyPath: m_text
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2879989908364338339, guid: a43834aa87499de49b9e600f49048372,
         type: 3}
@@ -6237,7 +6237,7 @@ PrefabInstance:
     - target: {fileID: 2879989908364338339, guid: a43834aa87499de49b9e600f49048372,
         type: 3}
       propertyPath: m_text
-      value: 300
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2879989908364338339, guid: a43834aa87499de49b9e600f49048372,
         type: 3}
@@ -7503,7 +7503,7 @@ PrefabInstance:
     - target: {fileID: 2879989908364338339, guid: a43834aa87499de49b9e600f49048372,
         type: 3}
       propertyPath: m_text
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2879989908364338339, guid: a43834aa87499de49b9e600f49048372,
         type: 3}
@@ -8809,7 +8809,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.16250001, y: 0.21222223}
   m_AnchorMax: {x: 0.8375001, y: 0.79111105}
-  m_AnchoredPosition: {x: -0.8223877, y: -0.74998474}
+  m_AnchoredPosition: {x: -0.8223877, y: -0.75}
   m_SizeDelta: {x: -111.2872, y: 29.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1776062443

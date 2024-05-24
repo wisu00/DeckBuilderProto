@@ -23,8 +23,9 @@ public abstract class Card : ScriptableObject {
 
     [SerializeField] Condition[] additionalPlayConditions;
 
-	public bool cardIsTargeted;
-	[SerializeField] TargetTypes[] allowedTargets;
+    //should be moved into event cards
+	[HideInInspector] public bool cardIsTargeted;
+	TargetTypes[] allowedTargets;
 
 	[SerializeField] ConditionalEffect[] onBuyEffects;
 	[SerializeField] ConditionalEffect[] onPlayEffects;
