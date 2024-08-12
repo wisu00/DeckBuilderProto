@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 191ebde63ee578d4d8c7f59181840f94, type: 3}
+  m_Name: Bank Heist
+  m_EditorClassIdentifier: 
+  cardIndex: 0
+  cardName: Bank Heist
+  cardArt: {fileID: 21300000, guid: 9fe163f82ab0d90419818d6e3b54dd26, type: 3}
+  description: Gold +10, Notoriety +2
+  buyCost: 3
+  playCost: 0
+  discardValue: 0
+  tier: 0
+  cardType: 0
+  managerReferences: {fileID: 0}
+  gameManager: {fileID: 0}
+  handManager: {fileID: 0}
+  additionalPlayConditions: []
+  cardIsTargeted: 0
+  onBuyEffects: []
+  onPlayEffects:
+  - condition: {fileID: 0}
+    cardEffect: {fileID: 11400000, guid: 3cb6f2b74b45ac64eb868364959c8daa, type: 2}
+  - condition: {fileID: 0}
+    cardEffect: {fileID: 11400000, guid: 2c2cda118fe21274bac43037c63a510c, type: 2}
+  onDiscardEffects: []

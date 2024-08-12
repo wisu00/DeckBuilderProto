@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 191ebde63ee578d4d8c7f59181840f94, type: 3}
-  m_Name: BankHeist
+  m_Script: {fileID: 11500000, guid: 5d6aea63696375149bb7d1cf63d81888, type: 3}
+  m_Name: Extra Arm
   m_EditorClassIdentifier: 
   cardIndex: 0
-  cardName: Bank Heist
-  cardArt: {fileID: 21300000, guid: 9fe163f82ab0d90419818d6e3b54dd26, type: 3}
-  description: Gold +10, Notoriety +2
-  buyCost: 3
+  cardName: Extra Arm
+  cardArt: {fileID: 0}
+  description: Whenever you discard a card gain 1 gold
+  buyCost: 0
   playCost: 0
   discardValue: 0
   tier: 0
@@ -27,9 +27,6 @@ MonoBehaviour:
   additionalPlayConditions: []
   cardIsTargeted: 0
   onBuyEffects: []
-  onPlayEffects:
-  - condition: {fileID: 0}
-    cardEffect: {fileID: 11400000, guid: 3cb6f2b74b45ac64eb868364959c8daa, type: 2}
-  - condition: {fileID: 0}
-    cardEffect: {fileID: 11400000, guid: 2c2cda118fe21274bac43037c63a510c, type: 2}
+  onPlayEffects: []
   onDiscardEffects: []
+  turnStartEffects: []
