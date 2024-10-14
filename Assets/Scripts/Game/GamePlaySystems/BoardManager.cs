@@ -16,13 +16,15 @@ public class BoardManager : MonoBehaviour {
 
 	public PhotonView OpponentsBoardManager;
 
-	public static List<CardThatStaysOnBoard> activeCardsOnBoard = new List<CardThatStaysOnBoard>();
+	public static List<Card> activeCardsOnBoard = new List<Card>();
 
-	[SerializeField] LocationCard startingLocationBanker;
-    [SerializeField] LocationCard startingLocationScrapper;
-	[SerializeField] LocationCard startingLocationCultist;
+	[SerializeField] Card startingLocationBanker;
+    [SerializeField] Card startingLocationScrapper;
+	[SerializeField] Card startingLocationCultist;
 
     public void CreateStartingLocationPlayer(CharacterClasses selectedClass) {
+		if(!ClassHasStartingLocation(selectedClass)) return;
+
         GameObject createdLocation = Instantiate(locationPrefab, locationSlotPlayer.transform);
         switch (selectedClass) {
             case CharacterClasses.Banker:
@@ -38,10 +40,20 @@ public class BoardManager : MonoBehaviour {
                 break;
         }
         createdLocation.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(managerReferences, true);
-        activeCardsOnBoard.Add((CardThatStaysOnBoard)createdLocation.GetComponent<CardBaseFunctionality>().card);
+        activeCardsOnBoard.Add(createdLocation.GetComponent<CardBaseFunctionality>().card);
     }
 
+	//used to check if class has assigned starting location
+	private bool ClassHasStartingLocation(CharacterClasses selectedClass) {
+		if(selectedClass == CharacterClasses.Banker && startingLocationBanker != null) return true;
+        else if (selectedClass == CharacterClasses.Scrapper && startingLocationScrapper != null) return true;
+        else if (selectedClass == CharacterClasses.Cultist && startingLocationCultist != null) return true;
+		else return false;
+	}
+
     public void CreateStartingLocationOpponent(CharacterClasses selectedClass) {
+		if(!ClassHasStartingLocation(selectedClass)) return;
+
         GameObject createdLocation = Instantiate(locationPrefab, locationSlotOpponent.transform);
         switch (selectedClass) {
             case CharacterClasses.Banker:
@@ -60,7 +72,7 @@ public class BoardManager : MonoBehaviour {
     }
 
     public void DoRoundStartEffects() {
-        foreach (CardThatStaysOnBoard card in activeCardsOnBoard) {
+        foreach (Card card in activeCardsOnBoard) {
 			card.TurnStartEffects();
 		}
     }
@@ -70,7 +82,7 @@ public class BoardManager : MonoBehaviour {
 		spawnedCard.GetComponent<CardBaseFunctionality>().card = cardThatGotPlayed;
 		spawnedCard.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(managerReferences, true);
 
-		activeCardsOnBoard.Add((CardThatStaysOnBoard)spawnedCard.GetComponent<CardBaseFunctionality>().card);
+		activeCardsOnBoard.Add(spawnedCard.GetComponent<CardBaseFunctionality>().card);
 
 		if(!cardThatGotPlayed.isCardBack()) {
 			OpponentsBoardManager.RPC("OpponentsCardWasPlayedOnBoard", RpcTarget.OthersBuffered,

@@ -9,24 +9,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b287fdfcde329254faabc83e8b2865c9, type: 3}
-  m_Name: ScrapperStartingLocation
+  m_Script: {fileID: 11500000, guid: 28f19f7bdcb4b264ebff7c2743ce2354, type: 3}
+  m_Name: EqualExhange
   m_EditorClassIdentifier: 
-  cardIndex: 0
-  cardName: Scrapper Location lvl1
+  characterClass: 1
+  cardType: 0
+  cardName: Equal Exhange
   cardArt: {fileID: 0}
-  description: 'Round Start: draw a card'
+  description: Opponent discards the card with highest play cost and gets a junk
+    in hand
   buyCost: 0
-  playCost: 0
+  playCost: 4
   discardValue: 0
-  tier: 0
-  cardType: 2
+  tier: 2
+  cardIndex: 0
   managerReferences: {fileID: 0}
   gameManager: {fileID: 0}
   handManager: {fileID: 0}
+  additionalPlayConditions: []
+  cardIsTargeted: 0
   onBuyEffects: []
   onPlayEffects: []
   onDiscardEffects: []
-  turnStartEffects:
-  - condition: {fileID: 0}
-    cardEffect: {fileID: 11400000, guid: 3d2b7b1b51c5179438e97ce0f3fd66b6, type: 2}
+  turnStartEffects: []

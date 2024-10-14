@@ -122,19 +122,25 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 	}
 
     public void UpdateValues(ManagerReferences managerReferences) {
-		this.managerReferences = managerReferences;
-		handManager = managerReferences.GetHandManager();
-		boardManager = managerReferences.GetBoardManager();
-		gameManager = managerReferences.GetGameManager();
-		turnStateController = managerReferences.GetTurnStateController();
-		uIManager = managerReferences.GetUIManager();
-		canvas = GameObject.FindWithTag("MainCanvas").GetComponent<Canvas>();
-        card.AssignGameManager(managerReferences);
-        cardArt.sprite = card.cardArt;
-        cardName.text = card.cardName;
-        description.text = card.description;
-		playCost.text = card.playCost.ToString();
-        discardValueText.text = card.discardValue.ToString();
+		if(card.cardType!=CardType.CardBack) {
+            this.managerReferences = managerReferences;
+            handManager = managerReferences.GetHandManager();
+            boardManager = managerReferences.GetBoardManager();
+            gameManager = managerReferences.GetGameManager();
+            turnStateController = managerReferences.GetTurnStateController();
+            uIManager = managerReferences.GetUIManager();
+            canvas = GameObject.FindWithTag("MainCanvas").GetComponent<Canvas>();
+            card.AssignGameManager(managerReferences);
+            cardArt.sprite = card.cardArt;
+            cardName.text = card.cardName;
+            description.text = card.description;
+            playCost.text = card.playCost.ToString();
+            discardValueText.text = card.discardValue.ToString();
+        }
+		else {
+            //card.AssignGameManager(managerReferences);
+            cardArt.sprite = card.cardArt;
+        }
     }
 
 	public void UpdateValueOnBoard(ManagerReferences managerReferences, bool ownedByPlayer) {

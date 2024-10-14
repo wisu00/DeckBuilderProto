@@ -9,24 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b287fdfcde329254faabc83e8b2865c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 28f19f7bdcb4b264ebff7c2743ce2354, type: 3}
   m_Name: BankerStartingLocation
   m_EditorClassIdentifier: 
-  cardIndex: 0
-  cardName: Banker Location lvl1
+  characterClass: 0
+  cardType: 2
+  cardName: 
   cardArt: {fileID: 0}
-  description: Round Start +1g
+  description: 
   buyCost: 0
   playCost: 0
   discardValue: 0
   tier: 0
-  cardType: 2
+  cardIndex: 0
   managerReferences: {fileID: 0}
   gameManager: {fileID: 0}
   handManager: {fileID: 0}
+  additionalPlayConditions: []
+  cardIsTargeted: 0
   onBuyEffects: []
   onPlayEffects: []
   onDiscardEffects: []
-  turnStartEffects:
-  - condition: {fileID: 0}
-    cardEffect: {fileID: 11400000, guid: f4dcd9a1faa4e1c42a3a5dd605a0fcb6, type: 2}
+  turnStartEffects: []

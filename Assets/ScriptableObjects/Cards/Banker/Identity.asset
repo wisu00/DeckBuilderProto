@@ -9,21 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d6aea63696375149bb7d1cf63d81888, type: 3}
+  m_Script: {fileID: 11500000, guid: 28f19f7bdcb4b264ebff7c2743ce2354, type: 3}
   m_Name: Identity
   m_EditorClassIdentifier: 
-  cardIndex: 0
+  characterClass: 0
+  cardType: 3
   cardName: 
   cardArt: {fileID: 0}
-  description: 'Gold can be used until -10.
-
-    Start of turn: if gold is negative
-    gold -1'
+  description: 
   buyCost: 0
   playCost: 0
   discardValue: 0
   tier: 0
-  cardType: 0
+  cardIndex: 0
   managerReferences: {fileID: 0}
   gameManager: {fileID: 0}
   handManager: {fileID: 0}

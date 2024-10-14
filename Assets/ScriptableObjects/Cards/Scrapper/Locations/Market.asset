@@ -9,18 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 191ebde63ee578d4d8c7f59181840f94, type: 3}
-  m_Name: Equal Exhange
+  m_Script: {fileID: 11500000, guid: 28f19f7bdcb4b264ebff7c2743ce2354, type: 3}
+  m_Name: Market
   m_EditorClassIdentifier: 
-  cardIndex: 0
-  cardName: Equal Exhange
+  characterClass: 1
+  cardType: 2
+  cardName: Market
   cardArt: {fileID: 0}
-  description: Opponent discards a card at random and get's a junk in hand
+  description: 'Start of turn: Draw 2 cards
+
+    Cards in hand cost 2 more to play'
   buyCost: 0
   playCost: 0
   discardValue: 0
-  tier: 0
-  cardType: 0
+  tier: 2
+  cardIndex: 0
   managerReferences: {fileID: 0}
   gameManager: {fileID: 0}
   handManager: {fileID: 0}
@@ -29,3 +32,4 @@ MonoBehaviour:
   onBuyEffects: []
   onPlayEffects: []
   onDiscardEffects: []
+  turnStartEffects: []

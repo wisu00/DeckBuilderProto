@@ -9,21 +9,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 191ebde63ee578d4d8c7f59181840f94, type: 3}
-  m_Name: testSpell
+  m_Script: {fileID: 11500000, guid: 28f19f7bdcb4b264ebff7c2743ce2354, type: 3}
+  m_Name: IdentityScrapper
   m_EditorClassIdentifier: 
-  cardIndex: 1
-  cardName: Spell
+  cardType: 3
+  cardName: Scrapper Identity
   cardArt: {fileID: 0}
-  description: test
-  buyCost: 3
-  playCost: 1
-  discardValue: 2
+  description: Your tools can be discarded for 3 gold.
+  buyCost: 0
+  playCost: 0
+  discardValue: 0
   tier: 0
-  cardType: 0
+  cardIndex: 0
   managerReferences: {fileID: 0}
   gameManager: {fileID: 0}
   handManager: {fileID: 0}
+  additionalPlayConditions: []
+  cardIsTargeted: 0
   onBuyEffects: []
   onPlayEffects: []
   onDiscardEffects: []
+  turnStartEffects: []

@@ -2,21 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CardType {Event, Tool, Location}
+public enum CardType {Event, Tool, Location,Identity, Junk, CardBack}
 
 public enum TargetTypes {OwnTool, OpponentTool, OwnLocation, OpponentLocation}
 
-public abstract class Card : ScriptableObject {
-    [HideInInspector]public int cardIndex;//identifier that is assigned during run time
+[CreateAssetMenu(fileName = "Card", menuName = "Card", order = 1)]
+public class Card : ScriptableObject {
+    public CardType cardType;
+    public CharacterClasses characterClass;
     public string cardName;
     public Sprite cardArt;
     [TextArea(2,10)] public string description;
     public int buyCost;
     public int playCost;
     public int discardValue;
-    public int tier;
-	public CardType cardType;
+    [Range(1, 3)] public int tier;
 
+    [HideInInspector] public int cardIndex;//identifier that is assigned during run time
     [HideInInspector] public ManagerReferences managerReferences;
 	[HideInInspector] public GameManager gameManager;
 	[HideInInspector] public HandManager handManager;
@@ -84,34 +86,17 @@ public abstract class Card : ScriptableObject {
 		}
 	}
 
+    [SerializeField] ConditionalEffect[] turnStartEffects;
+    public void TurnStartEffects()
+    {
+        foreach (ConditionalEffect effect in turnStartEffects)
+        {
+            effect.DoEffectConditionally(managerReferences, this);
+        }
+    }
+
     //gets override in cardBack
     public virtual bool isCardBack() {
         return false;
     }
-    /*
-
-    #region card effects that can be used from other methods (like OnPlay()). 
-
-    protected virtual void PrintName() {
-        Debug.Log("derived name: " + cardName);
-    }
-
-    protected virtual void increasePlayerMoney(int amount) {
-        gameManager.IncreasePlayerMoney(amount);
-    }
-
-    protected virtual void decreasePlayerMoney(int amount) {
-        gameManager.DecreasePlayerMoney(amount);
-    }
-
-    protected virtual void increaseOpponentMoney(int amount) {
-        gameManager.IncreaseOpponentMoney(amount);
-    }
-
-    protected virtual void decreaseOpponentMoney(int amount) {
-        gameManager.DecreaseOpponentMoney(amount);
-    }
-
-    #endregion
-    */
 }

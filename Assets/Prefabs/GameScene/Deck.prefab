@@ -152,7 +152,10 @@ MonoBehaviour:
   hand: {fileID: 0}
   discardPile: {fileID: 0}
   infoText: {fileID: 0}
-  cardsInDeck: []
+  cardBack: {fileID: 11400000, guid: 1a458a78b843bee41825c1caf24bf108, type: 2}
+  startingCardsBanker: []
+  startingCardsCultist: []
+  startingCardsScrapper: []
   photonViewFromOpponentsDeck: {fileID: 0}
 --- !u!114 &1311963583540269757
 MonoBehaviour:

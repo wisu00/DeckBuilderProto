@@ -4316,18 +4316,21 @@ MonoBehaviour:
   cardFolderScrapper: ScriptableObjects/Cards/Scrapper
   cardFolderCultist: ScriptableObjects/Cards/Cultist
   allCards:
-  - {fileID: 11400000, guid: 8813072844ec7ba4582fe375f3b94db7, type: 2}
-  - {fileID: 11400000, guid: 2143eea1a10e0ae4cbcb1318c29bf9a0, type: 2}
-  - {fileID: 11400000, guid: 202e3f3fcc51272479edbddabadd9c88, type: 2}
-  - {fileID: 11400000, guid: 17cf8c515e651e448bd48943ac271c16, type: 2}
   - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
   - {fileID: 11400000, guid: 22c61a34a01a5fd44bb4bc25b2c17b62, type: 2}
   - {fileID: 11400000, guid: 9c9a99d4fb8b7e348a3fc788a7dda862, type: 2}
-  - {fileID: 11400000, guid: a4f6e82695e07a04eaa6b2f384c04bdc, type: 2}
-  - {fileID: 11400000, guid: 253ba3939b2b8e84c80a14b9775e6204, type: 2}
-  - {fileID: 11400000, guid: 6e31dae7948c65940a3ee1dbdb1fd8f4, type: 2}
-  - {fileID: 11400000, guid: 1125c12f7df400746ba726f04b7c0668, type: 2}
-  - {fileID: 11400000, guid: 998eb86de68e80b40b10a5870e599f3d, type: 2}
+  - {fileID: 11400000, guid: 2fcd00f616bb5ec4496605f90a6f8adb, type: 2}
+  - {fileID: 11400000, guid: 202e3f3fcc51272479edbddabadd9c88, type: 2}
+  - {fileID: 11400000, guid: 17cf8c515e651e448bd48943ac271c16, type: 2}
+  - {fileID: 11400000, guid: da2d1b95bbda9c34289c7e45c4547071, type: 2}
+  - {fileID: 11400000, guid: d017871f991fda848ba2a0eb3f19cccc, type: 2}
+  - {fileID: 11400000, guid: 551d2fde2e91fdb4cb7269790b0be4c0, type: 2}
+  - {fileID: 11400000, guid: 7cc6b2d94cffdba44910b8a8323894f8, type: 2}
+  - {fileID: 11400000, guid: 5bd26ce1643d89e41ace7bc153b7acd6, type: 2}
+  - {fileID: 11400000, guid: 947e887bfe2ec504f88ff3e1c9979d89, type: 2}
+  - {fileID: 11400000, guid: 8c183db2659f9984c8cade6b9add5dc9, type: 2}
+  - {fileID: 11400000, guid: 83ee75f5cf8673141a055d8cf535c094, type: 2}
+  - {fileID: 11400000, guid: 7f48e4a5dfca2a94b93f1b43e2311ce4, type: 2}
   cardsBankerTier1:
   - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
   - {fileID: 11400000, guid: be51ac6bdb05cff47a6b76531d31b6a0, type: 2}
@@ -5930,7 +5933,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cards in deck: 14'
+  m_text: 'Cards in deck: not updated'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7466,8 +7469,7 @@ MonoBehaviour:
   cardDataBase: {fileID: 723103709}
   managerReferences: {fileID: 2108085454}
   OpponentsBoardManager: {fileID: 1605339863}
-  startingLocationBanker: {fileID: 11400000, guid: 202e3f3fcc51272479edbddabadd9c88,
-    type: 2}
+  startingLocationBanker: {fileID: 0}
   startingLocationScrapper: {fileID: 11400000, guid: a4f6e82695e07a04eaa6b2f384c04bdc,
     type: 2}
   startingLocationCultist: {fileID: 11400000, guid: 998eb86de68e80b40b10a5870e599f3d,
@@ -7707,7 +7709,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cards in deck: 14'
+  m_text: 'Cards in deck: not updated'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8952,6 +8954,17 @@ PrefabInstance:
       propertyPath: photonViewFromOpponentsDeck
       value: 
       objectReference: {fileID: 2247525653897978904}
+    - target: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
+        type: 3}
+      propertyPath: startingCardsScrapper.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
+        type: 3}
+      propertyPath: startingCardsScrapper.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1a458a78b843bee41825c1caf24bf108,
+        type: 2}
     - target: {fileID: 5052789243501474818, guid: 037add7f361e51e47b2d4faea36390b3,
         type: 3}
       propertyPath: m_Name
@@ -10682,49 +10695,96 @@ PrefabInstance:
         type: 3}
       propertyPath: cardsInDeck.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 17cf8c515e651e448bd48943ac271c16,
+      objectReference: {fileID: 11400000, guid: da2d1b95bbda9c34289c7e45c4547071,
         type: 2}
     - target: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
         type: 3}
       propertyPath: cardsInDeck.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 8813072844ec7ba4582fe375f3b94db7,
+      objectReference: {fileID: 11400000, guid: 551d2fde2e91fdb4cb7269790b0be4c0,
         type: 2}
     - target: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
         type: 3}
       propertyPath: cardsInDeck.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 8813072844ec7ba4582fe375f3b94db7,
+      objectReference: {fileID: 11400000, guid: 7cc6b2d94cffdba44910b8a8323894f8,
         type: 2}
     - target: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
         type: 3}
       propertyPath: cardsInDeck.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 8813072844ec7ba4582fe375f3b94db7,
+      objectReference: {fileID: 11400000, guid: 947e887bfe2ec504f88ff3e1c9979d89,
         type: 2}
     - target: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
         type: 3}
       propertyPath: cardsInDeck.Array.data[4]
       value: 
-      objectReference: {fileID: 11400000, guid: 17cf8c515e651e448bd48943ac271c16,
+      objectReference: {fileID: 11400000, guid: 8c183db2659f9984c8cade6b9add5dc9,
         type: 2}
     - target: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
         type: 3}
       propertyPath: cardsInDeck.Array.data[5]
       value: 
-      objectReference: {fileID: 11400000, guid: 17cf8c515e651e448bd48943ac271c16,
+      objectReference: {fileID: 11400000, guid: 7f48e4a5dfca2a94b93f1b43e2311ce4,
         type: 2}
     - target: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
         type: 3}
       propertyPath: cardsInDeck.Array.data[6]
       value: 
-      objectReference: {fileID: 11400000, guid: 8813072844ec7ba4582fe375f3b94db7,
+      objectReference: {fileID: 11400000, guid: 5bd26ce1643d89e41ace7bc153b7acd6,
         type: 2}
     - target: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
         type: 3}
       propertyPath: photonViewFromOpponentsDeck
       value: 
       objectReference: {fileID: 1783154431}
+    - target: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
+        type: 3}
+      propertyPath: startingCardsScrapper.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
+        type: 3}
+      propertyPath: startingCardsScrapper.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: da2d1b95bbda9c34289c7e45c4547071,
+        type: 2}
+    - target: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
+        type: 3}
+      propertyPath: startingCardsScrapper.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 551d2fde2e91fdb4cb7269790b0be4c0,
+        type: 2}
+    - target: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
+        type: 3}
+      propertyPath: startingCardsScrapper.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7cc6b2d94cffdba44910b8a8323894f8,
+        type: 2}
+    - target: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
+        type: 3}
+      propertyPath: startingCardsScrapper.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5bd26ce1643d89e41ace7bc153b7acd6,
+        type: 2}
+    - target: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
+        type: 3}
+      propertyPath: startingCardsScrapper.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 947e887bfe2ec504f88ff3e1c9979d89,
+        type: 2}
+    - target: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
+        type: 3}
+      propertyPath: startingCardsScrapper.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8c183db2659f9984c8cade6b9add5dc9,
+        type: 2}
+    - target: {fileID: 4538951704474453762, guid: 037add7f361e51e47b2d4faea36390b3,
+        type: 3}
+      propertyPath: startingCardsScrapper.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7f48e4a5dfca2a94b93f1b43e2311ce4,
+        type: 2}
     - target: {fileID: 5052789243501474818, guid: 037add7f361e51e47b2d4faea36390b3,
         type: 3}
       propertyPath: m_Name

@@ -35,7 +35,8 @@ public class StoreManager : MonoBehaviour {
 	CharacterClasses playersCharacterClass;
 
 	private void Awake() {
-		cardsBankerTier1 = cardDataBase.cardsBankerTier1;
+		cardDataBase.UpdateCardTiers();
+        cardsBankerTier1 = cardDataBase.cardsBankerTier1;
 		cardsBankerTier2 = cardDataBase.cardsBankerTier2;
 		cardsBankerTier3 = cardDataBase.cardsBankerTier3;
 		cardsScrapperTier1 = cardDataBase.cardsScrapperTier1;

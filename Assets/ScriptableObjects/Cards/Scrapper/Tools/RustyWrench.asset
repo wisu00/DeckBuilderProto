@@ -9,21 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 191ebde63ee578d4d8c7f59181840f94, type: 3}
-  m_Name: testCardScrapperTier3
+  m_Script: {fileID: 11500000, guid: 28f19f7bdcb4b264ebff7c2743ce2354, type: 3}
+  m_Name: RustyWrench
   m_EditorClassIdentifier: 
-  cardIndex: 10
-  cardName: Scrapper Spell
+  characterClass: 1
+  cardType: 1
+  cardName: Rusty Wrench
   cardArt: {fileID: 0}
-  description: Scapper Test Card Tier 3
-  buyCost: 2
-  playCost: 1
-  discardValue: 4
-  tier: 3
-  cardType: 0
+  description: Whenever you discard a card gain a gold
+  buyCost: 0
+  playCost: 0
+  discardValue: 0
+  tier: 0
+  cardIndex: 0
   managerReferences: {fileID: 0}
   gameManager: {fileID: 0}
   handManager: {fileID: 0}
+  additionalPlayConditions: []
+  cardIsTargeted: 0
   onBuyEffects: []
   onPlayEffects: []
   onDiscardEffects: []
+  turnStartEffects: []

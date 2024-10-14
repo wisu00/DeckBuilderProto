@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour {
         managerReferences.GetInfluenceBarManager().UpdatePlayerInfluenceBarColor(playerCharacter);
         managerReferences.GetBoardManager().CreateStartingLocationPlayer(playerCharacter);
         managerReferences.GetStoreManager().SetPlayerCharacter(playerCharacter);
+		managerReferences.GetDeckManager().SetPlayerCharacter(playerCharacter);
 		photonView.RPC("UpdatePlayerClassForOpponent", RpcTarget.OthersBuffered, playerCharacter);
 
 		moneyPlayer = startingMoney;

@@ -91,6 +91,45 @@ public class CardDataBase : MonoBehaviour {
 		}
 	}
 
+	public void UpdateCardTiers() {
+        cardsBankerTier1.Clear();
+		cardsBankerTier2.Clear();
+		cardsBankerTier3.Clear();
+		cardsScrapperTier1.Clear();
+		cardsScrapperTier2.Clear();
+		cardsScrapperTier3.Clear();
+        cardsCultistTier1.Clear();
+		cardsCultistTier2.Clear();
+		cardsCultistTier3.Clear();
+
+        foreach (Card card in allCards) {
+			// checks that card belongs to one of the types with tiers
+			if (!(card.cardType == CardType.Event || card.cardType == CardType.Tool || card.cardType == CardType.Location)) break;
+			// assigns card to a list based on its class and tier
+
+			switch (card.characterClass) {
+				case CharacterClasses.Banker:
+					if (card.tier == 1) cardsBankerTier1.Add(card);
+                    else if (card.tier == 2) cardsBankerTier2.Add(card);
+                    else cardsBankerTier3.Add(card);
+                    break;
+				case CharacterClasses.Scrapper:
+                    if (card.tier == 1) cardsScrapperTier1.Add(card);
+                    else if (card.tier == 2) cardsScrapperTier2.Add(card);
+                    else cardsScrapperTier3.Add(card);
+                    break;
+                case CharacterClasses.Cultist:
+                    if (card.tier == 1) cardsCultistTier1.Add(card);
+                    else if (card.tier == 2) cardsCultistTier2.Add(card);
+                    else cardsCultistTier3.Add(card);
+                    break;
+                default:
+					Debug.LogError(card.cardName + "card's character class is unassigned");
+					break;
+			}
+		}
+    }
+
 	public Card GetCardWithIndex(int index) {
 		return allCards[index];
 	}

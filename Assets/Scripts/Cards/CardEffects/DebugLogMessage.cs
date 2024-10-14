@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "LogMessage", menuName = "Effects/LogMessage", order = 1)]
+[CreateAssetMenu(fileName = "LogMessage", menuName = "Effects/LogMessage")]
 public class DebugLogMessage : CardEffect {
 	[SerializeField] string message;
 
