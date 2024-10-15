@@ -57,6 +57,7 @@ MonoBehaviour:
   - SyncNotorietyValues
   - UpdateCardPrizesInStore
   - InitializeOpponentsDeckRPC
+  - RemoveCardFromBoardOpponent
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

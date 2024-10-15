@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f19f7bdcb4b264ebff7c2743ce2354, type: 3}
   m_Name: Junk
   m_EditorClassIdentifier: 
+  cardType: 4
   characterClass: 1
-  cardType: 3
   cardName: Junk
   cardArt: {fileID: 0}
   description: Can be discarded for x gold. If you would gain another junk in hand
@@ -22,7 +22,7 @@ MonoBehaviour:
   playCost: 0
   discardValue: 0
   tier: 0
-  cardIndex: 0
+  cardIndex: 10
   managerReferences: {fileID: 0}
   gameManager: {fileID: 0}
   handManager: {fileID: 0}

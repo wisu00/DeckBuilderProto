@@ -27,8 +27,8 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private Image popUpMessageBox;
     [SerializeField] private GameObject notYourTurnMessage;
 	[SerializeField] private GameObject toolSlotTakenMessage;
-	[SerializeField] private GameObject cardCantBePlayedMessage;
-	[SerializeField] private GameObject victoryMessage;
+	[SerializeField] private GameObject lackingRecources;
+    [SerializeField] private GameObject victoryMessage;
 	[SerializeField] private GameObject defeatMessage;
 
 	private void Awake() {
@@ -89,16 +89,16 @@ public class UIManager : MonoBehaviour {
 		}
 	}
 
-	public void ShowCardCantBePlayedMessage() {
+	public void ShowLackingRecources() {
 		if(!messageIsActive) {
 			messageIsActive = true;
 			popUpMessageBox.gameObject.SetActive(true);
-			cardCantBePlayedMessage.SetActive(true);
+            lackingRecources.SetActive(true);
 			Invoke("DisableMessage", 1.5f);
 		}
 	}
 
-	public void ShowVictoryMessage() {
+    public void ShowVictoryMessage() {
 		DisableMessage();
 		messageIsActive = true;
 		popUpMessageBox.gameObject.SetActive(true);
@@ -117,10 +117,10 @@ public class UIManager : MonoBehaviour {
 		popUpMessageBox.gameObject.SetActive(false);
 		notYourTurnMessage.SetActive(false);
 		toolSlotTakenMessage.SetActive(false);
-		cardCantBePlayedMessage.SetActive(false);
-	}
+        lackingRecources.SetActive(!false);
+    }
 
-    void updateOpponentsNickName(){
+    void updateOpponentsNickName() {
         photonView.RPC("SyncValues", RpcTarget.OthersBuffered, playersName.text);
     }
 

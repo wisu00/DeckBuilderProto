@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f19f7bdcb4b264ebff7c2743ce2354, type: 3}
   m_Name: Junkyard
   m_EditorClassIdentifier: 
+  cardType: 2
   characterClass: 1
-  cardType: 0
   cardName: 
   cardArt: {fileID: 0}
   description: 'start of turn: add junk to your hand'
@@ -21,7 +21,7 @@ MonoBehaviour:
   playCost: 0
   discardValue: 0
   tier: 0
-  cardIndex: 0
+  cardIndex: 8
   managerReferences: {fileID: 0}
   gameManager: {fileID: 0}
   handManager: {fileID: 0}

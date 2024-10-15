@@ -174,24 +174,25 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 		}
 	}
 
-	public bool CardCanBePlayed() {
-		if(turnStateController.CheckIfItIsPlayersTurn() && gameManager.getMoneyPlayer() >= card.playCost && card.ClearsAdditionalPlayConditions()) return true; 
+	//checks that it is players turn and the card isn't too expensive
+	public bool ItIsPlayersTurn() {
+		if(turnStateController.CheckIfItIsPlayersTurn()) return true; 
 		else return false;
 	}
 
-	public void PlayToolCard(int toolSlotNumber) {
-		if(!turnStateController.CheckIfItIsPlayersTurn()) {
-			managerReferences.GetUIManager().ShowNotYourTurnMessage();
-			return;
-		}
-		if(!cardIsInStore) {
-			if(gameManager.getMoneyPlayer() >= card.playCost) {
-				gameManager.DecreasePlayerMoney(card.playCost);
-				card.OnPlay();
-				handManager.RemoveCardFromHand(card, gameObject);
-				boardManager.CardWasPlayedOnBoard(card, toolSlotNumber);
-				uIManager.SetPlayAreaActiveStatus(false, card.cardType);
-			}
+    //checks that it is players turn and the card isn't too expensive
+    public bool PlayerHasEnoughMoneyToPlayTheCard() {
+        if (gameManager.getMoneyPlayer() >= card.playCost && card.ClearsAdditionalPlayConditions()) return true;
+        else return false;
+    }
+
+    public void PlayCardOnBoard(int slotNumber) {
+		if(!cardIsInStore && !cardIsOnBoard) {
+			gameManager.DecreasePlayerMoney(card.playCost);
+			card.OnPlay();
+			handManager.RemoveCardFromHand(card, gameObject);
+			boardManager.CardWasPlayedOnBoard(card, slotNumber);
+			uIManager.SetPlayAreaActiveStatus(false, card.cardType);
 		}
 	}
 
@@ -222,7 +223,13 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 			return;
 		}
 		if (!cardIsInStore) {
-			if(CardCanBePlayed()) {
+			if(!ItIsPlayersTurn()) {
+                uIManager.ShowNotYourTurnMessage();
+            }
+			else if (PlayerHasEnoughMoneyToPlayTheCard()) {
+
+			}
+			else {
 				if(targetIsActive) cardVisuals.transform.SetParent(transform);
 				gameManager.DecreasePlayerMoney(card.playCost);
 				card.OnPlay();
@@ -230,9 +237,6 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 					handManager.MoveCardToDiscardPile(card, gameObject);
 					uIManager.SetPlayAreaActiveStatus(false, card.cardType);
 				}
-			}
-            else {
-				uIManager.ShowCardCantBePlayedMessage();
 			}
         }
     }

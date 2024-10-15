@@ -7,10 +7,8 @@ using UnityEngine;
 public class BoardManager : MonoBehaviour {
 	[SerializeField] GameObject cardPrefab;
 	[SerializeField] GameObject locationPrefab;
-	[SerializeField] GameObject[] toolSlotsPlayer;
-	[SerializeField] GameObject[] toolSlotsOpponent;
-	[SerializeField] GameObject locationSlotPlayer;
-    [SerializeField] GameObject locationSlotOpponent;
+	[SerializeField] GameObject[] cardSlotsPlayer;
+	[SerializeField] GameObject[] cardSlotsOpponent;
     [SerializeField] CardDataBase cardDataBase;
 	[SerializeField] ManagerReferences managerReferences;
 
@@ -25,7 +23,7 @@ public class BoardManager : MonoBehaviour {
     public void CreateStartingLocationPlayer(CharacterClasses selectedClass) {
 		if(!ClassHasStartingLocation(selectedClass)) return;
 
-        GameObject createdLocation = Instantiate(locationPrefab, locationSlotPlayer.transform);
+        GameObject createdLocation = Instantiate(locationPrefab, cardSlotsPlayer[4].transform);
         switch (selectedClass) {
             case CharacterClasses.Banker:
                 createdLocation.GetComponent<CardBaseFunctionality>().card = startingLocationBanker;
@@ -54,7 +52,7 @@ public class BoardManager : MonoBehaviour {
     public void CreateStartingLocationOpponent(CharacterClasses selectedClass) {
 		if(!ClassHasStartingLocation(selectedClass)) return;
 
-        GameObject createdLocation = Instantiate(locationPrefab, locationSlotOpponent.transform);
+        GameObject createdLocation = Instantiate(locationPrefab, cardSlotsOpponent[4].transform);
         switch (selectedClass) {
             case CharacterClasses.Banker:
                 createdLocation.GetComponent<CardBaseFunctionality>().card = startingLocationBanker;
@@ -77,8 +75,8 @@ public class BoardManager : MonoBehaviour {
 		}
     }
 
-	public void CardWasPlayedOnBoard(Card cardThatGotPlayed, int toolSlot) {
-		GameObject spawnedCard = Instantiate(cardPrefab, toolSlotsPlayer[toolSlot - 1].transform);
+	public void CardWasPlayedOnBoard(Card cardThatGotPlayed, int cardSlot) {
+		GameObject spawnedCard = Instantiate(cardPrefab, cardSlotsPlayer[cardSlot - 1].transform);
 		spawnedCard.GetComponent<CardBaseFunctionality>().card = cardThatGotPlayed;
 		spawnedCard.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(managerReferences, true);
 
@@ -86,26 +84,26 @@ public class BoardManager : MonoBehaviour {
 
 		if(!cardThatGotPlayed.isCardBack()) {
 			OpponentsBoardManager.RPC("OpponentsCardWasPlayedOnBoard", RpcTarget.OthersBuffered,
-				toolSlot, spawnedCard.GetComponent<CardBaseFunctionality>().card.cardIndex);
+				cardSlot, spawnedCard.GetComponent<CardBaseFunctionality>().card.cardIndex);
 		}
 	}
 
 	[PunRPC]
-	void OpponentsCardWasPlayedOnBoard(int toolSlot, int cardIndex) {
-		GameObject spawnedCard = Instantiate(cardPrefab, toolSlotsOpponent[toolSlot - 1].transform);
+	void OpponentsCardWasPlayedOnBoard(int cardSlot, int cardIndex) {
+		GameObject spawnedCard = Instantiate(cardPrefab, cardSlotsOpponent[cardSlot - 1].transform);
 		spawnedCard.GetComponent<CardBaseFunctionality>().card = cardDataBase.GetCardWithIndex(cardIndex);
 		spawnedCard.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(managerReferences, false);
 	}
 
-	public void RemoveToolFromBoard(int toolSlot) {
-		GameObject cardToBeDestroyed = toolSlotsPlayer[toolSlot - 1].GetComponentInChildren<CardBaseFunctionality>().gameObject;
+	public void RemoveCardFromBoard(int cardSlot) {
+		GameObject cardToBeDestroyed = cardSlotsPlayer[cardSlot - 1].GetComponentInChildren<CardBaseFunctionality>().gameObject;
 		managerReferences.GetDiscardPileManager().AddCardToDiscardPile(cardToBeDestroyed.GetComponent<CardBaseFunctionality>().card);
 		Destroy(cardToBeDestroyed);
-		OpponentsBoardManager.RPC("RemoveToolFromBoardOpponent", RpcTarget.OthersBuffered, toolSlot);
+		OpponentsBoardManager.RPC("RemoveCardFromBoardOpponent", RpcTarget.OthersBuffered, cardSlot);
 	}
 	[PunRPC]
-	void RemoveToolFromBoardOpponent(int toolSlot) {
-		Destroy(toolSlotsOpponent[toolSlot - 1].GetComponentInChildren<CardBaseFunctionality>().gameObject);
+	void RemoveCardFromBoardOpponent(int cardSlot) {
+		Destroy(cardSlotsOpponent[cardSlot - 1].GetComponentInChildren<CardBaseFunctionality>().gameObject);
 		managerReferences.GetDiscardPileManagerOpponent().AddCardBackToDiscardPile();
 	}
 }
