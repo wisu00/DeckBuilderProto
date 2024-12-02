@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f19f7bdcb4b264ebff7c2743ce2354, type: 3}
   m_Name: Junkyard
   m_EditorClassIdentifier: 
-  cardType: 2
+  cardType: 1
   characterClass: 1
   cardName: 
   cardArt: {fileID: 0}
@@ -31,3 +31,4 @@ MonoBehaviour:
   onPlayEffects: []
   onDiscardEffects: []
   turnStartEffects: []
+  turnEndEffects: []

@@ -95,6 +95,13 @@ public class Card : ScriptableObject {
         }
     }
 
+    [SerializeField] ConditionalEffect[] turnEndEffects;
+    public void TurnEndEffects() {
+        foreach (ConditionalEffect effect in turnEndEffects) {
+            effect.DoEffectConditionally(managerReferences, this);
+        }
+    }
+
     //gets override in cardBack
     public virtual bool isCardBack() {
         return false;
