@@ -222,23 +222,20 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 			managerReferences.GetUIManager().ShowNotYourTurnMessage();
 			return;
 		}
-		if (!cardIsInStore) {
-			if(!ItIsPlayersTurn()) {
-                uIManager.ShowNotYourTurnMessage();
-            }
-			else if (PlayerHasEnoughMoneyToPlayTheCard()) {
-
+		else if (!PlayerHasEnoughMoneyToPlayTheCard()) {
+			managerReferences.GetUIManager().ShowLackingRecources();
+			return;
+		}
+		else {
+			if(targetIsActive) cardVisuals.transform.SetParent(transform);
+			gameManager.DecreasePlayerMoney(card.playCost);
+			card.OnPlay();
+			if(card.cardType == CardType.Event) {
+				handManager.MoveCardToDiscardPile(card, gameObject);
+				uIManager.SetPlayAreaActiveStatus(false, card.cardType);
 			}
-			else {
-				if(targetIsActive) cardVisuals.transform.SetParent(transform);
-				gameManager.DecreasePlayerMoney(card.playCost);
-				card.OnPlay();
-				if(card.cardType==CardType.Event) {
-					handManager.MoveCardToDiscardPile(card, gameObject);
-					uIManager.SetPlayAreaActiveStatus(false, card.cardType);
-				}
-			}
-        }
+			else Debug.Log("not event?");
+		}
     }
 
     public void DiscardTheCard() {

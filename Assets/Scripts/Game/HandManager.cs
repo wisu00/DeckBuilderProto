@@ -61,14 +61,17 @@ public class HandManager : MonoBehaviour {
     void OpponentsCardGoesToDiscardPile (int cardPlaceInHand) {
         Card cardThatGotPlayed = hand[cardPlaceInHand];
         GameObject physicalCard = physicalCardsInHand[cardPlaceInHand];
-        MoveCardToDiscardPile(cardThatGotPlayed, physicalCard);
-    }
+		Debug.Log(cardThatGotPlayed.cardType);
+		Destroy(physicalCard);
+		discardPile.AddCardToDiscardPile(cardThatGotPlayed);
+		hand.Remove(cardThatGotPlayed);
+		physicalCardsInHand.Remove(physicalCard);
+		OrganiseHand();
+	}
 
     public void MoveCardToDiscardPile(Card cardThatGotPlayed, GameObject physicalCard) {
-        if(!cardThatGotPlayed.isCardBack()) {
-            int cardPlaceInHand = hand.IndexOf(cardThatGotPlayed);
-            photonViewFromOpponentsHand.RPC("OpponentsCardGoesToDiscardPile", RpcTarget.OthersBuffered, cardPlaceInHand);
-        }
+        int cardPlaceInHand = hand.IndexOf(cardThatGotPlayed);
+        photonViewFromOpponentsHand.RPC("OpponentsCardGoesToDiscardPile", RpcTarget.OthersBuffered, cardPlaceInHand);
         Destroy(physicalCard);
         discardPile.AddCardToDiscardPile(cardThatGotPlayed);
         hand.Remove(cardThatGotPlayed);
@@ -77,11 +80,8 @@ public class HandManager : MonoBehaviour {
     }
 
     public void RemoveCardFromHand(Card cardThatGotPlayed, GameObject physicalCard) {
-		if(!cardThatGotPlayed.isCardBack()) {
-			int cardPlaceInHand = hand.IndexOf(cardThatGotPlayed);
-			photonViewFromOpponentsHand.RPC("RemoveCardFromHandOpponent", RpcTarget.OthersBuffered, cardPlaceInHand);
-		}
-
+		int cardPlaceInHand = hand.IndexOf(cardThatGotPlayed);
+		photonViewFromOpponentsHand.RPC("RemoveCardFromHandOpponent", RpcTarget.OthersBuffered, cardPlaceInHand);
 		Destroy(physicalCard);
 		hand.Remove(cardThatGotPlayed);
 		physicalCardsInHand.Remove(physicalCard);
