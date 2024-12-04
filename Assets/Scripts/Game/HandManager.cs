@@ -3,28 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using System;
 
 public class HandManager : MonoBehaviour {
     [SerializeField] GameObject handArea;
     [SerializeField] DiscardPileManager discardPile;
     [SerializeField] GameObject cardPrefab;
-    [SerializeField] List<Card> hand;
-    [SerializeField] ManagerReferences managerReferences;
+	[SerializeField] ManagerReferences managerReferences;
 	[SerializeField] GameObject[] toolSlotsPlayer;
 	[SerializeField] GameObject[] toolSlotsOpponent;
 
 	[SerializeField] CardDataBase cardDataBase;
+
+	private List<Card> hand = new List<Card>();
 
 	public PhotonView photonViewFromOpponentsHand;
 
     private int maxHandSize = 5;
     private List<GameObject> physicalCardsInHand = new List<GameObject>();
 
-    public GameObject GetHandArea() {
+	public static List<Card> cardsThatTrackChangesInHand = new List<Card>();
+	private void OnHandChange() {
+		//updates list of tracking cards
+		cardsThatTrackChangesInHand.Clear();
+		foreach (Card card in hand) {
+			if(card.CardHasHandChangeEffects()) cardsThatTrackChangesInHand.Add(card);
+		}
+        foreach (Card card in managerReferences.GetBoardManager().activeCardsOnBoard) {
+			if(card.CardHasHandChangeEffects()) cardsThatTrackChangesInHand.Add(card);
+		}
+		//trigger all tracking cards
+        foreach (Card card in cardsThatTrackChangesInHand) {
+			card.HandChangesEffects();
+		}
+	}
+
+	public GameObject GetHandArea() {
         return handArea;
 	}
 
 	public void DrawCard(Card drawnCard) {
+		//hand is full -> card goes to discard
         if(hand.Count == maxHandSize) {
             discardPile.AddCardToDiscardPile(drawnCard);
             //Debug.Log(drawnCard.cardName + " was put to discard pile");
@@ -37,12 +56,17 @@ public class HandManager : MonoBehaviour {
             cardThatWasDrawn.GetComponent<CardBaseFunctionality>().card = drawnCard;
 			if(!drawnCard.isCardBack()) {
 				cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValues(managerReferences);
+				OnHandChange();
 			}
 			
             physicalCardsInHand.Add(cardThatWasDrawn);
-            OrganiseHand();
-        }
+			OrganiseHand();
+		}
     }
+
+	public List<Card> GetCardsInHand() {
+		return hand;
+	}
 
     public void OrganiseHand() {
         float cardWidth = cardPrefab.GetComponent<RectTransform>().rect.width; //returns 0 for some reason
@@ -55,7 +79,7 @@ public class HandManager : MonoBehaviour {
             RectTransform picture = physicalCardsInHand[i].GetComponent<RectTransform>();
             picture.anchoredPosition = new Vector2(cardWidth*(i-physicalCardsInHand.Count/2) + xOffSetWhenCardCountIsEven, picture.anchoredPosition.y); 
         }
-    }
+	}
 
     [PunRPC]
     void OpponentsCardGoesToDiscardPile (int cardPlaceInHand) {
@@ -77,7 +101,8 @@ public class HandManager : MonoBehaviour {
         hand.Remove(cardThatGotPlayed);
         physicalCardsInHand.Remove(physicalCard);
         OrganiseHand();
-    }
+		OnHandChange();
+	}
 
     public void RemoveCardFromHand(Card cardThatGotPlayed, GameObject physicalCard) {
 		int cardPlaceInHand = hand.IndexOf(cardThatGotPlayed);
@@ -86,6 +111,7 @@ public class HandManager : MonoBehaviour {
 		hand.Remove(cardThatGotPlayed);
 		physicalCardsInHand.Remove(physicalCard);
 		OrganiseHand();
+		OnHandChange();
 	}
 
 	[PunRPC]
@@ -113,6 +139,7 @@ public class HandManager : MonoBehaviour {
 		hand.Remove(cardThatGotPlayed);
 		physicalCardsInHand.Remove(physicalCard);
 		OrganiseHand();
+		OnHandChange();
 	}
 
 	[PunRPC]

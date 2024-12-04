@@ -7339,6 +7339,7 @@ MonoBehaviour:
   cardDataBase: {fileID: 723103709}
   managerReferences: {fileID: 2108085454}
   OpponentsBoardManager: {fileID: 1342767449}
+  activeCardsOnBoard: []
   startingLocationBanker: {fileID: 0}
   startingLocationScrapper: {fileID: 11400000, guid: a4f6e82695e07a04eaa6b2f384c04bdc,
     type: 2}
@@ -11227,7 +11228,6 @@ MonoBehaviour:
   discardPile: {fileID: 1265654712}
   cardPrefab: {fileID: 4422418461076721767, guid: a4a7d84a2f525d2469e674b215cfc708,
     type: 3}
-  hand: []
   managerReferences: {fileID: 2108085454}
   toolSlotsPlayer:
   - {fileID: 432711798}
@@ -11646,7 +11646,6 @@ MonoBehaviour:
   discardPile: {fileID: 2308483127154020510}
   cardPrefab: {fileID: 4422418461076721767, guid: 6a2924c55b4b6ae4e8c93db8970767e7,
     type: 3}
-  hand: []
   managerReferences: {fileID: 2108085454}
   toolSlotsPlayer:
   - {fileID: 432711798}

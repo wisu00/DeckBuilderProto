@@ -14,7 +14,8 @@ public class BoardManager : MonoBehaviour {
 
 	public PhotonView OpponentsBoardManager;
 
-	public static List<Card> activeCardsOnBoard = new List<Card>();
+	private Card[] playersCardsOnBoard = new Card[5];
+	public List<Card> activeCardsOnBoard = new List<Card>();
 
 	[SerializeField] Card startingLocationBanker;
     [SerializeField] Card startingLocationScrapper;
@@ -39,7 +40,9 @@ public class BoardManager : MonoBehaviour {
         }
         createdLocation.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(managerReferences, true);
         activeCardsOnBoard.Add(createdLocation.GetComponent<CardBaseFunctionality>().card);
-    }
+		playersCardsOnBoard[4] = createdLocation.GetComponent<CardBaseFunctionality>().card;
+
+	}
 
 	//used to check if class has assigned starting location
 	private bool ClassHasStartingLocation(CharacterClasses selectedClass) {
@@ -75,12 +78,20 @@ public class BoardManager : MonoBehaviour {
 		}
     }
 
+	private void UpdateCardsOnBoard() {
+		activeCardsOnBoard.Clear();
+		foreach (Card card in playersCardsOnBoard) {
+			if(card != null) activeCardsOnBoard.Add(card);
+		}
+    }
+
 	public void CardWasPlayedOnBoard(Card cardThatGotPlayed, int cardSlot) {
 		GameObject spawnedCard = Instantiate(cardPrefab, cardSlotsPlayer[cardSlot - 1].transform);
 		spawnedCard.GetComponent<CardBaseFunctionality>().card = cardThatGotPlayed;
 		spawnedCard.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(managerReferences, true);
 
-		activeCardsOnBoard.Add(spawnedCard.GetComponent<CardBaseFunctionality>().card);
+		activeCardsOnBoard.Add(cardThatGotPlayed);
+		UpdateCardsOnBoard();
 
 		if(!cardThatGotPlayed.isCardBack()) {
 			OpponentsBoardManager.RPC("OpponentsCardWasPlayedOnBoard", RpcTarget.OthersBuffered,
@@ -97,6 +108,8 @@ public class BoardManager : MonoBehaviour {
 
 	public void RemoveCardFromBoard(int cardSlot) {
 		GameObject cardToBeDestroyed = cardSlotsPlayer[cardSlot - 1].GetComponentInChildren<CardBaseFunctionality>().gameObject;
+		playersCardsOnBoard[cardSlot - 1] = null;
+		activeCardsOnBoard.Remove(cardToBeDestroyed.GetComponent<CardBaseFunctionality>().card);
 		managerReferences.GetDiscardPileManager().AddCardToDiscardPile(cardToBeDestroyed.GetComponent<CardBaseFunctionality>().card);
 		Destroy(cardToBeDestroyed);
 		OpponentsBoardManager.RPC("RemoveCardFromBoardOpponent", RpcTarget.OthersBuffered, cardSlot);

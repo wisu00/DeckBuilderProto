@@ -16,11 +16,10 @@ MonoBehaviour:
   characterClass: 1
   cardName: Junk
   cardArt: {fileID: 0}
-  description: Can be discarded for x gold. If you would gain another junk in hand
-    this one is upraged instead.
+  description: Can be discarded for x gold. Stackable.
   buyCost: 0
   playCost: 0
-  discardValue: 0
+  discardValue: 3
   tier: 0
   cardIndex: 10
   managerReferences: {fileID: 0}
@@ -32,3 +31,7 @@ MonoBehaviour:
   onPlayEffects: []
   onDiscardEffects: []
   turnStartEffects: []
+  onHandChangesEffects:
+  - condition: {fileID: 0}
+    cardEffect: {fileID: 11400000, guid: 0a292ab85bd4aae479ae7d4e585038a2, type: 2}
+  turnEndEffects: []

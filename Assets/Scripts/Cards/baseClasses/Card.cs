@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum CardType {Event, Tool, Location,Identity, Junk, CardBack}
@@ -32,6 +33,7 @@ public class Card : ScriptableObject {
 	[SerializeField] ConditionalEffect[] onBuyEffects;
 	[SerializeField] ConditionalEffect[] onPlayEffects;
     [SerializeField] ConditionalEffect[] onDiscardEffects;
+    
 
 	[System.Serializable]
 	public class ConditionalEffect {
@@ -95,7 +97,17 @@ public class Card : ScriptableObject {
         }
     }
 
-    [SerializeField] ConditionalEffect[] turnEndEffects;
+	[SerializeField] ConditionalEffect[] onHandChangesEffects;
+    public void HandChangesEffects() {
+		foreach(ConditionalEffect effect in onHandChangesEffects) {
+			effect.DoEffectConditionally(managerReferences, this);
+		}
+	}
+    public bool CardHasHandChangeEffects() {
+        return onHandChangesEffects != null;
+    }
+
+	[SerializeField] ConditionalEffect[] turnEndEffects;
     public void TurnEndEffects() {
         foreach (ConditionalEffect effect in turnEndEffects) {
             effect.DoEffectConditionally(managerReferences, this);

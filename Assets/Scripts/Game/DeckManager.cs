@@ -80,6 +80,7 @@ public class DeckManager : MonoBehaviour {
         infoText.text = "Cards in deck: " + cardsInDeck.Count;
     }
 
+    //called once on the first turn if opponent is the starting player
     public void OpponentDrawsACard() {
 		photonView.RPC("OpponentDrawsACardRPC", RpcTarget.OthersBuffered);
 	}
@@ -87,7 +88,6 @@ public class DeckManager : MonoBehaviour {
     [PunRPC]
     void OpponentDrawsACardRPC() {
         DrawCard();
-        Debug.Log("opponent drew a card");
     }
 
     public void ShuffleDiscardPileToDeck(List<Card> newDeck) {

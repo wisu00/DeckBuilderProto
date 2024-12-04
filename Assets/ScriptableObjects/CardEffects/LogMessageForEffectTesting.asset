@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 645f4b25206b1f242ab72b7fd9e77fbd, type: 3}
-  m_Name: LogMessageRoundStart
+  m_Name: LogMessageForEffectTesting
   m_EditorClassIdentifier: 
-  message: doingRoundStartEffects
+  message: JunkWasDrawn

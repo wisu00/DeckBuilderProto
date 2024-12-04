@@ -13,20 +13,23 @@ MonoBehaviour:
   m_Name: IdentityScrapper
   m_EditorClassIdentifier: 
   cardType: 3
+  characterClass: 1
   cardName: Scrapper Identity
-  cardArt: {fileID: 0}
+  cardArt: {fileID: 21300000, guid: 44ebd8e6f42cae445ab4b22f0a9b48a0, type: 3}
   description: Your tools can be discarded for 3 gold.
   buyCost: 0
   playCost: 0
   discardValue: 0
   tier: 0
-  cardIndex: 0
+  cardIndex: 7
   managerReferences: {fileID: 0}
   gameManager: {fileID: 0}
   handManager: {fileID: 0}
   additionalPlayConditions: []
   cardIsTargeted: 0
   onBuyEffects: []
+  entersHandEffects: []
   onPlayEffects: []
   onDiscardEffects: []
   turnStartEffects: []
+  turnEndEffects: []

@@ -31,7 +31,8 @@ public class CardCustomInspector : Editor {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("cardArt"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("description"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("discardValue"));
-        }
+			EditorGUILayout.PropertyField(serializedObject.FindProperty("onHandChangesEffects"));
+		}
         else {
             DrawPropertiesExcluding(serializedObject, excludedFields);
 
