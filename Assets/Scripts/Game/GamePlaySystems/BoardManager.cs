@@ -14,8 +14,8 @@ public class BoardManager : MonoBehaviour {
 
 	public PhotonView OpponentsBoardManager;
 
-	private Card[] playersCardsOnBoard = new Card[5];
-	public List<Card> activeCardsOnBoard = new List<Card>();
+	private CardBaseFunctionality[] playersCardsOnBoard = new CardBaseFunctionality[5];
+	public List<CardBaseFunctionality> activeCardsOnBoard = new List<CardBaseFunctionality>();
 
 	[SerializeField] Card startingLocationBanker;
     [SerializeField] Card startingLocationScrapper;
@@ -39,8 +39,8 @@ public class BoardManager : MonoBehaviour {
                 break;
         }
         createdLocation.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(managerReferences, true);
-        activeCardsOnBoard.Add(createdLocation.GetComponent<CardBaseFunctionality>().card);
-		playersCardsOnBoard[4] = createdLocation.GetComponent<CardBaseFunctionality>().card;
+        activeCardsOnBoard.Add(createdLocation.GetComponent<CardBaseFunctionality>());
+		playersCardsOnBoard[4] = createdLocation.GetComponent<CardBaseFunctionality>();
 
 	}
 
@@ -73,27 +73,27 @@ public class BoardManager : MonoBehaviour {
     }
 
     public void DoRoundStartEffects() {
-        foreach (Card card in activeCardsOnBoard) {
-			card.TurnStartEffects();
+        foreach (CardBaseFunctionality baseCard in activeCardsOnBoard) {
+			baseCard.DoTurnStartEffects();
 		}
     }
 
 	private void UpdateCardsOnBoard() {
 		activeCardsOnBoard.Clear();
-		foreach (Card card in playersCardsOnBoard) {
-			if(card != null) activeCardsOnBoard.Add(card);
+		foreach (CardBaseFunctionality baseCard in playersCardsOnBoard) {
+			if(baseCard != null) activeCardsOnBoard.Add(baseCard);
 		}
     }
 
-	public void CardWasPlayedOnBoard(Card cardThatGotPlayed, int cardSlot) {
+	public void CardWasPlayedOnBoard(CardBaseFunctionality cardThatGotPlayed, int cardSlot) {
 		GameObject spawnedCard = Instantiate(cardPrefab, cardSlotsPlayer[cardSlot - 1].transform);
-		spawnedCard.GetComponent<CardBaseFunctionality>().card = cardThatGotPlayed;
+		spawnedCard.GetComponent<CardBaseFunctionality>().card = cardThatGotPlayed.card;
 		spawnedCard.GetComponent<CardBaseFunctionality>().UpdateValueOnBoard(managerReferences, true);
 
 		activeCardsOnBoard.Add(cardThatGotPlayed);
 		UpdateCardsOnBoard();
 
-		if(!cardThatGotPlayed.isCardBack()) {
+		if(!cardThatGotPlayed.card.isCardBack()) {
 			OpponentsBoardManager.RPC("OpponentsCardWasPlayedOnBoard", RpcTarget.OthersBuffered,
 				cardSlot, spawnedCard.GetComponent<CardBaseFunctionality>().card.cardIndex);
 		}
@@ -109,7 +109,7 @@ public class BoardManager : MonoBehaviour {
 	public void RemoveCardFromBoard(int cardSlot) {
 		GameObject cardToBeDestroyed = cardSlotsPlayer[cardSlot - 1].GetComponentInChildren<CardBaseFunctionality>().gameObject;
 		playersCardsOnBoard[cardSlot - 1] = null;
-		activeCardsOnBoard.Remove(cardToBeDestroyed.GetComponent<CardBaseFunctionality>().card);
+		activeCardsOnBoard.Remove(cardToBeDestroyed.GetComponent<CardBaseFunctionality>());
 		managerReferences.GetDiscardPileManager().AddCardToDiscardPile(cardToBeDestroyed.GetComponent<CardBaseFunctionality>().card);
 		Destroy(cardToBeDestroyed);
 		OpponentsBoardManager.RPC("RemoveCardFromBoardOpponent", RpcTarget.OthersBuffered, cardSlot);

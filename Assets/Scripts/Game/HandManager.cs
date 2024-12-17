@@ -22,20 +22,32 @@ public class HandManager : MonoBehaviour {
     private int maxHandSize = 5;
     private List<GameObject> physicalCardsInHand = new List<GameObject>();
 
-	public static List<Card> cardsThatTrackChangesInHand = new List<Card>();
+	[SerializeField] private Card cardBack;
+
+	public static List<CardBaseFunctionality> cardsThatTrackChangesInHand = new List<CardBaseFunctionality>();
+	bool cardsThatTrackChangesInHandHaveBeenChanged = false;
 	private void OnHandChange() {
+		cardsThatTrackChangesInHandHaveBeenChanged = false;
 		//updates list of tracking cards
 		cardsThatTrackChangesInHand.Clear();
-		foreach (Card card in hand) {
-			if(card.CardHasHandChangeEffects()) cardsThatTrackChangesInHand.Add(card);
+		foreach (GameObject physicalCard in physicalCardsInHand) {
+			CardBaseFunctionality baseCard = physicalCard.GetComponent<CardBaseFunctionality>();
+			if(baseCard.card.CardHasHandChangeEffects()) cardsThatTrackChangesInHand.Add(baseCard);
 		}
-        foreach (Card card in managerReferences.GetBoardManager().activeCardsOnBoard) {
-			if(card.CardHasHandChangeEffects()) cardsThatTrackChangesInHand.Add(card);
+        foreach (CardBaseFunctionality baseCard in managerReferences.GetBoardManager().activeCardsOnBoard) {
+			if(baseCard.card.CardHasHandChangeEffects()) cardsThatTrackChangesInHand.Add(baseCard);
 		}
 		//trigger all tracking cards
-        foreach (Card card in cardsThatTrackChangesInHand) {
-			card.HandChangesEffects();
+		//for (int i = 0; i < cardsThatTrackChangesInHand.Count; i++) {
+		//	card.HandChangesEffects();
+		//}
+
+		
+		for(int i=0; i<cardsThatTrackChangesInHand.Count; i++) {
+			if(cardsThatTrackChangesInHandHaveBeenChanged) break;
+			else cardsThatTrackChangesInHand[i].DoHandChangeEffects();
 		}
+		if(cardsThatTrackChangesInHandHaveBeenChanged) OnHandChange();
 	}
 
 	public GameObject GetHandArea() {
@@ -49,26 +61,28 @@ public class HandManager : MonoBehaviour {
             //Debug.Log(drawnCard.cardName + " was put to discard pile");
         }
         else {
+			Debug.Log("Drawing a card");
             hand.Add(drawnCard);
             //Debug.Log(drawnCard.cardName + " was drawn");
             
             GameObject cardThatWasDrawn = Instantiate(cardPrefab, handArea.transform);
-            cardThatWasDrawn.GetComponent<CardBaseFunctionality>().card = drawnCard;
+			physicalCardsInHand.Add(cardThatWasDrawn);
+			
 			if(!drawnCard.isCardBack()) {
+				cardThatWasDrawn.GetComponent<CardBaseFunctionality>().card = drawnCard;
 				cardThatWasDrawn.GetComponent<CardBaseFunctionality>().UpdateValues(managerReferences);
 				OnHandChange();
 			}
 			
-            physicalCardsInHand.Add(cardThatWasDrawn);
 			OrganiseHand();
 		}
     }
 
-	public List<Card> GetCardsInHand() {
-		return hand;
+	public List<GameObject> GetCardsInHand() {
+		return physicalCardsInHand;
 	}
 
-    public void OrganiseHand() {
+	public void OrganiseHand() {
         float cardWidth = cardPrefab.GetComponent<RectTransform>().rect.width; //returns 0 for some reason
         cardWidth = 78.05f;
         float xOffSetWhenCardCountIsEven = 0f;
@@ -100,18 +114,65 @@ public class HandManager : MonoBehaviour {
         discardPile.AddCardToDiscardPile(cardThatGotPlayed);
         hand.Remove(cardThatGotPlayed);
         physicalCardsInHand.Remove(physicalCard);
-        OrganiseHand();
 		OnHandChange();
+		OrganiseHand();
 	}
 
-    public void RemoveCardFromHand(Card cardThatGotPlayed, GameObject physicalCard) {
+	//can later be replaced with something using card id
+	public void RemoveJunksInHandFromTheGame() {
+		cardsThatTrackChangesInHandHaveBeenChanged = true;
+
+		for(int i = 0; i < physicalCardsInHand.Count; i++) {
+			if(physicalCardsInHand[i].GetComponent<CardBaseFunctionality>().card.cardType == CardType.Junk) {
+				Destroy(physicalCardsInHand[i]);
+				physicalCardsInHand.Remove(physicalCardsInHand[i]);
+				i--;
+			}
+		}
+		List<Card> newHand = new List<Card>();
+        foreach (Card card in hand) {
+            if(card.cardType == CardType.Junk) {
+				int cardPlaceInHand = hand.IndexOf(card);
+				photonViewFromOpponentsHand.RPC("RemoveCardFromHandOpponent", RpcTarget.OthersBuffered, cardPlaceInHand);
+			}
+			else newHand.Add(card);
+		}
+		hand = newHand;
+		OrganiseHand();
+	}
+
+	public void CreateACardInHandWithLevel(Card createdCard, int level) {
+		hand.Add(createdCard);
+
+		GameObject cardThatWasCreated = Instantiate(cardPrefab, handArea.transform);
+		cardThatWasCreated.GetComponent<CardBaseFunctionality>().cardLevel = level;
+		cardThatWasCreated.GetComponent<CardBaseFunctionality>().card = createdCard;
+		cardThatWasCreated.GetComponent<CardBaseFunctionality>().UpdateValues(managerReferences);
+
+		physicalCardsInHand.Add(cardThatWasCreated);
+		photonViewFromOpponentsHand.RPC("OpponentCreatesCardInHand", RpcTarget.OthersBuffered);
+		OnHandChange();
+		OrganiseHand();
+	}
+
+	[PunRPC]
+	void OpponentCreatesCardInHand() {
+		//not set to an instance of a object???
+		hand.Add(cardBack);
+		GameObject cardThatWasCreated = Instantiate(cardPrefab, handArea.transform);
+		cardThatWasCreated.GetComponent<CardBaseFunctionality>().card = cardBack;
+		cardThatWasCreated.GetComponent<CardBaseFunctionality>().UpdateValues(managerReferences);
+		physicalCardsInHand.Add(cardThatWasCreated);
+		OrganiseHand();
+	}
+
+	public void RemoveCardFromHand(Card cardThatGotPlayed, GameObject physicalCard) {
 		int cardPlaceInHand = hand.IndexOf(cardThatGotPlayed);
 		photonViewFromOpponentsHand.RPC("RemoveCardFromHandOpponent", RpcTarget.OthersBuffered, cardPlaceInHand);
 		Destroy(physicalCard);
 		hand.Remove(cardThatGotPlayed);
 		physicalCardsInHand.Remove(physicalCard);
 		OrganiseHand();
-		OnHandChange();
 	}
 
 	[PunRPC]
@@ -139,7 +200,6 @@ public class HandManager : MonoBehaviour {
 		hand.Remove(cardThatGotPlayed);
 		physicalCardsInHand.Remove(physicalCard);
 		OrganiseHand();
-		OnHandChange();
 	}
 
 	[PunRPC]

@@ -7,7 +7,7 @@ public class IncreasePlayerNotoriety : CardEffect {
 
 	[Range(0, 10)] [SerializeField] int increaseAmount = 0;
 
-	public override void DoEffect(ManagerReferences managerReferences, Card card) {
+	public override void DoEffect(ManagerReferences managerReferences, Card card, CardBaseFunctionality cardBaseFunctionality) {
 		managerReferences.GetGameManager().IncreasePlayerNotoriety(increaseAmount);
 	}
 }

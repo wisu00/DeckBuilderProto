@@ -4,7 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "DecreasePlayerMoneyEqualToBuyCost", menuName = "Effects/DecreasePlayerMoneyEqualToBuyCost")]
 public class DecreasePlayerMoneyEqualToBuyCost : CardEffect {
-	public override void DoEffect(ManagerReferences managerReferences, Card card) {
+	public override void DoEffect(ManagerReferences managerReferences, Card card, CardBaseFunctionality cardBaseFunctionality) {
 		managerReferences.GetGameManager().DecreasePlayerMoney(card.buyCost);
 	}
 }

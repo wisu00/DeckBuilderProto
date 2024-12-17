@@ -7,7 +7,7 @@ public class IncreasePlayerMoney : CardEffect {
 
 	[Range(0, 20)] [SerializeField] int increaseAmount = 0;
 
-	public override void DoEffect(ManagerReferences managerReferences, Card card) {
+	public override void DoEffect(ManagerReferences managerReferences, Card card, CardBaseFunctionality cardBaseFunctionality) {
 		managerReferences.GetGameManager().IncreasePlayerMoney(increaseAmount);
 	}
 }

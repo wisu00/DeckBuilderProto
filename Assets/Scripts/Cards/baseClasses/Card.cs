@@ -24,7 +24,7 @@ public class Card : ScriptableObject {
 	[HideInInspector] public GameManager gameManager;
 	[HideInInspector] public HandManager handManager;
 
-    [SerializeField] Condition[] additionalPlayConditions;
+	[SerializeField] Condition[] additionalPlayConditions;
 
     //should be moved into event cards
 	[HideInInspector] public bool cardIsTargeted;
@@ -43,12 +43,12 @@ public class Card : ScriptableObject {
 		[SerializeField]
 		public CardEffect cardEffect;
 
-		public void DoEffectConditionally(ManagerReferences managerReferences, Card card) {
+		public void DoEffectConditionally(ManagerReferences managerReferences, Card card, CardBaseFunctionality baseFunctionality) {
             if(condition == null) {
-				cardEffect.DoEffect(managerReferences, card);
+				cardEffect.DoEffect(managerReferences, card, baseFunctionality);
 			} 
             else if (condition.CheckCondition(managerReferences, card)) {
-				cardEffect.DoEffect(managerReferences, card);
+				cardEffect.DoEffect(managerReferences, card, baseFunctionality);
 			}
 		}
 	}
@@ -59,9 +59,9 @@ public class Card : ScriptableObject {
         handManager = managerReferences.GetHandManager();
     }
 
-	public void OnBuy() { 
+	public void OnBuy(CardBaseFunctionality baseFunctionality) { 
         foreach(ConditionalEffect effect in onBuyEffects) {
-		    effect.DoEffectConditionally(managerReferences, this);
+		    effect.DoEffectConditionally(managerReferences, this, baseFunctionality);
 	    }
     }
 
@@ -76,31 +76,31 @@ public class Card : ScriptableObject {
 		return true;
     }
 
-	public void OnPlay() {
+	public void OnPlay(CardBaseFunctionality baseFunctionality) {
 		foreach(ConditionalEffect effect in onPlayEffects) {
-			effect.DoEffectConditionally(managerReferences, this);
+			effect.DoEffectConditionally(managerReferences, this, baseFunctionality);
 		}
 	}
 
-	public void OnDiscard() {
+	public void OnDiscard(CardBaseFunctionality baseFunctionality) {
 		foreach(ConditionalEffect effect in onDiscardEffects) {
-			effect.DoEffectConditionally(managerReferences, this);
+			effect.DoEffectConditionally(managerReferences, this, baseFunctionality);
 		}
 	}
 
     [SerializeField] ConditionalEffect[] turnStartEffects;
-    public void TurnStartEffects()
+    public void TurnStartEffects(CardBaseFunctionality baseFunctionality)
     {
         foreach (ConditionalEffect effect in turnStartEffects)
         {
-            effect.DoEffectConditionally(managerReferences, this);
+            effect.DoEffectConditionally(managerReferences, this, baseFunctionality);
         }
     }
 
 	[SerializeField] ConditionalEffect[] onHandChangesEffects;
-    public void HandChangesEffects() {
+    public void HandChangesEffects(CardBaseFunctionality baseFunctionality) {
 		foreach(ConditionalEffect effect in onHandChangesEffects) {
-			effect.DoEffectConditionally(managerReferences, this);
+			effect.DoEffectConditionally(managerReferences, this, baseFunctionality);
 		}
 	}
     public bool CardHasHandChangeEffects() {
@@ -108,9 +108,9 @@ public class Card : ScriptableObject {
     }
 
 	[SerializeField] ConditionalEffect[] turnEndEffects;
-    public void TurnEndEffects() {
+    public void TurnEndEffects(CardBaseFunctionality baseFunctionality) {
         foreach (ConditionalEffect effect in turnEndEffects) {
-            effect.DoEffectConditionally(managerReferences, this);
+            effect.DoEffectConditionally(managerReferences, this, baseFunctionality);
         }
     }
 

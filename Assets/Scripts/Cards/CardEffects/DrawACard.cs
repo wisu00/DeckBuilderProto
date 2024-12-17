@@ -4,7 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "DrawACard", menuName = "Effects/DrawACard")]
 public class DrawACard : CardEffect {
-	public override void DoEffect(ManagerReferences managerReferences, Card card) {
+	public override void DoEffect(ManagerReferences managerReferences, Card card, CardBaseFunctionality cardBaseFunctionality) {
         managerReferences.GetDeckManager().DrawCard();
     }
 }

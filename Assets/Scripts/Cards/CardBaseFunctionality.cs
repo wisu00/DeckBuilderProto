@@ -34,6 +34,7 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 
 	GameObject handArea;
 	bool targetIsActive = false;
+	public int cardLevel = 1;
 	Vector3 startPosition;
 
     private void Awake() {
@@ -133,10 +134,14 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
             card.AssignGameManager(managerReferences);
             cardArt.sprite = card.cardArt;
             cardName.text = card.cardName;
-            description.text = card.description;
+			if(cardLevel > 1) cardName.text += " #" + (cardLevel);
+			description.text = card.description;
             playCost.text = card.playCost.ToString();
             discardValueText.text = card.discardValue.ToString();
         }
+		if(card.cardType == CardType.Junk) {
+			description.text = description.text.Replace("(moneyAmount)", (cardLevel*card.discardValue).ToString());
+		}
 		else {
             //card.AssignGameManager(managerReferences);
             cardArt.sprite = card.cardArt;
@@ -166,7 +171,7 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 		if(cardIsInStore) {
 			if(gameManager.getMoneyPlayer() >= card.buyCost + managerReferences.GetGameManager().GetPlayerNotoriety()) {
 				gameManager.DecreasePlayerMoney(card.buyCost + managerReferences.GetGameManager().GetPlayerNotoriety());
-				card.OnBuy();
+				card.OnBuy(this);
 				uIManager.SetBuyAreaActiveStatus(false);
 				discardPileManager.AddCardToDiscardPile(card);
                 storeManager.CardIsBought(card, gameObject, cardPosInStore);
@@ -189,9 +194,9 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
     public void PlayCardOnBoard(int slotNumber) {
 		if(!cardIsInStore && !cardIsOnBoard) {
 			gameManager.DecreasePlayerMoney(card.playCost);
-			card.OnPlay();
+			card.OnPlay(this);
 			handManager.RemoveCardFromHand(card, gameObject);
-			boardManager.CardWasPlayedOnBoard(card, slotNumber);
+			boardManager.CardWasPlayedOnBoard(this, slotNumber);
 			uIManager.SetPlayAreaActiveStatus(false, card.cardType);
 		}
 	}
@@ -229,7 +234,7 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 		else {
 			if(targetIsActive) cardVisuals.transform.SetParent(transform);
 			gameManager.DecreasePlayerMoney(card.playCost);
-			card.OnPlay();
+			card.OnPlay(this);
 			if(card.cardType == CardType.Event) {
 				handManager.MoveCardToDiscardPile(card, gameObject);
 				uIManager.SetPlayAreaActiveStatus(false, card.cardType);
@@ -244,9 +249,17 @@ public class CardBaseFunctionality : MonoBehaviour, IBeginDragHandler, IEndDragH
 			return;
 		}
 		if(!cardIsInStore) {
-            card.OnDiscard();
+            card.OnDiscard(this);
 			handManager.MoveCardToDiscardPile(card, gameObject);
 			uIManager.SetPlayAreaActiveStatus(false, card.cardType);
 		}
     }
+
+	public void DoTurnStartEffects() {
+		card.TurnStartEffects(this);
+	}
+
+	public void DoHandChangeEffects() {
+		card.HandChangesEffects(this);
+	}
 }

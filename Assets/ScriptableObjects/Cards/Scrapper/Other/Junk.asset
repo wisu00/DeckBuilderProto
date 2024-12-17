@@ -16,7 +16,7 @@ MonoBehaviour:
   characterClass: 1
   cardName: Junk
   cardArt: {fileID: 0}
-  description: Can be discarded for x gold. Stackable.
+  description: Can be discarded for (moneyAmount) gold. Stackable.
   buyCost: 0
   playCost: 0
   discardValue: 3
@@ -29,9 +29,11 @@ MonoBehaviour:
   cardIsTargeted: 0
   onBuyEffects: []
   onPlayEffects: []
-  onDiscardEffects: []
+  onDiscardEffects:
+  - condition: {fileID: 0}
+    cardEffect: {fileID: 11400000, guid: a9ec46214f6719f4a8d39d97dce95d93, type: 2}
   turnStartEffects: []
   onHandChangesEffects:
-  - condition: {fileID: 0}
-    cardEffect: {fileID: 11400000, guid: 0a292ab85bd4aae479ae7d4e585038a2, type: 2}
+  - condition: {fileID: 11400000, guid: ed99f593115d4ba4799da1a968245109, type: 2}
+    cardEffect: {fileID: 11400000, guid: 5c0521b9e927731408366feef3a12a59, type: 2}
   turnEndEffects: []

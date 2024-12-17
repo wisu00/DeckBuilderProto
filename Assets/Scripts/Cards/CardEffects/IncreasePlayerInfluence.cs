@@ -7,7 +7,7 @@ public class IncreasePlayerInfluence : CardEffect {
 
 	[Range(0, 30)] [SerializeField] int increaseAmount = 0;
 
-	public override void DoEffect(ManagerReferences managerReferences, Card card) {
+	public override void DoEffect(ManagerReferences managerReferences, Card card, CardBaseFunctionality cardBaseFunctionality) {
 		managerReferences.GetInfluenceBarManager().IncreasePlayerInfluence(increaseAmount);
 	}
 }
